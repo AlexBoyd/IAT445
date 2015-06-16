@@ -18,7 +18,12 @@ public class CharView : MonoBehaviour
 
 	public int playerId;
 	private Player player;
-	
+
+	public LayerMask _interectableLayerMask;
+
+	public GameObject _3dCrosshair;
+	public LayerMask _3dLayerMask;
+
 	void Awake() 
 	{
 		player = ReInput.players.GetPlayer (playerId);
@@ -32,23 +37,57 @@ public class CharView : MonoBehaviour
 
 
 		RaycastHit hit;
-		if (Physics.SphereCast (new Ray (p1, (_centerReference.position - transform.position).normalized), _sphereRadius, out hit, _interactDistance)) {
+		if (Physics.SphereCast (new Ray (transform.position, (_centerReference.position - transform.position).normalized), _sphereRadius, out hit, _interactDistance,_interectableLayerMask)) {
 			if (_currentFocus != null && _currentFocus != hit.transform.gameObject) {
-				_currentFocus.GetComponent<Interactable> ().unlit ();
-				_currentFocus = null;
+				removeCurrentFocus();
 			
 			}
 		
 			if (hit.transform.gameObject.GetComponent<Interactable> () != null) {
-				_currentFocus = hit.transform.gameObject;
-				_currentFocus.GetComponent<Interactable> ().litUp ();
+				setCurrentFocus(hit.transform.gameObject);
 			}
 
 		} else {
 			if (_currentFocus != null)
-				_currentFocus.GetComponent<Interactable> ().unlit ();
+			{
+				removeCurrentFocus();
+			}
+		}
+
+		_3dCrosshair.SetActive (_currentFocus == null);
+
+		if (_currentFocus == null) 
+		{
+			check3DCrosshair();
 		}
 	
+	}
+
+	void setCurrentFocus(GameObject go)
+	{
+		_currentFocus = go;
+		_currentFocus.GetComponent<Interactable> ().litUp ();
+	}
+	void removeCurrentFocus()
+	{
+
+			_currentFocus.GetComponent<Interactable> ().unlit ();
+			_currentFocus = null;
+
+	}
+	
+
+	void check3DCrosshair()
+	{
+		RaycastHit hit;
+		if (Physics.Raycast (new Ray (transform.position, (_centerReference.position - transform.position).normalized), out hit, Mathf.Infinity,_3dLayerMask)) 
+		{
+			_3dCrosshair.SetActive (true);
+			_3dCrosshair.transform.position = Vector3.Distance(_3dCrosshair.transform.position,hit.point) > 1 ?  hit.point :  Vector3.Lerp(_3dCrosshair.transform.position,hit.point,Time.deltaTime * 15);
+
+		}
+		else
+			_3dCrosshair.SetActive (false);
 	}
 
 	void checkButtonPress()
