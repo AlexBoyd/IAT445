@@ -54,12 +54,12 @@ public class CharView : MonoBehaviour
 			}
 		}
 
-		_3dCrosshair.SetActive (_currentFocus == null);
+//		_3dCrosshair.SetActive (_currentFocus == null);
 
-		if (_currentFocus == null) 
-		{
+//		if (_currentFocus == null) 
+//		{
 			check3DCrosshair();
-		}
+//		}
 	
 	}
 

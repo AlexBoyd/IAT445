@@ -58,6 +58,8 @@ public class Interactable : MonoBehaviour {
 	{
 		Debug.Log ("Interacted with object: " + name + " and triggered " + _eventName);
 		OnTriggerEvent ();
+
+		GetComponent<Shake> ().shake (0.1f);
 	}
 
 }
