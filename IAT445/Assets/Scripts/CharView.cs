@@ -4,7 +4,7 @@ using Rewired;
 
 public class CharView : MonoBehaviour
 {
-		[Range(0.1f,10f)]
+	[Range(0.1f,10f)]
 	public float _interactDistance;
 
 	[Range(0.1f,10f)]
@@ -95,7 +95,12 @@ public class CharView : MonoBehaviour
 		if (player.GetButtonDown ("Use")) 
 		{
 			if(_currentFocus!=null)
-				_currentFocus.GetComponent<Interactable>().triggerEvent();
+				_currentFocus.GetComponent<Interactable>().triggerPressedEvent();
+		}
+		if (player.GetButtonUp ("Use")) 
+		{
+			if(_currentFocus!=null)
+				_currentFocus.GetComponent<Interactable>().triggerReleasedEvent();
 		}
 	}
 	
@@ -104,8 +109,6 @@ public class CharView : MonoBehaviour
 
 		updateFacingObject ();
 		checkButtonPress ();
-
-	
 
 	}
 

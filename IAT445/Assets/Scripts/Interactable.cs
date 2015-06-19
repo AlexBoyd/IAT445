@@ -2,7 +2,7 @@
 using System.Collections;
 
 
-public delegate void StringDelegate (string parameter);
+public delegate void InterectableDelegate (Interactable interactable);
 
 public class Interactable : MonoBehaviour {
 
@@ -17,15 +17,26 @@ public class Interactable : MonoBehaviour {
 	public string _eventName;
 	public string _eventNamePretty;
 
-	public event StringDelegate TriggerEvent;
+	public event InterectableDelegate PressedEvent;
+	public event InterectableDelegate ReleasedEvent;
 
-	void OnTriggerEvent()
+	float _pressStartTime ;
+	public float _pressDuration;
+
+
+	void OnPressedEvent()
 	{
-		if (TriggerEvent != null)
-			TriggerEvent (_eventName);
+		if (PressedEvent != null)
+			PressedEvent (this);
 	}
 
-	void Awake()
+	void OnReleasedEvent()
+	{
+		if (ReleasedEvent != null)
+			ReleasedEvent (this);
+	}
+
+	protected void Awake()
 	{
 		if (_sharedLitMaterial == null) 
 		{
@@ -36,6 +47,8 @@ public class Interactable : MonoBehaviour {
 		_originalMaterial.color = _boxColor;
 		_meshRenderer.material = _originalMaterial;
 
+
+		Debug.LogWarning ("_orign: " + _originalMaterial);
 
 	}
 
@@ -54,12 +67,21 @@ public class Interactable : MonoBehaviour {
 		_meshRenderer.material = _originalMaterial;
 	}
 
-	public void triggerEvent()
+	public virtual void triggerPressedEvent()
 	{
-		Debug.Log ("Interacted with object: " + name + " and triggered " + _eventName);
-		OnTriggerEvent ();
+		_pressStartTime = Time.time;
 
-		GetComponent<Shake> ().shake (0.1f);
+
+		OnPressedEvent ();
+
+	}
+
+	public virtual void triggerReleasedEvent()
+	{
+		_pressDuration = Time.time - _pressStartTime;
+
+		OnReleasedEvent ();
+
 	}
 
 }
