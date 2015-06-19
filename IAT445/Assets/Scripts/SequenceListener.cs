@@ -8,26 +8,39 @@ using System.Collections;
 public class SequenceListener : MonoBehaviour {
 
 	Interactable[] _interectables;
-
+	Switch[] _switches;
+	SwitchPanel _switchPanel;
 	public Text _eventPrompt;
 
 	string _requiredEvent;
 
+
 	void Awake()
 	{
 		_interectables = GameObject.FindObjectsOfType<Interactable> () as Interactable[];
+		_switchPanel = GameObject.FindObjectOfType<SwitchPanel> () as SwitchPanel;
+
 	}
 
 	void OnEnable()
 	{
-		foreach (Interactable i in _interectables)
-			i.TriggerEvent += eventTriggered;
+		foreach (Interactable i in _interectables) {
+			i.PressedEvent += pressedEvent;
+			i.ReleasedEvent += releasedEvent;
+		}
+
+
+		_switchPanel.TriggerEvent += eventTriggered;
 	}
 
 	void OnDisable()
 	{
-		foreach (Interactable i in _interectables)
-			i.TriggerEvent -= eventTriggered;
+		foreach (Interactable i in _interectables) {
+			i.PressedEvent -= pressedEvent;
+			i.ReleasedEvent -= releasedEvent;
+		}
+
+		_switchPanel.TriggerEvent -= eventTriggered;
 	}
 
 	void eventTriggered(string eventName)
@@ -36,7 +49,28 @@ public class SequenceListener : MonoBehaviour {
 		{
 			promptRandomInteractable();
 		}
+
+
+		if (eventName.Equals ("switchPanel")) 
+		{
+			Debug.Log ("SwitchPanel");
+		}
 	}
+
+	void pressedEvent(Interactable interactable)
+	{
+
+	}
+
+	void releasedEvent(Interactable interactable)
+	{
+		if (interactable._eventName.Equals ("initializeDrill") && interactable._pressDuration > 4) {
+			Debug.Log ("Pressed for 4 seconds the initialize drill!");
+		} else {
+			Debug.Log ("Not 4 seconds or not drill!");
+		}
+	}
+
 
 	// Use this for initialization
 	void Start () {
