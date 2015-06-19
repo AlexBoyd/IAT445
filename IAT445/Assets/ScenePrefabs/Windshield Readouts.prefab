@@ -159,7 +159,14 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Press the orange button
+  m_Text: 'Engines
+
+
+    Fuel Injectors: Nominal
+
+    Nozzle Pressurizers: Nominal
+
+    Ignition: Nominal'
 --- !u!114 &11487504
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -204,7 +211,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100558}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 433.410004}
+  m_LocalPosition: {x: 0, y: 0, z: 433.459991}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 22495050}
@@ -212,7 +219,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 168.372726, y: -82.6100006}
+  m_AnchoredPosition: {x: 167.781998, y: -82.5329971}
   m_SizeDelta: {x: 557, y: 633}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22495050
@@ -221,7 +228,7 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 140942}
-  m_LocalRotation: {x: .422618091, y: 0, z: 0, w: -.906307876}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: .00150000001, y: .00150000001, z: .00150000001}
   m_Children: []
