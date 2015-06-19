@@ -6,13 +6,13 @@ public delegate void InterectableDelegate (Interactable interactable);
 
 public class Interactable : MonoBehaviour {
 
-	MeshRenderer _meshRenderer;
+	protected MeshRenderer _meshRenderer;
 
 	static Material _sharedLitMaterial;
 
 	public Color _boxColor;
 
-	Material _originalMaterial;
+	protected Material _originalMaterial;
 
 	public string _eventName;
 	public string _eventNamePretty;

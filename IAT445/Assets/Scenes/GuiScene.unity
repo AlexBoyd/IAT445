@@ -168,6 +168,12 @@ MeshFilter:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 64b387337361a134b9c28bc93d520798, type: 2}
   m_PrefabInternal: {fileID: 1861827283}
+--- !u!114 &90423028 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11405648, guid: 7e08afe33b8944441afa867022cf89e1,
+    type: 2}
+  m_PrefabInternal: {fileID: 1976649337}
+  m_Script: {fileID: 11500000, guid: 6921bf8a3343e48e69597a49bce7e181, type: 3}
 --- !u!1 &104562121
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,7 +244,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 104562121}
   m_LocalRotation: {x: 0, y: -.485187948, z: -4.65661343e-10, w: .874409914}
-  m_LocalPosition: {x: 166.272003, y: -84.0690002, z: 432.265015}
+  m_LocalPosition: {x: 166.300003, y: -84.0690002, z: 432.309998}
   m_LocalScale: {x: .187146097, y: .187146053, z: .187146157}
   m_Children: []
   m_Father: {fileID: 812978490}
@@ -255,7 +261,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _boxColor: {r: 0, g: 1, b: .172413826, a: 1}
-  _eventName: cubeGreen
+  _eventName: engines_button
   _eventNamePretty: green button
   _pressDuration: 0
 --- !u!114 &104562127
@@ -297,7 +303,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 165734727}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 168.391998, y: -82.4189987, z: 432.690002}
+  m_LocalPosition: {x: 168.391998, y: -82.3199997, z: 433.100006}
   m_LocalScale: {x: .187471926, y: .187146053, z: .187472001}
   m_Children: []
   m_Father: {fileID: 812978490}
@@ -506,6 +512,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _eventPrompt: {fileID: 1921134783}
+  _windShieldPrompt: {fileID: 90423028}
 --- !u!1 &247232771
 GameObject:
   m_ObjectHideFlags: 0
@@ -686,7 +693,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 251144684}
   m_LocalRotation: {x: 0, y: -.485187948, z: -4.65661343e-10, w: .874409914}
-  m_LocalPosition: {x: 166.524002, y: -84.0690002, z: 432.677002}
+  m_LocalPosition: {x: 166.529999, y: -84.0690002, z: 432.690002}
   m_LocalScale: {x: .187146097, y: .187146053, z: .187146157}
   m_Children: []
   m_Father: {fileID: 812978490}
@@ -703,7 +710,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _boxColor: {r: .0344824754, g: 0, b: 1, a: 1}
-  _eventName: cubeBlue
+  _eventName: powers_button
   _eventNamePretty: blue button
   _pressDuration: 0
 --- !u!114 &251144690
@@ -1775,7 +1782,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 689672032}
   m_LocalRotation: {x: 0, y: -.485187948, z: -4.65661343e-10, w: .874409914}
-  m_LocalPosition: {x: 166.061005, y: -84.0690002, z: 431.894012}
+  m_LocalPosition: {x: 166.089005, y: -84.0690002, z: 431.940002}
   m_LocalScale: {x: .187471926, y: .187146053, z: .187472001}
   m_Children: []
   m_Father: {fileID: 812978490}
@@ -1804,7 +1811,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _boxColor: {r: 0, g: 1, b: .172413826, a: 1}
-  _eventName: cubeRed
+  _eventName: gravity_button
   _eventNamePretty: red button
   _pressDuration: 0
 --- !u!23 &689672036
@@ -2616,7 +2623,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1375486980}
   m_LocalRotation: {x: 0, y: -.485187948, z: -4.65661343e-10, w: .874409914}
-  m_LocalPosition: {x: 166.807999, y: -84.0690002, z: 433.127014}
+  m_LocalPosition: {x: 166.759995, y: -84.0690002, z: 433.049988}
   m_LocalScale: {x: .187146097, y: .187146053, z: .187146157}
   m_Children: []
   m_Father: {fileID: 812978490}
@@ -2633,7 +2640,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _boxColor: {r: 1, g: 0, b: .931034565, a: 1}
-  _eventName: cubePink
+  _eventName: life_button
   _eventNamePretty: pink button
   _pressDuration: 0
 --- !u!114 &1375486986
@@ -5490,7 +5497,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22441000, guid: 7e08afe33b8944441afa867022cf89e1, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22441000, guid: 7e08afe33b8944441afa867022cf89e1, type: 2}
       propertyPath: m_AnchoredPosition.x
@@ -5543,6 +5550,10 @@ Prefab:
     - target: {fileID: 11472908, guid: 7e08afe33b8944441afa867022cf89e1, type: 2}
       propertyPath: m_Color.b
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11472908, guid: 7e08afe33b8944441afa867022cf89e1, type: 2}
+      propertyPath: m_Text
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7e08afe33b8944441afa867022cf89e1, type: 2}
