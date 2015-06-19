@@ -5,7 +5,8 @@ using System.Collections;
 
 
 
-public class SequenceListener : MonoBehaviour {
+public class SequenceListener : MonoBehaviour
+{
 
 	Interactable[] _interectables;
 	Switch[] _switches;
@@ -19,14 +20,14 @@ public class SequenceListener : MonoBehaviour {
 
 	bool _cockpitActivated = false;
 
-	void Awake()
+	void Awake ()
 	{
 		_interectables = GameObject.FindObjectsOfType<Interactable> () as Interactable[];
 		_switchPanel = GameObject.FindObjectOfType<SwitchPanel> () as SwitchPanel;
 
 	}
 
-	void OnEnable()
+	void OnEnable ()
 	{
 		foreach (Interactable i in _interectables) {
 			i.PressedEvent += pressedEvent;
@@ -37,7 +38,7 @@ public class SequenceListener : MonoBehaviour {
 		_switchPanel.TriggerEvent += eventTriggered;
 	}
 
-	void OnDisable()
+	void OnDisable ()
 	{
 		foreach (Interactable i in _interectables) {
 			i.PressedEvent -= pressedEvent;
@@ -48,7 +49,7 @@ public class SequenceListener : MonoBehaviour {
 	}
 
 
-	void eventTriggered(string eventName)
+	void eventTriggered (string eventName)
 	{
 		if (!_cockpitActivated)
 			return;
@@ -71,40 +72,36 @@ public class SequenceListener : MonoBehaviour {
 //		}
 //
 //
-		if (eventName.Equals ("switchPanel")) 
-		{
+		if (eventName.Equals ("switchPanel")) {
 			Debug.Log ("SwitchPanel");
 			_windShieldPrompt.showLifeOK ();
 		}
 	}
 
-	void pressedEvent(Interactable interactable)
+	void pressedEvent (Interactable interactable)
 	{
 		if (!_cockpitActivated)
 			return;
 		
-		if (interactable._eventName.Equals("gravity_button")) 
-		{
+		if (interactable._eventName.Equals ("gravity_button")) {
 			_windShieldPrompt.showGravity ();
 		}
-		if (interactable._eventName.Equals ("engines_button") )
-		{
+		if (interactable._eventName.Equals ("engines_button")) {
 			_windShieldPrompt.showEngines ();
 		}
-		if (interactable._eventName.Equals ("powers_button") )
-		{
-			_windShieldPrompt.showPowers();
+		if (interactable._eventName.Equals ("powers_button")) {
+			_windShieldPrompt.showPowers ();
 		}
-		if (interactable._eventName.Equals("life_button") )
-		{
+		if (interactable._eventName.Equals ("life_button")) {
 			_windShieldPrompt.showLife ();
 		}
 	}
 
-	void releasedEvent(Interactable interactable)
+	void releasedEvent (Interactable interactable)
 	{
 		if (interactable._eventName.Equals ("initializeDrill") && interactable._pressDuration > 4) {
 			_cockpitActivated = true;
+			_windShieldPrompt.ARText.text = "Diagnostic Mode Activated";
 			Debug.Log ("Pressed for 4 seconds the initialize drill!");
 		} else {
 			Debug.Log ("Not 4 seconds or not drill!");
@@ -113,12 +110,13 @@ public class SequenceListener : MonoBehaviour {
 
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
 	
 //		promptRandomInteractable ();
 	}
 
-	void promptRandomInteractable()
+	void promptRandomInteractable ()
 	{
 		int randomIndex = Random.Range (0, _interectables.Length);
 
