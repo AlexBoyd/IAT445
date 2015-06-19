@@ -29,6 +29,7 @@ GameObject:
   - 222: {fileID: 22246704}
   - 114: {fileID: 11472908}
   - 114: {fileID: 11487504}
+  - 114: {fileID: 11405648}
   m_Layer: 5
   m_Name: promptText
   m_TagString: Untagged
@@ -36,6 +37,66 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &11405648
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 140942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6921bf8a3343e48e69597a49bce7e181, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ARText: {fileID: 11472908}
+  ArtificialGravityOK: 'Artificial Gravity System
+
+
+    Graviton Generator: Nomial
+
+    Intertial Dampeners: Nominal
+
+'
+  EnginesOK: 'Engines
+
+
+    Fuel Injectors: Nominal
+
+    Nozzle Pressurizers: Nominal
+
+    Ignition: Nominal'
+  PowerSystemsOK: 'Power Relays
+
+
+    Enerygy Bank: 90%
+
+    Cockpit: Nominal
+
+    Cargo Bay: Nominal
+
+    Bulkheads 1-3: Nominal
+
+    Bulkheads 4-6: Nominal'
+  LifeSupportOK: 'Life Support
+
+
+    Hull Integrity: 100%
+
+    Cockpit Pressure: 100%
+
+    Breathable Air: 100%
+
+    Oxygen Recycler: Nominal'
+  LifeSupportError: 'Life Support
+
+
+    Hull Integrity: 100%
+
+    Cockpit Pressure: 100%
+
+    Breathable Air: 63%
+
+    Oxygen Recycler: Err #314'
 --- !u!114 &11407108
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -85,7 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: .536764741, g: .536764741, b: .536764741, a: 1}
+  m_Color: {r: 0, g: 1, b: 0, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: 2eab921198154ec4e934bfe68d06d984, type: 3}
     m_FontSize: 10
