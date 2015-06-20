@@ -101,7 +101,7 @@ Material:
       data:
         first:
           name: _Parallax
-        second: .0320000015
+        second: .0115
       data:
         first:
           name: _ZWrite
@@ -109,7 +109,7 @@ Material:
       data:
         first:
           name: _Glossiness
-        second: .519999981
+        second: .361999989
       data:
         first:
           name: _BumpScale
@@ -133,7 +133,7 @@ Material:
       data:
         first:
           name: _Metallic
-        second: .49000001
+        second: .0949999988
     m_Colors:
       data:
         first:
