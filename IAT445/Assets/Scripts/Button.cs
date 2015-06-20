@@ -14,7 +14,10 @@ public class Button : Interactable {
 
 	public  void pressed() 
 	{
-		_animator.SetBool ("Press", true);
+		_animator.SetBool ("PressButton", true);
+
+		_meshRenderer.material.SetColor("_EmissionColor",Color.blue);
+//		_meshRenderer.material.color = Color.blue;
 	}
 
 	public override void triggerPressedEvent()

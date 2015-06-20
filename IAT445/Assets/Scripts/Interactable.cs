@@ -6,7 +6,7 @@ public delegate void InterectableDelegate (Interactable interactable);
 
 public class Interactable : MonoBehaviour {
 
-	protected MeshRenderer _meshRenderer;
+	public SkinnedMeshRenderer _meshRenderer;
 
 	static Material _sharedLitMaterial;
 
@@ -38,11 +38,15 @@ public class Interactable : MonoBehaviour {
 
 	protected void Awake()
 	{
+
 		if (_sharedLitMaterial == null) 
 		{
 			_sharedLitMaterial = Resources.Load("InteractableShared") as Material;
 		}
-		_meshRenderer = GetComponentInChildren<MeshRenderer> ();
+		if(_meshRenderer == null)
+			_meshRenderer = GetComponentInChildren<SkinnedMeshRenderer> ();
+
+
 		_originalMaterial = _meshRenderer.material;
 		_originalMaterial.color = _boxColor;
 		_meshRenderer.material = _originalMaterial;

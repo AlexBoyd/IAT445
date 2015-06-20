@@ -40,7 +40,6 @@ public class CharView : MonoBehaviour
 		if (Physics.SphereCast (new Ray (transform.position, (_centerReference.position - transform.position).normalized), _sphereRadius, out hit, _interactDistance,_interectableLayerMask)) {
 			if (_currentFocus != null && _currentFocus != hit.transform.gameObject) {
 				removeCurrentFocus();
-			
 			}
 		
 			if (hit.transform.gameObject.GetComponent<Interactable> () != null) {

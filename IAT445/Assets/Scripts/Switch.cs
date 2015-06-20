@@ -10,9 +10,10 @@ public class Switch : Interactable {
 
 	void Awake()
 	{
-		_meshRenderer = GetComponentInChildren<MeshRenderer> ();
-
 		base.Awake ();
+//		_meshRenderer = GetComponentInChildren<SkinnedMeshRenderer> ();
+
+
 		_animator = GetComponent<Animator> ();
 
 //		updateColor();
@@ -30,7 +31,7 @@ public class Switch : Interactable {
 
 	public  void pressed() 
 	{
-//		_animator.SetBool ("toggle", !_isOn);
+		_animator.SetBool ("Up", !_isOn);
 		_isOn = !_isOn;
 
 //		updateColor ();
