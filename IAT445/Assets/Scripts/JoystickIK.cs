@@ -33,7 +33,7 @@ public class JoystickIK : MonoBehaviour {
 			_animator.SetLookAtPosition(_headRotation.position + -_headRotation.transform.forward * 10);
 
 
-			_spineTransform.position = _initialSpinePos + _vrRoot.transform.position - _initialVRPos;
+//			_spineTransform.position = _initialSpinePos + _vrRoot.transform.position - _initialVRPos;
 		}        
 		
 		
