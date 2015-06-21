@@ -6,7 +6,7 @@ public delegate void InterectableDelegate (Interactable interactable);
 
 public class Interactable : MonoBehaviour {
 
-	public SkinnedMeshRenderer _meshRenderer;
+	public Renderer _meshRenderer;
 
 	static Material _sharedLitMaterial;
 	static Color _normalGlowColor = new Color(255/255f,145/255f,26/255f);
@@ -45,15 +45,12 @@ public class Interactable : MonoBehaviour {
 			_sharedLitMaterial = Resources.Load("UltraGlow") as Material;
 		}
 		if(_meshRenderer == null)
-			_meshRenderer = GetComponentInChildren<SkinnedMeshRenderer> ();
+			_meshRenderer = GetComponentInChildren<Renderer> ();
 
 
 		_originalMaterial = _meshRenderer.material;
 		_originalMaterial.color = _boxColor;
 		_meshRenderer.material = _originalMaterial;
-
-
-		Debug.LogWarning ("_orign: " + _originalMaterial);
 
 	}
 		

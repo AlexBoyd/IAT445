@@ -1,3 +1,4 @@
+
 /************************************************************************************
 
 Copyright   :   Copyright 2014 Oculus VR, LLC. All Rights reserved.
@@ -19,7 +20,6 @@ limitations under the License.
 
 ************************************************************************************/
 
-/*
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -70,14 +70,22 @@ public class OVRCameraRig : MonoBehaviour
 	private readonly string eyeAnchorName = "EyeAnchor";
 	private readonly string legacyEyeAnchorName = "Camera";
 
-#region Unity Messages
+	public float _maxXOffset;
+	public float _maxZOffset;
+
+	private Vector3 _initialRightEyePos;
+	private Vector3 _initialLeftEyePos;
+
+	public AstronautIK _astronautIK;
+
+	#region Unity Messages
 	private void Awake()
 	{
 		EnsureGameObjectIntegrity();
-		
+
 		if (!Application.isPlaying)
 			return;
-		
+
 		OVRManager.Created += () => { needsCameraConfigure = true; };
 		OVRManager.NativeTextureScaleModified += (prev, current) => { needsCameraConfigure = true; };
 		OVRManager.VirtualTextureScaleModified += (prev, current) => { needsCameraConfigure = true; };
@@ -99,14 +107,14 @@ public class OVRCameraRig : MonoBehaviour
 		UpdateAnchors();
 	}
 
-#if !UNITY_ANDROID || UNITY_EDITOR
+	#if !UNITY_ANDROID || UNITY_EDITOR
 	private void LateUpdate()
-#else
+	#else
 	private void Update()
-#endif
+	#endif
 	{
 		EnsureGameObjectIntegrity();
-		
+
 		if (!Application.isPlaying)
 			return;
 
@@ -114,10 +122,11 @@ public class OVRCameraRig : MonoBehaviour
 		UpdateAnchors();
 	}
 
-#endregion
+	#endregion
 
-	private void UpdateAnchors()
+	private new void UpdateAnchors()
 	{
+
 		bool monoscopic = OVRManager.instance.monoscopic;
 
 		OVRPose tracker = OVRManager.tracker.GetPose(0f);
@@ -129,10 +138,38 @@ public class OVRCameraRig : MonoBehaviour
 		leftEyeAnchor.localRotation = monoscopic ? centerEyeAnchor.localRotation : hmdLeftEye.orientation;
 		rightEyeAnchor.localRotation = monoscopic ? centerEyeAnchor.localRotation : hmdRightEye.orientation;
 
+
+
 		trackerAnchor.localPosition = tracker.position;
 		centerEyeAnchor.localPosition = 0.5f * (hmdLeftEye.position + hmdRightEye.position);
-		leftEyeAnchor.localPosition = monoscopic ? centerEyeAnchor.localPosition : hmdLeftEye.position;
-		rightEyeAnchor.localPosition = monoscopic ? centerEyeAnchor.localPosition : hmdRightEye.position;
+
+		Vector3 intendedLeftEyePos = monoscopic ? centerEyeAnchor.localPosition : hmdLeftEye.position;
+		Vector3 intendedRightEyePos = monoscopic ? centerEyeAnchor.localPosition : hmdRightEye.position;
+
+		Vector3 deltaLeftEye = intendedLeftEyePos - _initialLeftEyePos;
+		Vector3 deltaRightEye = intendedRightEyePos - _initialRightEyePos;
+
+
+
+		deltaLeftEye = new Vector3 ((Mathf.Min (Mathf.Abs (deltaLeftEye.x), _maxXOffset) * Mathf.Sign(deltaLeftEye.x)),
+			0,
+			Mathf.Min (Mathf.Abs (deltaLeftEye.z), _maxZOffset) * Mathf.Sign(deltaLeftEye.z));
+
+		deltaRightEye = new Vector3 ((Mathf.Min (Mathf.Abs (deltaRightEye.x), _maxXOffset) * Mathf.Sign(deltaRightEye.x)),
+			0,
+			Mathf.Min (Mathf.Abs (deltaRightEye.z), _maxZOffset) * Mathf.Sign(deltaRightEye.z));
+
+		float deltaX = deltaLeftEye.x / _maxXOffset;
+		float deltaZ = deltaLeftEye.z / _maxZOffset;
+
+//		Debug.LogWarning ("deltaX:" + deltaX);
+//		Debug.LogWarning ("deltaZ:" + deltaZ);
+		_astronautIK._xOffset = deltaX;
+		_astronautIK._zOffset = deltaZ;
+
+		rightEyeAnchor.localPosition = _initialRightEyePos + deltaRightEye;
+		leftEyeAnchor.localPosition = _initialLeftEyePos + deltaLeftEye;
+
 
 		if (UpdatedAnchors != null)
 		{
@@ -150,9 +187,9 @@ public class OVRCameraRig : MonoBehaviour
 			leftEyeCamera = ConfigureCamera(OVREye.Left);
 			rightEyeCamera = ConfigureCamera(OVREye.Right);
 
-#if !UNITY_ANDROID || UNITY_EDITOR
+			#if !UNITY_ANDROID || UNITY_EDITOR
 			needsCameraConfigure = false;
-#endif
+			#endif
 		}
 	}
 
@@ -180,12 +217,12 @@ public class OVRCameraRig : MonoBehaviour
 			{
 				leftEyeCamera = leftEyeAnchor.gameObject.AddComponent<Camera>();
 			}
-#if UNITY_ANDROID && !UNITY_EDITOR
+			#if UNITY_ANDROID && !UNITY_EDITOR
 			if (leftEyeCamera.GetComponent<OVRPostRender>() == null)
 			{
-				leftEyeCamera.gameObject.AddComponent<OVRPostRender>();
+			leftEyeCamera.gameObject.AddComponent<OVRPostRender>();
 			}
-#endif
+			#endif
 		}
 
 		if (rightEyeCamera == null)
@@ -195,12 +232,12 @@ public class OVRCameraRig : MonoBehaviour
 			{
 				rightEyeCamera = rightEyeAnchor.gameObject.AddComponent<Camera>();
 			}
-#if UNITY_ANDROID && !UNITY_EDITOR
+			#if UNITY_ANDROID && !UNITY_EDITOR
 			if (rightEyeCamera.GetComponent<OVRPostRender>() == null)
 			{
-				rightEyeCamera.gameObject.AddComponent<OVRPostRender>();
+			rightEyeCamera.gameObject.AddComponent<OVRPostRender>();
 			}
-#endif
+			#endif
 		}
 	}
 
@@ -281,11 +318,11 @@ public class OVRCameraRig : MonoBehaviour
 		cam.targetTexture = OVRManager.display.GetEyeTexture(eye);
 		cam.hdr = OVRManager.instance.hdr;
 
-#if UNITY_ANDROID && !UNITY_EDITOR
+		#if UNITY_ANDROID && !UNITY_EDITOR
 		// Enforce camera render order
 		cam.depth = (eye == OVREye.Left) ?
-				(int)RenderEventType.LeftEyeEndFrame :
-				(int)RenderEventType.RightEyeEndFrame;
+		(int)RenderEventType.LeftEyeEndFrame :
+		(int)RenderEventType.RightEyeEndFrame;
 
 		// If we don't clear the color buffer with a glClear, tiling GPUs
 		// will be forced to do an "unresolve" and read back the color buffer information.
@@ -296,11 +333,11 @@ public class OVRCameraRig : MonoBehaviour
 		// NOTE: The color buffer is not being invalidated in skybox mode, forcing an additional,
 		// wasted color buffer read before the skybox is drawn.
 		bool hasSkybox = ((cam.clearFlags == CameraClearFlags.Skybox) &&
-		                 ((cam.gameObject.GetComponent<Skybox>() != null) || (RenderSettings.skybox != null)));
+		((cam.gameObject.GetComponent<Skybox>() != null) || (RenderSettings.skybox != null)));
 		cam.clearFlags = (hasSkybox) ? CameraClearFlags.Skybox : CameraClearFlags.SolidColor;
-#else
+		#else
 		cam.rect = new Rect(0f, 0f, OVRManager.instance.virtualTextureScale, OVRManager.instance.virtualTextureScale);
-#endif
+		#endif
 
 		// When rendering monoscopic, we will use the left camera render for both eyes.
 		if (eye == OVREye.Right)
@@ -315,4 +352,3 @@ public class OVRCameraRig : MonoBehaviour
 		return cam;
 	}
 }
-*/

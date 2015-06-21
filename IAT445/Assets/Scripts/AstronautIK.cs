@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class JoystickIK : MonoBehaviour {
+public class AstronautIK : MonoBehaviour {
 	
 	
 	public Transform _joystickGrip;
@@ -13,11 +13,13 @@ public class JoystickIK : MonoBehaviour {
 
 	Vector3 _initialSpinePos, _initialVRPos;
 
+	public float _xOffset, _zOffset;
+
 	void Awake()
 	{
 		_animator = GetComponent<Animator> ();
 		_initialSpinePos = _spineTransform.transform.position;
-		_initialVRPos = _vrRoot.transform.position;
+		_initialVRPos = _headRotation.transform.position;
 	}
 	
 	//a callback for calculating IK
@@ -33,10 +35,19 @@ public class JoystickIK : MonoBehaviour {
 			_animator.SetLookAtPosition(_headRotation.position + -_headRotation.transform.forward * 10);
 
 
-//			_spineTransform.position = _initialSpinePos + _vrRoot.transform.position - _initialVRPos;
+
 		}        
 		
 		
 		
-	}    
+	}   
+
+
+//	void LateUpdate()
+//	{
+//		Vector3 deltaVRPos = (_headRotation.transform.position - _initialVRPos);
+//
+//		_spineTransform.position = _initialSpinePos + deltaVRPos;
+//
+//	}
 }
