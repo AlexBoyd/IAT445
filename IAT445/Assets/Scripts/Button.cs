@@ -19,8 +19,13 @@ public class Button : Interactable
 		_animator.SetBool ("PressButton", true);
 		Audio.Play ();
 
-		_meshRenderer.material.SetColor ("_EmissionColor", Color.blue);
-//		_meshRenderer.material.color = Color.blue;
+	}
+
+	public  void released ()
+	{
+		_animator.SetBool ("PressButton", false);
+		Audio.Play ();
+
 	}
 
 	public override void triggerPressedEvent ()
@@ -28,6 +33,13 @@ public class Button : Interactable
 		pressed ();
 
 		base.triggerPressedEvent ();
+	}
+
+	public override void triggerReleasedEvent ()
+	{
+		released ();
+
+		base.triggerReleasedEvent ();
 	}
 
 }

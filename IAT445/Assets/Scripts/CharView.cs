@@ -42,7 +42,7 @@ public class CharView : MonoBehaviour
 				removeCurrentFocus();
 			}
 		
-			if (hit.transform.gameObject.GetComponent<Interactable> () != null) {
+			if (hit.transform.gameObject != _currentFocus && hit.transform.gameObject.GetComponent<Interactable> () != null) {
 				setCurrentFocus(hit.transform.gameObject);
 			}
 

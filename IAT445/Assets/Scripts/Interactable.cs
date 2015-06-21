@@ -9,6 +9,8 @@ public class Interactable : MonoBehaviour {
 	public SkinnedMeshRenderer _meshRenderer;
 
 	static Material _sharedLitMaterial;
+	static Color _normalGlowColor = new Color(255/255f,145/255f,26/255f);
+	static Color _pressedGlowColor = new Color(26/255f,189/255f,255/255f);
 
 	public Color _boxColor;
 
@@ -22,7 +24,6 @@ public class Interactable : MonoBehaviour {
 
 	float _pressStartTime ;
 	public float _pressDuration;
-
 
 	void OnPressedEvent()
 	{
@@ -41,7 +42,7 @@ public class Interactable : MonoBehaviour {
 
 		if (_sharedLitMaterial == null) 
 		{
-			_sharedLitMaterial = Resources.Load("InteractableShared") as Material;
+			_sharedLitMaterial = Resources.Load("UltraGlow") as Material;
 		}
 		if(_meshRenderer == null)
 			_meshRenderer = GetComponentInChildren<SkinnedMeshRenderer> ();
@@ -55,13 +56,13 @@ public class Interactable : MonoBehaviour {
 		Debug.LogWarning ("_orign: " + _originalMaterial);
 
 	}
-
+		
 	public void litUp()
 	{
-		Color c = _originalMaterial.color;
-		c.a = 0.8f;
-		_sharedLitMaterial.color = c;
-		_sharedLitMaterial.SetColor("_EmissionColor",c);
+		_sharedLitMaterial.mainTexture = _meshRenderer.material.mainTexture;
+
+		_sharedLitMaterial.SetColor("_GlowColor",_normalGlowColor);
+
 
 		_meshRenderer.material = _sharedLitMaterial;
 	}
@@ -74,6 +75,7 @@ public class Interactable : MonoBehaviour {
 	public virtual void triggerPressedEvent()
 	{
 		_pressStartTime = Time.time;
+		_sharedLitMaterial.SetColor("_GlowColor",_pressedGlowColor);
 
 
 		OnPressedEvent ();
@@ -83,6 +85,8 @@ public class Interactable : MonoBehaviour {
 	public virtual void triggerReleasedEvent()
 	{
 		_pressDuration = Time.time - _pressStartTime;
+		_sharedLitMaterial.SetColor("_GlowColor",_normalGlowColor);
+
 
 		OnReleasedEvent ();
 
