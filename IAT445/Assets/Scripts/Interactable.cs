@@ -49,7 +49,7 @@ public class Interactable : MonoBehaviour {
 
 
 		_originalMaterial = _meshRenderer.material;
-		_originalMaterial.color = _boxColor;
+		//_originalMaterial.color = _boxColor;
 		_meshRenderer.material = _originalMaterial;
 
 	}

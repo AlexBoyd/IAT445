@@ -9,6 +9,8 @@ public class AstronautIK : MonoBehaviour {
 	public Transform _vrRoot;
 	Animator _animator;
 
+	public bool headLookAt = false;
+
 	public Transform _spineTransform;
 
 	Vector3 _initialSpinePos, _initialVRPos;
@@ -31,10 +33,10 @@ public class AstronautIK : MonoBehaviour {
 			_animator.SetIKPosition(AvatarIKGoal.RightHand,_joystickGrip.position);
 			_animator.SetIKRotation(AvatarIKGoal.RightHand,_joystickGrip.rotation);
 
-			_animator.SetLookAtWeight(1);  
-			_animator.SetLookAtPosition(_headRotation.position + _headRotation.transform.forward * 10);
-
-
+			if(headLookAt) {
+				_animator.SetLookAtWeight(1);  
+				_animator.SetLookAtPosition(_headRotation.position + _headRotation.transform.forward * 10);
+			}
 		}        
 		
 		

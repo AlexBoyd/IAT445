@@ -73,23 +73,27 @@ public class OVRCameraRig : MonoBehaviour
 	public float _maxXOffset;
 	public float _maxZOffset;
 
-	private Vector3 _initialRightEyePos;
-	private Vector3 _initialLeftEyePos;
+//	public Vector3 _initialRightEyePos;
+//	public Vector3 _initialLeftEyePos;
+	public Vector3 _initialCenterEyePos;
 
 	public AstronautIK _astronautIK;
 
 	public void resetPosition()
 	{
-		_initialRightEyePos = transform.GetChild(0).FindChild("RightEyeAnchor").transform.localPosition;
-		_initialLeftEyePos = transform.GetChild(0).FindChild("LeftEyeAnchor").transform.localPosition;
+//		_initialRightEyePos = transform.GetChild(0).FindChild("RightEyeAnchor").transform.position;
+//		_initialLeftEyePos = transform.GetChild(0).FindChild("LeftEyeAnchor").transform.position;
+		_initialCenterEyePos = centerEyeAnchor.transform.localPosition;
 	}
 
 	#region Unity Messages
 	private void Awake()
 	{
-		resetPosition ();	
+		
 
 		EnsureGameObjectIntegrity();
+
+		resetPosition ();	
 
 		if (!Application.isPlaying)
 			return;
@@ -149,39 +153,33 @@ public class OVRCameraRig : MonoBehaviour
 		rightEyeAnchor.localRotation = monoscopic ? centerEyeAnchor.localRotation : hmdRightEye.orientation;
 
 
+//		trackerAnchor.localPosition = tracker.position;
+//		centerEyeAnchor.localPosition = 0.5f * (hmdLeftEye.position + hmdRightEye.position);
+//		leftEyeAnchor.localPosition = monoscopic ? centerEyeAnchor.localPosition : hmdLeftEye.position;
+//		rightEyeAnchor.localPosition = monoscopic ? centerEyeAnchor.localPosition : hmdRightEye.position;
+
 
 		trackerAnchor.localPosition = tracker.position;
-		centerEyeAnchor.localPosition = 0.5f * (hmdLeftEye.position + hmdRightEye.position);
 
-		Vector3 intendedLeftEyePos = monoscopic ? centerEyeAnchor.localPosition : hmdLeftEye.position;
-		Vector3 intendedRightEyePos = monoscopic ? centerEyeAnchor.localPosition : hmdRightEye.position;
+		Vector3 intendedCenterPos = 0.5f * (hmdLeftEye.position + hmdRightEye.position);
 
-		Vector3 deltaLeftEye = intendedLeftEyePos - _initialLeftEyePos;
-		Vector3 deltaRightEye = intendedRightEyePos - _initialRightEyePos;
+		Vector3 deltaCenterEye = intendedCenterPos - _initialCenterEyePos;
+
+		deltaCenterEye = new Vector3 ((Mathf.Min (Mathf.Abs (deltaCenterEye.x), _maxXOffset) * Mathf.Sign(deltaCenterEye.x)),
+					0,
+			Mathf.Min (Mathf.Abs (deltaCenterEye.z), _maxZOffset) * Mathf.Sign(deltaCenterEye.z));
 
 
+		centerEyeAnchor.localPosition = _initialCenterEyePos + deltaCenterEye;
 
-		deltaLeftEye = new Vector3 ((Mathf.Min (Mathf.Abs (deltaLeftEye.x), _maxXOffset) * Mathf.Sign(deltaLeftEye.x)),
-			0,
-			Mathf.Min (Mathf.Abs (deltaLeftEye.z), _maxZOffset) * Mathf.Sign(deltaLeftEye.z));
+		leftEyeAnchor.localPosition = monoscopic ? centerEyeAnchor.localPosition : hmdLeftEye.position;
+		rightEyeAnchor.localPosition = monoscopic ? centerEyeAnchor.localPosition : hmdRightEye.position;
 
-		deltaRightEye = new Vector3 ((Mathf.Min (Mathf.Abs (deltaRightEye.x), _maxXOffset) * Mathf.Sign(deltaRightEye.x)),
-			0,
-			Mathf.Min (Mathf.Abs (deltaRightEye.z), _maxZOffset) * Mathf.Sign(deltaRightEye.z));
-
-		float deltaX = deltaLeftEye.x / _maxXOffset;
-		float deltaZ = deltaLeftEye.z / _maxZOffset;
-
-		Debug.LogWarning ("deltaX:" + deltaX);
-		Debug.LogWarning ("deltaZ:" + deltaZ);
+		float deltaX = deltaCenterEye.x / _maxXOffset;
+		float deltaZ = deltaCenterEye.z / _maxZOffset;
 		_astronautIK._xOffset = deltaX;
 		_astronautIK._zOffset = deltaZ;
-//
-//		rightEyeAnchor.position = _initialRightEyePos + deltaRightEye;
-//		leftEyeAnchor.position = _initialLeftEyePos + deltaLeftEye;
-//
-		rightEyeAnchor.localPosition = _initialRightEyePos + deltaRightEye;
-		leftEyeAnchor.localPosition = _initialLeftEyePos + deltaLeftEye;
+
 
 		if (UpdatedAnchors != null)
 		{

@@ -115,6 +115,7 @@ ModelImporter:
     100214: transform1
     100216: transform2
     100218: transform3
+    100220: Helmet_piece_5
     400000: //RootNode
     400002: Boot_A_left_starp_1
     400004: Boot_A_left_starp_2
@@ -225,6 +226,7 @@ ModelImporter:
     400214: transform1
     400216: transform2
     400218: transform3
+    400220: Helmet_piece_5
     2300000: pCylinder4
     3300000: pCylinder4
     4300000: Glove_1_left1
@@ -271,6 +273,7 @@ ModelImporter:
     4300082: pCylinder4
     4300084: Helmet_cover_neck_body1
     4300086: Helmet_piece_4
+    4300088: Helmet_piece_5
     7400000: NormalPos
     7400002: FwrdPos
     7400004: BackPos
@@ -320,6 +323,7 @@ ModelImporter:
     13700080: Waist_strap_Belt_1
     13700082: Waist_strap_Belt_4
     13700084: Helmet_piece_4
+    13700086: Helmet_piece_5
   materials:
     importMaterials: 1
     materialName: 0
