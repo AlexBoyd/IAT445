@@ -6028,6 +6028,14 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2300002, guid: d8cdd8c15f3b7ce4892d4e25ceb1e72d, type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: 476fa4b8f886b4303b5079b51cbed165, type: 2}
+    - target: {fileID: 2300002, guid: d8cdd8c15f3b7ce4892d4e25ceb1e72d, type: 3}
+      propertyPath: m_Materials.Array.data[4]
+      value: 
+      objectReference: {fileID: 2100000, guid: b7f2bca3370fda841bbe413830adc559, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d8cdd8c15f3b7ce4892d4e25ceb1e72d, type: 3}
   m_IsPrefabParent: 0
