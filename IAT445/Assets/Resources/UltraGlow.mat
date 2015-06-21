@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: GlowGreen
+  m_Name: UltraGlow
   m_Shader: {fileID: 4800000, guid: c86e690747c1e334e8a793d2c20be02e, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
@@ -19,7 +19,7 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 0}
+          m_Texture: {fileID: 2800000, guid: a9ec0757ccbff4f309b7779b68ff34ca, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -130,15 +130,15 @@ Material:
       data:
         first:
           name: _Emission
-        second: 1.57599998
+        second: 1.61000001
       data:
         first:
           name: _GlowPower
-        second: 8.56000042
+        second: 6.0999999
       data:
         first:
           name: _Albedo
-        second: 0
+        second: .720000029
     m_Colors:
       data:
         first:
@@ -147,7 +147,7 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: 1, g: 1, b: 1, a: 1}
+        second: {r: 1, g: .568627477, b: .101960786, a: 1}
       data:
         first:
           name: _MainColor
@@ -155,4 +155,4 @@ Material:
       data:
         first:
           name: _GlowColor
-        second: {r: .512170076, g: 0, b: .735294104, a: 1}
+        second: {r: 1, g: .568627477, b: .101960786, a: 1}
