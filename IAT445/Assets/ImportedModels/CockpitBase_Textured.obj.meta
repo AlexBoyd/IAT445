@@ -7,11 +7,41 @@ ModelImporter:
   fileIDToRecycleName:
     100000: //RootNode
     100002: newCockpit1:CockpitBase
+    100004: CockpitCentral_polySurface2_newCockpit1:polySurface8_newCockpit1:newCockpit1:polySurface1
+    100006: newCockpit1:polySurface8_newCockpit1:newCockpit1:polySurface1_Seat
+    100008: pCylinder5
+    100010: pCylinder6
+    100012: pCylinder7
+    100014: polySurface2_newCockpit1:polySurface8_newCockpit1:newCockpit1:polySurface1_polySurface3
     400000: //RootNode
     400002: newCockpit1:CockpitBase
+    400004: CockpitCentral_polySurface2_newCockpit1:polySurface8_newCockpit1:newCockpit1:polySurface1
+    400006: newCockpit1:polySurface8_newCockpit1:newCockpit1:polySurface1_Seat
+    400008: pCylinder5
+    400010: pCylinder6
+    400012: pCylinder7
+    400014: polySurface2_newCockpit1:polySurface8_newCockpit1:newCockpit1:polySurface1_polySurface3
     2300000: newCockpit1:CockpitBase
+    2300002: CockpitCentral_polySurface2_newCockpit1:polySurface8_newCockpit1:newCockpit1:polySurface1
+    2300004: newCockpit1:polySurface8_newCockpit1:newCockpit1:polySurface1_Seat
+    2300006: pCylinder5
+    2300008: pCylinder6
+    2300010: pCylinder7
+    2300012: polySurface2_newCockpit1:polySurface8_newCockpit1:newCockpit1:polySurface1_polySurface3
     3300000: newCockpit1:CockpitBase
+    3300002: CockpitCentral_polySurface2_newCockpit1:polySurface8_newCockpit1:newCockpit1:polySurface1
+    3300004: newCockpit1:polySurface8_newCockpit1:newCockpit1:polySurface1_Seat
+    3300006: pCylinder5
+    3300008: pCylinder6
+    3300010: pCylinder7
+    3300012: polySurface2_newCockpit1:polySurface8_newCockpit1:newCockpit1:polySurface1_polySurface3
     4300000: newCockpit1:CockpitBase
+    4300002: CockpitCentral_polySurface2_newCockpit1:polySurface8_newCockpit1:newCockpit1:polySurface1
+    4300004: newCockpit1:polySurface8_newCockpit1:newCockpit1:polySurface1_Seat
+    4300006: pCylinder5
+    4300008: pCylinder6
+    4300010: pCylinder7
+    4300012: polySurface2_newCockpit1:polySurface8_newCockpit1:newCockpit1:polySurface1_polySurface3
   materials:
     importMaterials: 1
     materialName: 0
