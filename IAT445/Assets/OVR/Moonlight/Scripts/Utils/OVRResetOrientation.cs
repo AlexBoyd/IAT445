@@ -23,7 +23,8 @@ using UnityEngine;
 
 public class OVRResetOrientation : MonoBehaviour
 {
-	public OVRGamepadController.Button resetButton = OVRGamepadController.Button.Y;
+	public KeyCode keyCode;
+	public OVRCameraRig cameraRig;
 
 	/// <summary>
 	/// Check input and reset orientation if necessary
@@ -32,12 +33,15 @@ public class OVRResetOrientation : MonoBehaviour
 	void Update()
 	{
 		// NOTE: some of the buttons defined in OVRGamepadController.Button are not available on the Android game pad controller
-		if (Input.GetButtonDown(OVRGamepadController.ButtonNames[(int)resetButton]))
+		if (Input.GetKeyDown(keyCode))//OVRGamepadController.ButtonNames[(int)resetButton]))
 		{
 			//*************************
 			// reset orientation
 			//*************************
 			OVRManager.display.RecenterPose();
+
+
+//			cameraRig.resetPosition ();
 		}
 	}
 }

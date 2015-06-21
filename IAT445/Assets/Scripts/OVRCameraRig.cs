@@ -78,9 +78,17 @@ public class OVRCameraRig : MonoBehaviour
 
 	public AstronautIK _astronautIK;
 
+	public void resetPosition()
+	{
+		_initialRightEyePos = transform.GetChild(0).FindChild("RightEyeAnchor").transform.localPosition;
+		_initialLeftEyePos = transform.GetChild(0).FindChild("LeftEyeAnchor").transform.localPosition;
+	}
+
 	#region Unity Messages
 	private void Awake()
 	{
+		resetPosition ();	
+
 		EnsureGameObjectIntegrity();
 
 		if (!Application.isPlaying)
@@ -113,6 +121,8 @@ public class OVRCameraRig : MonoBehaviour
 	private void Update()
 	#endif
 	{
+
+
 		EnsureGameObjectIntegrity();
 
 		if (!Application.isPlaying)
@@ -162,14 +172,16 @@ public class OVRCameraRig : MonoBehaviour
 		float deltaX = deltaLeftEye.x / _maxXOffset;
 		float deltaZ = deltaLeftEye.z / _maxZOffset;
 
-//		Debug.LogWarning ("deltaX:" + deltaX);
-//		Debug.LogWarning ("deltaZ:" + deltaZ);
+		Debug.LogWarning ("deltaX:" + deltaX);
+		Debug.LogWarning ("deltaZ:" + deltaZ);
 		_astronautIK._xOffset = deltaX;
 		_astronautIK._zOffset = deltaZ;
-
+//
+//		rightEyeAnchor.position = _initialRightEyePos + deltaRightEye;
+//		leftEyeAnchor.position = _initialLeftEyePos + deltaLeftEye;
+//
 		rightEyeAnchor.localPosition = _initialRightEyePos + deltaRightEye;
 		leftEyeAnchor.localPosition = _initialLeftEyePos + deltaLeftEye;
-
 
 		if (UpdatedAnchors != null)
 		{
