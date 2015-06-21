@@ -17,8 +17,11 @@ public class SequenceListener : MonoBehaviour
 
 	public ARWindShield _windShieldPrompt;
 
+	public Animation _EffectsAnimations;
 
-	bool _cockpitActivated = false;
+	public bool _cockpitActivated = false;
+	public bool _hyperDrive1Primed;
+	public bool _hyperDrive2Primed;
 
 	void Awake ()
 	{
@@ -100,12 +103,21 @@ public class SequenceListener : MonoBehaviour
 	void releasedEvent (Interactable interactable)
 	{
 		if (interactable._eventName.Equals ("initializeDrill") && interactable._pressDuration > 4) {
-			_cockpitActivated = true;
-			_windShieldPrompt.ARText.text = "Diagnostic Mode Activated";
-			Debug.Log ("Pressed for 4 seconds the initialize drill!");
-		} else {
-			Debug.Log ("Not 4 seconds or not drill!");
-		}
+			_cockpitActivated = !_cockpitActivated;
+			if (_cockpitActivated) {
+				_windShieldPrompt.ARText.text = "Diagnostic Mode Activated";
+				Debug.Log ("Pressed for 4 seconds the initialize drill!");
+			} else {
+				_windShieldPrompt.ARText.text = "Diagnostic Mode Disabled";
+			}
+		} else if (interactable._eventName.Equals ("initializeDrill") && interactable._pressDuration <= 4) {
+			if (_hyperDrive1Primed) {
+
+			} else if (_hyperDrive2Primed) {
+				_EffectsAnimations.Play ("HyperDriveFailure");
+
+			}
+		} 
 	}
 
 

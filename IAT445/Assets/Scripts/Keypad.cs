@@ -2,7 +2,8 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class Keypad : MonoBehaviour {
+public class Keypad : MonoBehaviour
+{
 
 	public KeypadButton[] _keypadButtons;
 
@@ -13,39 +14,55 @@ public class Keypad : MonoBehaviour {
 	public Text _keypadInput;
 	public event StringDelegate TriggerEvent;
 
-	void OnTriggerEvent()
+	public SequenceListener _SequenceListener;
+
+	public Text	ConsoleTxt;
+
+	void OnTriggerEvent ()
 	{
 		if (TriggerEvent != null)
 			TriggerEvent (_eventName);
 	}
 
-	void Awake()
+	void Awake ()
 	{
-		if (_keypadButtons == null) 
-		{
+		if (_keypadButtons == null) {
 			_keypadButtons = GetComponentsInChildren<KeypadButton> () as KeypadButton[];
 		}
 	}
 
-	void OnEnable()
+	void OnEnable ()
 	{
-		foreach(KeypadButton button in _keypadButtons)
-		{
+		foreach (KeypadButton button in _keypadButtons) {
 			button.ButtonPressed += keypadButtonPressed;
 		}
 	}
 
-	void OnDisable()
+	void OnDisable ()
 	{
-		foreach(KeypadButton button in _keypadButtons)
-		{
+		foreach (KeypadButton button in _keypadButtons) {
 			button.ButtonPressed -= keypadButtonPressed;
 		}
 	}
 
-	void keypadButtonPressed(string keyValue)
-	{
-		_currentInput += keyValue;
+	void keypadButtonPressed (string keyValue)
+	{	
+		if (keyValue == "#") {
+			if (_currentInput == "8717") {
+				ConsoleTxt.text = "HyperDrive Primed";
+				_currentInput = string.Empty;
+				_SequenceListener._hyperDrive1Primed = true;
+			} else if (_currentInput == "7178") {
+				ConsoleTxt.text = "HyperDrive Primed";
+				_currentInput = string.Empty;
+				_SequenceListener._hyperDrive2Primed = true;
+			}
+		} else if (keyValue == "*") {
+			_currentInput = string.Empty;
+
+		} else {
+			_currentInput += keyValue;
+		}
 		_keypadInput.text = _currentInput;
 	}
 

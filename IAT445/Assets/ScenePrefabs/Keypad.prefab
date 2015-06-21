@@ -1140,6 +1140,7 @@ MonoBehaviour:
   _eventName: 
   _currentInput: 
   _keypadInput: {fileID: 11419674}
+  ConsoleTxt: {fileID: 0}
 --- !u!114 &11453812
 MonoBehaviour:
   m_ObjectHideFlags: 1
