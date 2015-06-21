@@ -32,8 +32,7 @@ public class AstronautIK : MonoBehaviour {
 			_animator.SetIKRotation(AvatarIKGoal.RightHand,_joystickGrip.rotation);
 
 			_animator.SetLookAtWeight(1);  
-			_animator.SetLookAtPosition(_headRotation.position + -_headRotation.transform.forward * 10);
-
+			_animator.SetLookAtPosition(_headRotation.position + _headRotation.transform.forward * 10);
 
 
 		}        
@@ -43,11 +42,11 @@ public class AstronautIK : MonoBehaviour {
 	}   
 
 
-//	void LateUpdate()
-//	{
-//		Vector3 deltaVRPos = (_headRotation.transform.position - _initialVRPos);
-//
-//		_spineTransform.position = _initialSpinePos + deltaVRPos;
-//
-//	}
+	void Update()
+	{
+
+		_animator.SetFloat ("X", _xOffset);
+		_animator.SetFloat ("Z", _zOffset);
+
+	}
 }
