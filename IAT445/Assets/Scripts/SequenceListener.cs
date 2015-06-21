@@ -112,7 +112,7 @@ public class SequenceListener : MonoBehaviour
 			}
 		} else if (interactable._eventName.Equals ("initializeDrill") && interactable._pressDuration <= 4) {
 			if (_hyperDrive1Primed) {
-
+				_EffectsAnimations.Play ("HyperDriveSuccess");
 			} else if (_hyperDrive2Primed) {
 				_EffectsAnimations.Play ("HyperDriveFailure");
 
