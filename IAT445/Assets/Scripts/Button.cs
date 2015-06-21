@@ -24,8 +24,6 @@ public class Button : Interactable
 	public  void released ()
 	{
 		_animator.SetBool ("PressButton", false);
-		Audio.Play ();
-
 	}
 
 	public override void triggerPressedEvent ()

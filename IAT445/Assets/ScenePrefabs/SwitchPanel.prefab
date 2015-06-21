@@ -736,7 +736,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _meshRenderer: {fileID: 13755416}
+  _materialIndex: 1
   _boxColor: {r: 1, g: 1, b: 1, a: 1}
+  _originalMaterial: {fileID: 0}
   _eventName: 
   _eventNamePretty: 
   _pressDuration: 0
@@ -771,7 +773,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _meshRenderer: {fileID: 13711150}
+  _materialIndex: 1
   _boxColor: {r: 1, g: 1, b: 1, a: 1}
+  _originalMaterial: {fileID: 0}
   _eventName: 
   _eventNamePretty: 
   _pressDuration: 0
@@ -788,7 +792,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _meshRenderer: {fileID: 13748270}
+  _materialIndex: 1
   _boxColor: {r: 1, g: 1, b: 1, a: 1}
+  _originalMaterial: {fileID: 0}
   _eventName: 
   _eventNamePretty: 
   _pressDuration: 0
@@ -805,7 +811,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _meshRenderer: {fileID: 13720668}
+  _materialIndex: 1
   _boxColor: {r: 1, g: 1, b: 1, a: 1}
+  _originalMaterial: {fileID: 0}
   _eventName: 
   _eventNamePretty: 
   _pressDuration: 0
