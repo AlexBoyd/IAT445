@@ -95,15 +95,15 @@ AnimationClip:
         inSlope: 0
         outSlope: 0
         tangentMode: 10
-      - time: 7.91666651
+      - time: 2
         value: 1
-        inSlope: -.127659574
-        outSlope: -.127659574
+        inSlope: -.256410241
+        outSlope: -.256410241
         tangentMode: 10
-      - time: 11.833333
+      - time: 3.95000005
         value: 0
-        inSlope: -.255319148
-        outSlope: -.255319148
+        inSlope: -.512820482
+        outSlope: -.512820482
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -218,15 +218,15 @@ AnimationClip:
         inSlope: 0
         outSlope: 0
         tangentMode: 10
-      - time: 7.91666651
+      - time: 2
         value: 1
-        inSlope: -.127659574
-        outSlope: -.127659574
+        inSlope: -.256410241
+        outSlope: -.256410241
         tangentMode: 10
-      - time: 11.833333
+      - time: 3.95000005
         value: 0
-        inSlope: -.255319148
-        outSlope: -.255319148
+        inSlope: -.512820482
+        outSlope: -.512820482
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
