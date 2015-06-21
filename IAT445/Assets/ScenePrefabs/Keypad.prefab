@@ -1,5 +1,22 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &112728
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 435962}
+  - 82: {fileID: 8285714}
+  - 114: {fileID: 11450442}
+  m_Layer: 0
+  m_Name: OSPAudioSource
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &135720
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,7 +307,7 @@ Transform:
   m_LocalScale: {x: .244520664, y: .244520649, z: .244520649}
   m_Children: []
   m_Father: {fileID: 491482}
-  m_RootOrder: 8
+  m_RootOrder: 9
 --- !u!4 &430730
 Transform:
   m_ObjectHideFlags: 1
@@ -302,7 +319,7 @@ Transform:
   m_LocalScale: {x: .244520664, y: .244520649, z: .244520649}
   m_Children: []
   m_Father: {fileID: 491482}
-  m_RootOrder: 11
+  m_RootOrder: 12
 --- !u!4 &432376
 Transform:
   m_ObjectHideFlags: 1
@@ -314,7 +331,7 @@ Transform:
   m_LocalScale: {x: .244520664, y: .244520649, z: .244520649}
   m_Children: []
   m_Father: {fileID: 491482}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!4 &433460
 Transform:
   m_ObjectHideFlags: 1
@@ -326,7 +343,19 @@ Transform:
   m_LocalScale: {x: .244520664, y: .244520649, z: .244520649}
   m_Children: []
   m_Father: {fileID: 491482}
-  m_RootOrder: 3
+  m_RootOrder: 4
+--- !u!4 &435962
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 112728}
+  m_LocalRotation: {x: -.501485229, y: .784654856, z: -.196269512, w: .307095587}
+  m_LocalPosition: {x: 1.75033033, y: .369004011, z: -2.32263184}
+  m_LocalScale: {x: .32438302, y: .258172035, z: .272891581}
+  m_Children: []
+  m_Father: {fileID: 491482}
+  m_RootOrder: 0
 --- !u!4 &437280
 Transform:
   m_ObjectHideFlags: 1
@@ -338,7 +367,7 @@ Transform:
   m_LocalScale: {x: .244520664, y: .244520649, z: .244520649}
   m_Children: []
   m_Father: {fileID: 491482}
-  m_RootOrder: 7
+  m_RootOrder: 8
 --- !u!4 &447768
 Transform:
   m_ObjectHideFlags: 1
@@ -350,7 +379,7 @@ Transform:
   m_LocalScale: {x: .244520664, y: .244520649, z: .244520649}
   m_Children: []
   m_Father: {fileID: 491482}
-  m_RootOrder: 10
+  m_RootOrder: 11
 --- !u!4 &448002
 Transform:
   m_ObjectHideFlags: 1
@@ -362,7 +391,7 @@ Transform:
   m_LocalScale: {x: .244520664, y: .244520649, z: .244520649}
   m_Children: []
   m_Father: {fileID: 491482}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!4 &448748
 Transform:
   m_ObjectHideFlags: 1
@@ -374,7 +403,7 @@ Transform:
   m_LocalScale: {x: .244520664, y: .244520649, z: .244520649}
   m_Children: []
   m_Father: {fileID: 491482}
-  m_RootOrder: 9
+  m_RootOrder: 10
 --- !u!4 &460450
 Transform:
   m_ObjectHideFlags: 1
@@ -386,7 +415,7 @@ Transform:
   m_LocalScale: {x: .244520664, y: .244520649, z: .244520649}
   m_Children: []
   m_Father: {fileID: 491482}
-  m_RootOrder: 6
+  m_RootOrder: 7
 --- !u!4 &471076
 Transform:
   m_ObjectHideFlags: 1
@@ -398,7 +427,7 @@ Transform:
   m_LocalScale: {x: .244520664, y: .244520649, z: .244520649}
   m_Children: []
   m_Father: {fileID: 491482}
-  m_RootOrder: 5
+  m_RootOrder: 6
 --- !u!4 &484862
 Transform:
   m_ObjectHideFlags: 1
@@ -410,7 +439,7 @@ Transform:
   m_LocalScale: {x: .244520664, y: .244520649, z: .244520649}
   m_Children: []
   m_Father: {fileID: 491482}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!4 &485492
 Transform:
   m_ObjectHideFlags: 1
@@ -422,7 +451,7 @@ Transform:
   m_LocalScale: {x: .244520664, y: .244520649, z: .244520649}
   m_Children: []
   m_Father: {fileID: 491482}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!4 &491482
 Transform:
   m_ObjectHideFlags: 1
@@ -433,6 +462,7 @@ Transform:
   m_LocalPosition: {x: -2.9000001, y: 2.8599999, z: 1.76999998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 435962}
   - {fileID: 484862}
   - {fileID: 448002}
   - {fileID: 432376}
@@ -964,6 +994,75 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: .5, y: .5, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!82 &8285714
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 112728}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: c85415d29d87e461d8e96cce7f43f210, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: .100000001
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 0
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!114 &11400440
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1096,6 +1195,22 @@ MonoBehaviour:
   _eventNamePretty: 
   _pressDuration: 0
   _value: '#'
+--- !u!114 &11450442
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 112728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31c367764a091a44daf1d68152d26aaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bypass: 0
+  playOnAwake: 0
+  priority: 0
+  frequencyHint: 0
+  useSimple: 0
 --- !u!114 &11452102
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1140,7 +1255,9 @@ MonoBehaviour:
   _eventName: 
   _currentInput: 
   _keypadInput: {fileID: 11419674}
+  _SequenceListener: {fileID: 0}
   ConsoleTxt: {fileID: 0}
+  _KeypadAudio: {fileID: 8285714}
 --- !u!114 &11453812
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1294,7 +1411,7 @@ RectTransform:
   m_Children:
   - {fileID: 22499496}
   m_Father: {fileID: 491482}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: .340000004}

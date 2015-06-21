@@ -18,6 +18,8 @@ public class Keypad : MonoBehaviour
 
 	public Text	ConsoleTxt;
 
+	public AudioSource _KeypadAudio;
+
 	void OnTriggerEvent ()
 	{
 		if (TriggerEvent != null)
@@ -47,6 +49,7 @@ public class Keypad : MonoBehaviour
 
 	void keypadButtonPressed (string keyValue)
 	{	
+		_KeypadAudio.Play ();
 		if (keyValue == "#") {
 			if (_currentInput == "8717") {
 				ConsoleTxt.text = "HyperDrive Primed";
