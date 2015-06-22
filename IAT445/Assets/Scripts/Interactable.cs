@@ -26,6 +26,8 @@ public class Interactable : MonoBehaviour {
 	float _pressStartTime ;
 	public float _pressDuration;
 
+	AudioSource Audio;
+
 	void OnPressedEvent()
 	{
 		if (PressedEvent != null)
@@ -50,6 +52,8 @@ public class Interactable : MonoBehaviour {
 		
 		_originalMaterial = _meshRenderer.materials[_materialIndex];
 
+		Audio = GetComponentInChildren<AudioSource> ();
+
 	}
 		
 	public void litUp()
@@ -73,6 +77,10 @@ public class Interactable : MonoBehaviour {
 	{
 		_pressStartTime = Time.time;
 		_sharedLitMaterial.SetColor("_GlowColor",_pressedGlowColor);
+
+		if (Audio!=null) {
+			Audio.Play ();
+		}
 
 		OnPressedEvent ();
 	}
