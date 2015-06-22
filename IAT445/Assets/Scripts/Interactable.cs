@@ -28,6 +28,23 @@ public class Interactable : MonoBehaviour {
 
 	public AudioSource Audio;
 
+	public bool _interactable = true;
+
+	bool _previousInteractableState;
+
+	public void disableInteractable()
+	{
+		_previousInteractableState = _interactable;
+
+		_interactable = false;
+
+	}
+
+	public void enableInteractable(bool overridePrevious)
+	{
+		_interactable = overridePrevious ? true : _previousInteractableState;
+	}
+
 	void OnPressedEvent()
 	{
 		if (PressedEvent != null)
@@ -59,6 +76,9 @@ public class Interactable : MonoBehaviour {
 		
 	public void litUp()
 	{
+		if (!_interactable)
+			return;
+
 		_sharedLitMaterial.mainTexture = _originalMaterial.mainTexture;
 
 		_sharedLitMaterial.SetColor("_GlowColor",_normalGlowColor);
@@ -69,6 +89,9 @@ public class Interactable : MonoBehaviour {
 
 	public void unlit()
 	{
+		if (!_interactable)
+			return;
+
 		Material[] materials = _meshRenderer.materials;
 		materials[_materialIndex] = _originalMaterial;
 		_meshRenderer.materials = materials;
@@ -76,6 +99,9 @@ public class Interactable : MonoBehaviour {
 
 	public virtual void triggerPressedEvent()
 	{
+		if (!_interactable)
+			return;
+
 		_pressStartTime = Time.time;
 		_sharedLitMaterial.SetColor("_GlowColor",_pressedGlowColor);
 
@@ -88,6 +114,9 @@ public class Interactable : MonoBehaviour {
 
 	public virtual void triggerReleasedEvent()
 	{
+		if (!_interactable)
+			return;
+
 		_pressDuration = Time.time - _pressStartTime;
 		_sharedLitMaterial.SetColor("_GlowColor",_normalGlowColor);
 

@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-
+using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins;
 
 
 
@@ -25,11 +27,39 @@ public class SequenceListener : MonoBehaviour
 	public bool _hyperDrive2Primed;
 	public bool _emergencyPowerOn;
 	public bool _powerOutage;
-	
+
+	public Interactable _removablePanel;
+	public CharView _charview;
+	public AudioSource _staticAudio;
+
+
+	void disableAllInteractables()
+	{
+		_charview.removeCurrentFocus ();
+
+		foreach (Interactable interactable in _interectables) 
+		{
+			interactable.disableInteractable ();
+		}
+	}
+
+	void enableAllInteractables(bool overridePrevious = false)
+	{
+		_charview.removeCurrentFocus ();
+
+		foreach (Interactable interactable in _interectables) 
+		{
+			interactable.enableInteractable (overridePrevious);
+		}
+	}
+
+
+
 	void Awake ()
 	{
 		_interectables = GameObject.FindObjectsOfType<Interactable> () as Interactable[];
 		//_switchPanel = GameObject.FindObjectOfType<SwitchPanel> () as SwitchPanel;
+
 
 	}
 
@@ -87,6 +117,9 @@ public class SequenceListener : MonoBehaviour
 		if (eventName == "emergencyPower" && !_emergencyPowerOn && _powerOutage) {
 			_EffectsAnimations.Play ("EmergencyPower");
 			_emergencyPowerOn = true;
+
+			enableAllInteractables (true);
+			disableStaticAudio ();
 		}
 
 	}
@@ -124,14 +157,61 @@ public class SequenceListener : MonoBehaviour
 			if (_hyperDrive1Primed) {
 				_EffectsAnimations.Play ("HyperDriveSuccess");
 				_hyperDrive1Primed = false;
+//				enableStaticAudio ();
 			} else if (_hyperDrive2Primed) {
 				_EffectsAnimations.Play ("HyperDriveFailure");
 				_powerOutage = true;
 				_hyperDrive2Primed = false;
+				_emergencyPowerOn = false;
+
+				Debug.LogWarning ("disableAllInteractables");
+
+				// Disable all
+				disableAllInteractables ();
+				// Enable the emergency switch
+				_emergencyPowerSwitch.GetComponentInChildren<Interactable>().enableInteractable (true);
+//
+//				enableStaticAudio ();
 
 			}
 		} 
 	}
+	public void disableStaticAudio()
+	{
+		Debug.LogWarning ("Disable static!");
+
+
+		StartCoroutine (setStaticVolume (0.0f, 0.25f));
+	}
+
+	public void enableStaticAudio()
+	{
+		Debug.LogWarning ("Enable static!");
+
+		StartCoroutine (setStaticVolume (0.02f, 0.25f));
+	}
+
+	IEnumerator setStaticVolume(float endValue, float duration)
+	{
+		float elapsed = 0.0f;
+
+		float initialValue = _staticAudio.volume;
+
+		while (elapsed < duration) 
+		{
+			float t = elapsed / duration;
+
+			_staticAudio.volume = Mathf.Lerp (initialValue, endValue, t);
+
+			elapsed += Time.deltaTime;
+
+			yield return null;
+		}
+
+		_staticAudio.volume = endValue;
+	}
+
+
 
 
 	// Use this for initialization
@@ -139,6 +219,14 @@ public class SequenceListener : MonoBehaviour
 	{
 	
 //		promptRandomInteractable ();
+	}
+
+	void Update()
+	{
+		if (Input.GetKeyDown (KeyCode.Alpha1))
+			enableAllInteractables ();
+		if(Input.GetKeyDown(KeyCode.Alpha2))
+			disableAllInteractables ();
 	}
 
 	void promptRandomInteractable ()

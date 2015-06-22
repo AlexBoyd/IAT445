@@ -35,6 +35,9 @@ public class Button : Interactable
 
 	public override void triggerReleasedEvent ()
 	{
+		if (!_interactable)
+			return;
+
 		released ();
 
 		base.triggerReleasedEvent ();

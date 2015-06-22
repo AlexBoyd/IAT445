@@ -8,6 +8,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 467676}
+  - 114: {fileID: 11486252}
   m_Layer: 20
   m_Name: SpaceScene
   m_TagString: Untagged
@@ -31,7 +32,7 @@ GameObject:
   m_TagString: SpaceScene_Nebula
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &125206
 GameObject:
@@ -49,7 +50,7 @@ GameObject:
   m_TagString: SpaceScene_Nebula
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 0
 --- !u!1 &132624
 GameObject:
@@ -67,7 +68,7 @@ GameObject:
   m_TagString: SpaceScene_Nebula
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &135476
 GameObject:
@@ -102,7 +103,7 @@ GameObject:
   m_TagString: SpaceScene_Nebula
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 0
 --- !u!1 &140278
 GameObject:
@@ -120,7 +121,7 @@ GameObject:
   m_TagString: SpaceScene_Nebula
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 0
 --- !u!1 &140904
 GameObject:
@@ -138,7 +139,7 @@ GameObject:
   m_TagString: SpaceScene_Nebula
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 0
 --- !u!1 &159096
 GameObject:
@@ -156,7 +157,7 @@ GameObject:
   m_TagString: SpaceScene_Nebula
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 0
 --- !u!1 &160038
 GameObject:
@@ -174,7 +175,7 @@ GameObject:
   m_TagString: SpaceScene_Nebula
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &161238
 GameObject:
@@ -192,7 +193,7 @@ GameObject:
   m_TagString: SpaceScene_Nebula
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 0
 --- !u!1 &164188
 GameObject:
@@ -210,7 +211,7 @@ GameObject:
   m_TagString: SpaceScene_Nebula
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 0
 --- !u!1 &164354
 GameObject:
@@ -228,7 +229,7 @@ GameObject:
   m_TagString: SpaceScene_Nebula
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &167296
 GameObject:
@@ -266,7 +267,7 @@ GameObject:
   m_TagString: SpaceScene_Nebula
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &185838
 GameObject:
@@ -284,7 +285,7 @@ GameObject:
   m_TagString: SpaceScene_Nebula
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 0
 --- !u!1 &192030
 GameObject:
@@ -302,7 +303,7 @@ GameObject:
   m_TagString: SpaceScene_Nebula
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &192860
 GameObject:
@@ -320,7 +321,7 @@ GameObject:
   m_TagString: SpaceScene_Nebula
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &192868
 GameObject:
@@ -338,7 +339,7 @@ GameObject:
   m_TagString: SpaceScene_Nebula
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &193468
 GameObject:
@@ -482,7 +483,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 193468}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.08197403, y: .163131714, z: 25.0866432}
+  m_LocalPosition: {x: 251.899994, y: -90.9000015, z: 273.700012}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 446314}
@@ -508,8 +509,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 116944}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.21267796, y: 3.21267629, z: 3.21267629}
+  m_LocalPosition: {x: 18.6476746, y: 140.83049, z: -321.992249}
+  m_LocalScale: {x: 2.39413953, y: 2.3941381, z: 2.39413834}
   m_Children:
   - {fileID: 463434}
   - {fileID: 471948}
@@ -584,7 +585,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 192860}
-  m_LocalRotation: {x: .282568455, y: -.306465298, z: .729242504, w: -.542622745}
+  m_LocalRotation: {x: .282568485, y: -.306465328, z: .729242563, w: -.542622805}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: .99999994}
   m_Children: []
@@ -1422,6 +1423,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planetRotation: {x: 0, y: 0, z: .100000001}
+--- !u!114 &11486252
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 116944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41683f0e118844587a2e1ac6d450951f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerId: 0
+  rotationSpeed: 1
+  currentHorizontal: 0
+  currentVertical: 0
 --- !u!135 &13590774
 SphereCollider:
   m_ObjectHideFlags: 1

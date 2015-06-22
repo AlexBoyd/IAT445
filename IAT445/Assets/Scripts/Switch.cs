@@ -15,29 +15,8 @@ public class Switch : Interactable {
 		_animator = GetComponent<Animator> ();
 	}
 
-
-	public void updateColor()
-	{
-		Color c = _meshRenderer.material.color;
-
-		c = _isOn ? Color.green : Color.red;
-
-		_meshRenderer.material.color = c;
-	}
-
 	public  void pressed() 
 	{
-//		if(Audio)
-//		{
-//			if (_isOn) {
-//				Audio.time = Audio.clip.length;
-//				Audio.pitch = -1;
-//			} else {
-//				
-//				Audio.time = 0;
-//				Audio.pitch = 1;
-//			}
-//		}
 
 
 		_animator.SetBool ("Up", !_isOn);
@@ -49,6 +28,9 @@ public class Switch : Interactable {
 
 	public override void triggerPressedEvent()
 	{
+		if (!_interactable)
+			return;
+
 		pressed ();
 
 		base.triggerPressedEvent ();

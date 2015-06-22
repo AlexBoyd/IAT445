@@ -178,6 +178,8 @@ MonoBehaviour:
   _eventName: 
   _eventNamePretty: 
   _pressDuration: 0
+  Audio: {fileID: 0}
+  _interactable: 0
   _isOn: 0
 --- !u!137 &13778656
 SkinnedMeshRenderer:

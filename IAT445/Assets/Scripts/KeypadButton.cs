@@ -24,36 +24,25 @@ public class KeypadButton : Interactable
 	void Awake ()
 	{
 		base.Awake ();
-//		_animator = GetComponent<Animator> ();
 	}
 
 	public  void pressed ()
 	{
-//		_animator.SetBool ("PressButton", true);
-//		Audio.Play ();
+
 		OnButtonPressed ();
 
 	}
 
-	public  void released ()
-	{
-//		_animator.SetBool ("PressButton", false);
-//		Audio.Play ();
-
-	}
 
 	public override void triggerPressedEvent ()
 	{
+		if (!_interactable)
+			return;
+
 		pressed ();
 
 		base.triggerPressedEvent ();
 	}
 
-	public override void triggerReleasedEvent ()
-	{
-		released ();
-
-		base.triggerReleasedEvent ();
-	}
 
 }

@@ -62,16 +62,19 @@ public class CharView : MonoBehaviour
 	
 	}
 
+
+
 	void setCurrentFocus(GameObject go)
 	{
 		_currentFocus = go;
 		_currentFocus.GetComponent<Interactable> ().litUp ();
 	}
-	void removeCurrentFocus()
+	public void removeCurrentFocus()
 	{
-
+		if (_currentFocus != null) {
 			_currentFocus.GetComponent<Interactable> ().unlit ();
 			_currentFocus = null;
+		}
 
 	}
 	
