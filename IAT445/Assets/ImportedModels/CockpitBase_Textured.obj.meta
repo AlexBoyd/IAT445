@@ -14,6 +14,7 @@ ModelImporter:
     100012: pCylinder7
     100014: polySurface2_newCockpit1:polySurface8_newCockpit1:newCockpit1:polySurface1_polySurface3
     100016: CockpitCentral
+    100018: CockpitCenter
     400000: //RootNode
     400002: newCockpit1:CockpitBase
     400004: CockpitCentral_polySurface2_newCockpit1:polySurface8_newCockpit1:newCockpit1:polySurface1
@@ -23,6 +24,7 @@ ModelImporter:
     400012: pCylinder7
     400014: polySurface2_newCockpit1:polySurface8_newCockpit1:newCockpit1:polySurface1_polySurface3
     400016: CockpitCentral
+    400018: CockpitCenter
     2300000: newCockpit1:CockpitBase
     2300002: CockpitCentral_polySurface2_newCockpit1:polySurface8_newCockpit1:newCockpit1:polySurface1
     2300004: newCockpit1:polySurface8_newCockpit1:newCockpit1:polySurface1_Seat
@@ -31,6 +33,7 @@ ModelImporter:
     2300010: pCylinder7
     2300012: polySurface2_newCockpit1:polySurface8_newCockpit1:newCockpit1:polySurface1_polySurface3
     2300014: CockpitCentral
+    2300016: CockpitCenter
     3300000: newCockpit1:CockpitBase
     3300002: CockpitCentral_polySurface2_newCockpit1:polySurface8_newCockpit1:newCockpit1:polySurface1
     3300004: newCockpit1:polySurface8_newCockpit1:newCockpit1:polySurface1_Seat
@@ -39,6 +42,7 @@ ModelImporter:
     3300010: pCylinder7
     3300012: polySurface2_newCockpit1:polySurface8_newCockpit1:newCockpit1:polySurface1_polySurface3
     3300014: CockpitCentral
+    3300016: CockpitCenter
     4300000: newCockpit1:CockpitBase
     4300002: CockpitCentral_polySurface2_newCockpit1:polySurface8_newCockpit1:newCockpit1:polySurface1
     4300004: newCockpit1:polySurface8_newCockpit1:newCockpit1:polySurface1_Seat
@@ -47,6 +51,7 @@ ModelImporter:
     4300010: pCylinder7
     4300012: polySurface2_newCockpit1:polySurface8_newCockpit1:newCockpit1:polySurface1_polySurface3
     4300014: CockpitCentral
+    4300016: CockpitCenter
   materials:
     importMaterials: 1
     materialName: 0
