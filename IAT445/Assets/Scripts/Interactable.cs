@@ -26,7 +26,7 @@ public class Interactable : MonoBehaviour {
 	float _pressStartTime ;
 	public float _pressDuration;
 
-	AudioSource Audio;
+	public AudioSource Audio;
 
 	void OnPressedEvent()
 	{
@@ -52,7 +52,8 @@ public class Interactable : MonoBehaviour {
 		
 		_originalMaterial = _meshRenderer.materials[_materialIndex];
 
-		Audio = GetComponentInChildren<AudioSource> ();
+		if(Audio==null)
+			Audio = GetComponentInChildren<AudioSource> ();
 
 	}
 		

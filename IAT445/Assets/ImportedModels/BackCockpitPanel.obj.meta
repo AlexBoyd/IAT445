@@ -1,37 +1,17 @@
 fileFormatVersion: 2
-guid: bdd04c4b2961a704389b24ebb24911ec
-timeCreated: 1434909743
-licenseType: Pro
+guid: c58d74301bb28485e83cdf3b0326fd68
+timeCreated: 1434934874
+licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
-    100000: CockpitBack
-    100002: //RootNode
-    100004: pCube2
-    100006: cockpitDoor
-    100008: BackCockpitPanelExposed_CockpitBack
-    100010: CockpitBack_cockpitDoor
-    400000: CockpitBack
-    400002: //RootNode
-    400004: pCube2
-    400006: cockpitDoor
-    400008: BackCockpitPanelExposed_CockpitBack
-    400010: CockpitBack_cockpitDoor
-    2300000: CockpitBack
-    2300002: pCube2
-    2300004: cockpitDoor
-    2300006: BackCockpitPanelExposed_CockpitBack
-    2300008: CockpitBack_cockpitDoor
-    3300000: CockpitBack
-    3300002: pCube2
-    3300004: cockpitDoor
-    3300006: BackCockpitPanelExposed_CockpitBack
-    3300008: CockpitBack_cockpitDoor
-    4300000: CockpitBack
-    4300002: pCube2
-    4300004: cockpitDoor
-    4300006: BackCockpitPanelExposed_CockpitBack
-    4300008: CockpitBack_cockpitDoor
+    100000: //RootNode
+    100002: BackCockpitPanel_CockpitBack
+    400000: //RootNode
+    400002: BackCockpitPanel_CockpitBack
+    2300000: BackCockpitPanel_CockpitBack
+    3300000: BackCockpitPanel_CockpitBack
+    4300000: BackCockpitPanel_CockpitBack
   materials:
     importMaterials: 1
     materialName: 0
@@ -60,7 +40,7 @@ ModelImporter:
     addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
-    generateSecondaryUV: 1
+    generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0
@@ -71,7 +51,7 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
-    normalSmoothAngle: 66
+    normalSmoothAngle: 71
     splitTangentsAcrossUV: 1
     normalImportMode: 1
     tangentImportMode: 1
