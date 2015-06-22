@@ -3900,6 +3900,45 @@ AnimationClip:
     path: HyperDriveCorridor
     classID: 114
     script: {fileID: 11500000, guid: 591db2a9fd04b41caa3619bde1701cf9, type: 3}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: .0136363627
+        outSlope: .0136363627
+        tangentMode: 10
+      - time: .733333349
+        value: .00999999978
+        inSlope: .0105917659
+        outSlope: .0105917659
+        tangentMode: 10
+      - time: 3.38333344
+        value: .0299999993
+        inSlope: .0147224907
+        outSlope: .0147224907
+        tangentMode: 10
+      - time: 5.66666651
+        value: .0799999982
+        inSlope: .0037571257
+        outSlope: .0037571257
+        tangentMode: 10
+      - time: 10.5333338
+        value: .00999999978
+        inSlope: -.0146917868
+        outSlope: -.0146917868
+        tangentMode: 10
+      - time: 11.1999998
+        value: 0
+        inSlope: -.0150000136
+        outSlope: -.0150000136
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: _AlwaysShakeIntensity
+    path: 
+    classID: 114
+    script: {fileID: 11500000, guid: 9a388bacab8804e56862c1e6548f301c, type: 3}
   m_PPtrCurves: []
   m_SampleRate: 60
   m_WrapMode: 0
@@ -18543,6 +18582,45 @@ AnimationClip:
     path: HyperDriveCorridor
     classID: 4
     script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: .0136363627
+        outSlope: .0136363627
+        tangentMode: 10
+      - time: .733333349
+        value: .00999999978
+        inSlope: .0105917659
+        outSlope: .0105917659
+        tangentMode: 10
+      - time: 3.38333344
+        value: .0299999993
+        inSlope: .0147224907
+        outSlope: .0147224907
+        tangentMode: 10
+      - time: 5.66666651
+        value: .0799999982
+        inSlope: .0037571257
+        outSlope: .0037571257
+        tangentMode: 10
+      - time: 10.5333338
+        value: .00999999978
+        inSlope: -.0146917868
+        outSlope: -.0146917868
+        tangentMode: 10
+      - time: 11.1999998
+        value: 0
+        inSlope: -.0150000136
+        outSlope: -.0150000136
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: _AlwaysShakeIntensity
+    path: 
+    classID: 114
+    script: {fileID: 11500000, guid: 9a388bacab8804e56862c1e6548f301c, type: 3}
   m_EulerEditorCurves:
   - curve:
       serializedVersion: 2

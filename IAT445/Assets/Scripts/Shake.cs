@@ -1,36 +1,51 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Shake : MonoBehaviour {
+public class Shake : MonoBehaviour
+{
 
 	public Transform targetTransform;
 	private Vector3 originalPos;
 
-    bool init = false;
+	public float _AlwaysShakeIntensity;
 
-	void Start() {
+	bool init = false;
+
+	public bool _AlwaysShake;
+
+	void Start ()
+	{
 		if (!targetTransform)
 			targetTransform = transform;
 			
 		originalPos = targetTransform.localPosition;
-        init = true;
+		init = true;
 
-		if (targetTransform.tag=="MainCamera")
+		if (targetTransform.tag == "MainCamera")
 			originalPos = Vector3.zero;
 	}
 
-    public void OnEnable()
-    {
-        if (init)
-            targetTransform.localPosition = originalPos;
-    }
+	public void OnEnable ()
+	{
+		if (init)
+			targetTransform.localPosition = originalPos;
+	}
 
-	public void shake(float shakeIntensity) {
-		StopCoroutine("ShakeEffect");
-		StartCoroutine("ShakeEffect",shakeIntensity);
+	public void Update ()
+	{
+		if (_AlwaysShake) {
+			targetTransform.localPosition = originalPos + Random.insideUnitSphere * _AlwaysShakeIntensity;
+		}
+	}
+
+	public void shake (float duration, float shakeIntensity)
+	{
+		StopCoroutine ("ShakeEffect");
+		StartCoroutine ("ShakeEffect", shakeIntensity);
 	}
 	
-	IEnumerator ShakeEffect(float shakeIntensity) {
+	IEnumerator ShakeEffect (float shakeIntensity)
+	{
 		float shake = shakeIntensity;
 		float decreaseRate = 1 + shakeIntensity;
 		
@@ -39,8 +54,8 @@ public class Shake : MonoBehaviour {
 			targetTransform.localPosition = originalPos + Random.insideUnitSphere * shake;
 			shake -= Time.deltaTime * decreaseRate;
 			
-			if(Time.timeScale==0)
-				shake=0;
+			if (Time.timeScale == 0)
+				shake = 0;
 			
 			if (shake <= 0) {
 				targetTransform.localPosition = originalPos;
