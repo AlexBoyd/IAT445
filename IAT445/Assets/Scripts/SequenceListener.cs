@@ -161,7 +161,7 @@ public class SequenceListener : MonoBehaviour
 				_windShieldPrompt.ARText.text = "Diagnostic Mode Disabled";
 			}
 		} else if (interactable._eventName.Equals ("initializeDrill") && interactable._pressDuration <= 4) {
-			if (_hyperDrive1Primed) {
+			if (_hyperDrive1Primed || (_powerBypass && _hyperDrive2Primed)) {
 				_EffectsAnimations.Play ("HyperDriveSuccess");
 				_windShieldPrompt.ARText.text = string.Empty;
 

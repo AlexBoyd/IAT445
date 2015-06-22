@@ -32,8 +32,9 @@ public class WireMiniGame : MonoBehaviour
 				break;
 			}
 		}
-		if (_pieces.All ((p) => p.Locked) && !_SequenceListener._powerBypass) {
+		if (_pieces.Where ((p) => p.Locked).Count () == 5 && !_SequenceListener._powerBypass) {
 			_SequenceListener._powerBypass = true;
+			_SequenceListener._windShieldPrompt.showPowerRepaired ();
 		}
 	}
 }
