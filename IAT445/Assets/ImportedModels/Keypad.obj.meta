@@ -1,0 +1,141 @@
+fileFormatVersion: 2
+guid: df980a7b57861445da38090adb418248
+timeCreated: 1434955446
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Keypad
+    100004: Keypad_asterisk
+    100006: Keypad_eight
+    100008: Keypad_five
+    100010: Keypad_four
+    100012: Keypad_Handle
+    100014: Keypad_nine
+    100016: Keypad_one
+    100018: Keypad_pound
+    100020: Keypad_seven
+    100022: Keypad_six
+    100024: Keypad_three
+    100026: Keypad_two
+    100028: Keypad_zero
+    400000: Keypad
+    400002: //RootNode
+    400004: Keypad_asterisk
+    400006: Keypad_eight
+    400008: Keypad_five
+    400010: Keypad_four
+    400012: Keypad_Handle
+    400014: Keypad_nine
+    400016: Keypad_one
+    400018: Keypad_pound
+    400020: Keypad_seven
+    400022: Keypad_six
+    400024: Keypad_three
+    400026: Keypad_two
+    400028: Keypad_zero
+    2300000: Keypad
+    2300002: Keypad_asterisk
+    2300004: Keypad_eight
+    2300006: Keypad_five
+    2300008: Keypad_four
+    2300010: Keypad_Handle
+    2300012: Keypad_nine
+    2300014: Keypad_one
+    2300016: Keypad_pound
+    2300018: Keypad_seven
+    2300020: Keypad_six
+    2300022: Keypad_three
+    2300024: Keypad_two
+    2300026: Keypad_zero
+    3300000: Keypad
+    3300002: Keypad_asterisk
+    3300004: Keypad_eight
+    3300006: Keypad_five
+    3300008: Keypad_four
+    3300010: Keypad_Handle
+    3300012: Keypad_nine
+    3300014: Keypad_one
+    3300016: Keypad_pound
+    3300018: Keypad_seven
+    3300020: Keypad_six
+    3300022: Keypad_three
+    3300024: Keypad_two
+    3300026: Keypad_zero
+    4300000: Keypad
+    4300002: Keypad_asterisk
+    4300004: Keypad_eight
+    4300006: Keypad_five
+    4300008: Keypad_four
+    4300010: Keypad_Handle
+    4300012: Keypad_nine
+    4300014: Keypad_one
+    4300016: Keypad_pound
+    4300018: Keypad_seven
+    4300020: Keypad_six
+    4300022: Keypad_three
+    4300024: Keypad_two
+    4300026: Keypad_zero
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00499999989
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 73
+    splitTangentsAcrossUV: 1
+    normalImportMode: 1
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
