@@ -73,16 +73,16 @@ public class OVRCameraRig : MonoBehaviour
 	public float _maxXOffset;
 	public float _maxZOffset;
 
-//	public Vector3 _initialRightEyePos;
-//	public Vector3 _initialLeftEyePos;
+	public Vector3 _initialRightEyePos;
+	public Vector3 _initialLeftEyePos;
 	public Vector3 _initialCenterEyePos;
 
 	public AstronautIK _astronautIK;
 
 	public void resetPosition()
 	{
-//		_initialRightEyePos = transform.GetChild(0).FindChild("RightEyeAnchor").transform.position;
-//		_initialLeftEyePos = transform.GetChild(0).FindChild("LeftEyeAnchor").transform.position;
+		_initialRightEyePos = rightEyeAnchor.transform.localPosition;
+		_initialLeftEyePos = leftEyeAnchor.transform.localPosition;
 		_initialCenterEyePos = centerEyeAnchor.transform.localPosition;
 	}
 
@@ -162,18 +162,29 @@ public class OVRCameraRig : MonoBehaviour
 		trackerAnchor.localPosition = tracker.position;
 
 		Vector3 intendedCenterPos = 0.5f * (hmdLeftEye.position + hmdRightEye.position);
-
 		Vector3 deltaCenterEye = intendedCenterPos - _initialCenterEyePos;
-
 		deltaCenterEye = new Vector3 ((Mathf.Min (Mathf.Abs (deltaCenterEye.x), _maxXOffset) * Mathf.Sign(deltaCenterEye.x)),
 					0,
 			Mathf.Min (Mathf.Abs (deltaCenterEye.z), _maxZOffset) * Mathf.Sign(deltaCenterEye.z));
-
-
 		centerEyeAnchor.localPosition = _initialCenterEyePos + deltaCenterEye;
 
-		leftEyeAnchor.localPosition = monoscopic ? centerEyeAnchor.localPosition : hmdLeftEye.position;
-		rightEyeAnchor.localPosition = monoscopic ? centerEyeAnchor.localPosition : hmdRightEye.position;
+		Vector3 intendedLeftEye = monoscopic ? centerEyeAnchor.localPosition : hmdLeftEye.position;
+		Vector3 deltaLeftEye = intendedLeftEye - _initialLeftEyePos;
+		deltaLeftEye = new Vector3 ((Mathf.Min (Mathf.Abs (deltaLeftEye.x), _maxXOffset) * Mathf.Sign(deltaLeftEye.x)),
+			0,
+			Mathf.Min (Mathf.Abs (deltaLeftEye.z), _maxZOffset) * Mathf.Sign(deltaLeftEye.z));
+		
+
+		Vector3 intendedRightEye = monoscopic ? centerEyeAnchor.localPosition : hmdRightEye.position;
+		Vector3 deltaRightEye = intendedRightEye - _initialRightEyePos;
+		deltaRightEye = new Vector3 ((Mathf.Min (Mathf.Abs (deltaRightEye.x), _maxXOffset) * Mathf.Sign(deltaRightEye.x)),
+			0,
+			Mathf.Min (Mathf.Abs (deltaRightEye.z), _maxZOffset) * Mathf.Sign(deltaRightEye.z));
+		
+
+		leftEyeAnchor.localPosition = _initialLeftEyePos + deltaLeftEye;//monoscopic ? centerEyeAnchor.localPosition : hmdLeftEye.position;
+		rightEyeAnchor.localPosition = _initialRightEyePos + deltaRightEye;//monoscopic ? centerEyeAnchor.localPosition : hmdRightEye.position;
+
 
 		float deltaX = deltaCenterEye.x / _maxXOffset;
 		float deltaZ = deltaCenterEye.z / _maxZOffset;
