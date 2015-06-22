@@ -22,7 +22,10 @@ public class ARWindShield : MonoBehaviour
 		LifeSupportOK;
 	[TextArea(3, 10)]
 	public string
-		LifeSupportError;
+		PowerError;
+	[TextArea(3, 10)]
+	public string
+		PowerRepaired;
 
 	public void Update ()
 	{
@@ -62,13 +65,18 @@ public class ARWindShield : MonoBehaviour
 	}
 	public void showLife ()
 	{
-		ARText.color = Color.red;
-		ARText.text = LifeSupportError;
-	}
-	public void showLifeOK ()
-	{
 		ARText.color = Color.green;
 		ARText.text = LifeSupportOK;
+	}
+	public void showPowerError ()
+	{
+		ARText.color = new Color (255f, 0, 100f);
+		ARText.text = PowerError;
+	}
+	public void showPowerRepaired ()
+	{
+		ARText.color = new Color (100f, 0, 100f);
+		ARText.text = PowerRepaired;
 	}
 
 

@@ -25,6 +25,8 @@ public class SequenceListener : MonoBehaviour
 	public bool _hyperDrive2Primed;
 	public bool _emergencyPowerOn;
 	public bool _powerOutage;
+
+	public bool _powerBypass;
 	
 	void Awake ()
 	{
@@ -62,7 +64,6 @@ public class SequenceListener : MonoBehaviour
 		if (_cockpitActivated) {
 			if (eventName.Equals ("switchPanel")) {
 				Debug.Log ("SwitchPanel");
-				_windShieldPrompt.showLifeOK ();
 			}
 		}
 
@@ -103,7 +104,11 @@ public class SequenceListener : MonoBehaviour
 			_windShieldPrompt.showEngines ();
 		}
 		if (interactable._eventName.Equals ("powers_button")) {
-			_windShieldPrompt.showPowers ();
+			if (_emergencyPowerOn && !_powerBypass) {
+				_windShieldPrompt.showPowerError ();
+			} else {
+				_windShieldPrompt.showPowers ();
+			}
 		}
 		if (interactable._eventName.Equals ("life_button")) {
 			_windShieldPrompt.showLife ();
