@@ -27,28 +27,27 @@ public class SequenceListener : MonoBehaviour
 	public bool _hyperDrive2Primed;
 	public bool _emergencyPowerOn;
 	public bool _powerOutage;
+	public bool _powerBypass;
 
 	public Interactable _removablePanel;
 	public CharView _charview;
 	public AudioSource _staticAudio;
 
 
-	void disableAllInteractables()
+	void disableAllInteractables ()
 	{
 		_charview.removeCurrentFocus ();
 
-		foreach (Interactable interactable in _interectables) 
-		{
+		foreach (Interactable interactable in _interectables) {
 			interactable.disableInteractable ();
 		}
 	}
 
-	void enableAllInteractables(bool overridePrevious = false)
+	void enableAllInteractables (bool overridePrevious = false)
 	{
 		_charview.removeCurrentFocus ();
 
-		foreach (Interactable interactable in _interectables) 
-		{
+		foreach (Interactable interactable in _interectables) {
 			interactable.enableInteractable (overridePrevious);
 		}
 	}
@@ -92,7 +91,7 @@ public class SequenceListener : MonoBehaviour
 		if (_cockpitActivated) {
 			if (eventName.Equals ("switchPanel")) {
 				Debug.Log ("SwitchPanel");
-				_windShieldPrompt.showLifeOK ();
+				//_windShieldPrompt.showLifeOK ();
 			}
 		}
 
@@ -136,7 +135,15 @@ public class SequenceListener : MonoBehaviour
 			_windShieldPrompt.showEngines ();
 		}
 		if (interactable._eventName.Equals ("powers_button")) {
-			_windShieldPrompt.showPowers ();
+			if (_emergencyPowerOn) {
+				if (_powerBypass) {
+					_windShieldPrompt.showPowerRepaired ();
+				} else {
+					_windShieldPrompt.showPowerError ();
+				}
+			} else {
+				_windShieldPrompt.showPowers ();
+			}
 		}
 		if (interactable._eventName.Equals ("life_button")) {
 			_windShieldPrompt.showLife ();
@@ -156,6 +163,8 @@ public class SequenceListener : MonoBehaviour
 		} else if (interactable._eventName.Equals ("initializeDrill") && interactable._pressDuration <= 4) {
 			if (_hyperDrive1Primed) {
 				_EffectsAnimations.Play ("HyperDriveSuccess");
+				_windShieldPrompt.ARText.text = string.Empty;
+
 				_hyperDrive1Primed = false;
 //				enableStaticAudio ();
 			} else if (_hyperDrive2Primed) {
@@ -163,20 +172,21 @@ public class SequenceListener : MonoBehaviour
 				_powerOutage = true;
 				_hyperDrive2Primed = false;
 				_emergencyPowerOn = false;
+				_windShieldPrompt.ARText.text = string.Empty;
 
 				Debug.LogWarning ("disableAllInteractables");
 
 				// Disable all
 				disableAllInteractables ();
 				// Enable the emergency switch
-				_emergencyPowerSwitch.GetComponentInChildren<Interactable>().enableInteractable (true);
+				_emergencyPowerSwitch.GetComponentInChildren<Interactable> ().enableInteractable (true);
 //
 //				enableStaticAudio ();
 
 			}
 		} 
 	}
-	public void disableStaticAudio()
+	public void disableStaticAudio ()
 	{
 		Debug.LogWarning ("Disable static!");
 
@@ -184,21 +194,20 @@ public class SequenceListener : MonoBehaviour
 		StartCoroutine (setStaticVolume (0.0f, 0.25f));
 	}
 
-	public void enableStaticAudio()
+	public void enableStaticAudio ()
 	{
 		Debug.LogWarning ("Enable static!");
 
 		StartCoroutine (setStaticVolume (0.02f, 0.25f));
 	}
 
-	IEnumerator setStaticVolume(float endValue, float duration)
+	IEnumerator setStaticVolume (float endValue, float duration)
 	{
 		float elapsed = 0.0f;
 
 		float initialValue = _staticAudio.volume;
 
-		while (elapsed < duration) 
-		{
+		while (elapsed < duration) {
 			float t = elapsed / duration;
 
 			_staticAudio.volume = Mathf.Lerp (initialValue, endValue, t);
@@ -221,11 +230,11 @@ public class SequenceListener : MonoBehaviour
 //		promptRandomInteractable ();
 	}
 
-	void Update()
+	void Update ()
 	{
 		if (Input.GetKeyDown (KeyCode.Alpha1))
 			enableAllInteractables ();
-		if(Input.GetKeyDown(KeyCode.Alpha2))
+		if (Input.GetKeyDown (KeyCode.Alpha2))
 			disableAllInteractables ();
 	}
 
