@@ -19,7 +19,7 @@ public class WirePiece : Interactable
 	void Awake ()
 	{
 		base.Awake ();
-		transform.localEulerAngles = new Vector3 (0, 0, _orientation * 90);
+		transform.localEulerAngles = new Vector3 (0, _orientation * 90,0);
 //		_animator = GetComponent<Animator> ();
 	}
 
@@ -29,7 +29,7 @@ public class WirePiece : Interactable
 			_orientation++;
 			_orientation %= _isStraight? 2 : 4;
 
-			transform.DOLocalRotate	 (new Vector3 (0, 0, _orientation * 90), 0.5f, RotateMode.Fast);
+			transform.DOLocalRotate	 (new Vector3 (0, _orientation * 90, 0), 0.5f, RotateMode.Fast);
 		}
 
 //		_animator.SetBool ("PressButton", true);
