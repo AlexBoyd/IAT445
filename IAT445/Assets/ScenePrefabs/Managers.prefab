@@ -667,9 +667,7 @@ MonoBehaviour:
   _hyperDrive2Primed: 0
   _emergencyPowerOn: 0
   _powerOutage: 0
-  _removablePanel: {fileID: 0}
-  _charview: {fileID: 0}
-  _staticAudio: {fileID: 0}
+  _powerBypass: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -75,7 +75,7 @@ MonoBehaviour:
     m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 0
-    m_MaxSize: 35
+    m_MaxSize: 40
     m_Alignment: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
@@ -113,11 +113,9 @@ MonoBehaviour:
   PowerSystemsOK: 'Power Relays
 
 
-    Eneygy Bank: 90%
+    Eneygy Bank: 87%
 
     Cockpit: Nominal
-
-    Cargo Bay: Nominal
 
     Bulkheads 1-3: Nominal
 
@@ -125,23 +123,31 @@ MonoBehaviour:
   LifeSupportOK: 'Life Support
 
 
-    Hull Integrity: 100%
-
     Cockpit Pressure: 100%
 
-    Breathable Air: 100%
+    Breathable Air: 90%
 
     Oxygen Recycler: Nominal'
-  LifeSupportError: 'Life Support
+  PowerError: 'Power Relays
 
 
-    Hull Integrity: 100%
+    Eneygy Bank: 23%
 
-    Cockpit Pressure: 100%
+    Cockpit: EmerygencyBackup
 
-    Breathable Air: 63%
+    Bulkheads 1-3: Err #418
 
-    Oxygen Recycler: Err #314'
+    Bulkheads 4-6: Nominal'
+  PowerRepaired: 'Power Relays
+
+
+    Eneygy Bank: 17%
+
+    Cockpit: EmerygencyBackup
+
+    Bulkheads 1-3: Byapssed
+
+    Bulkheads 4-6: Nominal'
 --- !u!114 &11406402
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -314,15 +320,15 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 140942}
-  m_LocalRotation: {x: .0292079691, y: 0, z: 0, w: .99957341}
-  m_LocalPosition: {x: 0, y: 0, z: -.280999988}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: .00249999994, y: .00249999994, z: .00249999994}
   m_Children: []
   m_Father: {fileID: 22441000}
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: .0329999998, y: -.0909999982}
+  m_AnchoredPosition: {x: 0, y: .351000011}
   m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: .5, y: .5}
 --- !u!1001 &100100000
