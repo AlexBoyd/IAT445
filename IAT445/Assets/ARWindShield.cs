@@ -70,12 +70,12 @@ public class ARWindShield : MonoBehaviour
 	}
 	public void showPowerError ()
 	{
-		ARText.color = new Color (255f, 0, 100f);
+		ARText.color = new Color (255f, 100f, 0);
 		ARText.text = PowerError;
 	}
 	public void showPowerRepaired ()
 	{
-		ARText.color = new Color (100f, 0, 100f);
+		ARText.color = new Color (100f, 100f, 0);
 		ARText.text = PowerRepaired;
 	}
 
