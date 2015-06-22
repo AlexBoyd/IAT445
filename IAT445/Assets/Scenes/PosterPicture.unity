@@ -1219,7 +1219,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: c50ef14a9cf9b408c977c7333c68a788, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.58899999
+      value: 2.14499998
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: c50ef14a9cf9b408c977c7333c68a788, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2120,7 +2120,7 @@ Camera:
     height: 1
   near clip plane: .300000012
   far clip plane: 10000
-  field of view: 64
+  field of view: 58
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -2141,12 +2141,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 991458789}
-  m_LocalRotation: {x: .0193838011, y: .984060049, z: -.175685599, w: -.019613225}
-  m_LocalPosition: {x: .219999999, y: 2.97000003, z: 2.36999989}
+  m_LocalRotation: {x: .127310127, y: .253374159, z: -.053280659, w: .957473159}
+  m_LocalPosition: {x: -1.57000005, y: 2.3599999, z: -2.17000008}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
 --- !u!114 &991458796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3057,7 +3057,7 @@ Transform:
   - {fileID: 1387327439}
   - {fileID: 203447298}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
 --- !u!1001 &1271461362
 Prefab:
   m_ObjectHideFlags: 0
@@ -3195,7 +3195,7 @@ Transform:
   m_LocalScale: {x: 1.0973469, y: 1.42653525, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!108 &1281010409
 Light:
   m_ObjectHideFlags: 0
@@ -3246,7 +3246,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: df980a7b57861445da38090adb418248, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.11600006
+      value: 1.53400004
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: df980a7b57861445da38090adb418248, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4309,7 +4309,7 @@ Transform:
   m_LocalScale: {x: 1.0973469, y: 1.42653525, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!108 &2058260102
 Light:
   m_ObjectHideFlags: 0
