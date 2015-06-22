@@ -6,7 +6,7 @@ public class Button : Interactable
 {
 
 	Animator _animator;
-	public AudioSource Audio;
+
 
 	void Awake ()
 	{
@@ -17,15 +17,13 @@ public class Button : Interactable
 	public  void pressed ()
 	{
 		_animator.SetBool ("PressButton", true);
-		Audio.Play ();
+//		Audio.Play ();
 
 	}
 
 	public  void released ()
 	{
 		_animator.SetBool ("PressButton", false);
-		Audio.Play ();
-
 	}
 
 	public override void triggerPressedEvent ()

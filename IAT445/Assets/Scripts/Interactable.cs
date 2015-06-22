@@ -7,6 +7,7 @@ public delegate void InterectableDelegate (Interactable interactable);
 public class Interactable : MonoBehaviour {
 
 	public Renderer _meshRenderer;
+	public int _materialIndex = 0;
 
 	static Material _sharedLitMaterial;
 	static Color _normalGlowColor = new Color(255/255f,145/255f,26/255f);
@@ -14,7 +15,7 @@ public class Interactable : MonoBehaviour {
 
 	public Color _boxColor;
 
-	protected Material _originalMaterial;
+	public Material _originalMaterial;
 
 	public string _eventName;
 	public string _eventNamePretty;
@@ -24,6 +25,8 @@ public class Interactable : MonoBehaviour {
 
 	float _pressStartTime ;
 	public float _pressDuration;
+
+	AudioSource Audio;
 
 	void OnPressedEvent()
 	{
@@ -46,27 +49,28 @@ public class Interactable : MonoBehaviour {
 		}
 		if(_meshRenderer == null)
 			_meshRenderer = GetComponentInChildren<Renderer> ();
+		
+		_originalMaterial = _meshRenderer.materials[_materialIndex];
 
-
-		_originalMaterial = _meshRenderer.material;
-		//_originalMaterial.color = _boxColor;
-		_meshRenderer.material = _originalMaterial;
+		Audio = GetComponentInChildren<AudioSource> ();
 
 	}
 		
 	public void litUp()
 	{
-		_sharedLitMaterial.mainTexture = _meshRenderer.material.mainTexture;
+		_sharedLitMaterial.mainTexture = _originalMaterial.mainTexture;
 
 		_sharedLitMaterial.SetColor("_GlowColor",_normalGlowColor);
-
-
-		_meshRenderer.material = _sharedLitMaterial;
+		Material[] materials = _meshRenderer.materials;
+		materials[_materialIndex] = _sharedLitMaterial;
+		_meshRenderer.materials = materials;
 	}
 
 	public void unlit()
 	{
-		_meshRenderer.material = _originalMaterial;
+		Material[] materials = _meshRenderer.materials;
+		materials[_materialIndex] = _originalMaterial;
+		_meshRenderer.materials = materials;
 	}
 
 	public virtual void triggerPressedEvent()
@@ -74,9 +78,11 @@ public class Interactable : MonoBehaviour {
 		_pressStartTime = Time.time;
 		_sharedLitMaterial.SetColor("_GlowColor",_pressedGlowColor);
 
+		if (Audio!=null) {
+			Audio.Play ();
+		}
 
 		OnPressedEvent ();
-
 	}
 
 	public virtual void triggerReleasedEvent()
@@ -84,9 +90,7 @@ public class Interactable : MonoBehaviour {
 		_pressDuration = Time.time - _pressStartTime;
 		_sharedLitMaterial.SetColor("_GlowColor",_normalGlowColor);
 
-
 		OnReleasedEvent ();
-
 	}
 
 }
