@@ -12,7 +12,23 @@ AnimationClip:
   m_UseHighQualityCurve: 1
   m_RotationCurves: []
   m_CompressedRotationCurves: []
-  m_PositionCurves: []
+  m_PositionCurves:
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: {x: -.606842041, y: -1.48692703, z: 3.32598758}
+        inSlope: {x: 0, y: -26.0400009, z: 22.3199997}
+        outSlope: {x: 0, y: -26.0400009, z: 22.3199997}
+        tangentMode: 0
+      - time: .166666672
+        value: {x: -.606842041, y: -5.82692719, z: 7.04598761}
+        inSlope: {x: 0, y: -26.0400009, z: 22.3199997}
+        outSlope: {x: 0, y: -26.0400009, z: 22.3199997}
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    path: Alarm/AlarmLight
   m_ScaleCurves: []
   m_FloatCurves:
   - curve:
@@ -79,6 +95,63 @@ AnimationClip:
     attribute: m_Intensity
     path: 
     classID: 108
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: -.606842041
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: .166666672
+        value: -.606842041
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalPosition.x
+    path: Alarm/AlarmLight
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: -1.48692703
+        inSlope: -26.0400009
+        outSlope: -26.0400009
+        tangentMode: 10
+      - time: .166666672
+        value: -5.82692719
+        inSlope: -26.0400009
+        outSlope: -26.0400009
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalPosition.y
+    path: Alarm/AlarmLight
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 3.32598758
+        inSlope: 22.3199997
+        outSlope: 22.3199997
+        tangentMode: 10
+      - time: .166666672
+        value: 7.04598761
+        inSlope: 22.3199997
+        outSlope: 22.3199997
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalPosition.z
+    path: Alarm/AlarmLight
+    classID: 4
     script: {fileID: 0}
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0

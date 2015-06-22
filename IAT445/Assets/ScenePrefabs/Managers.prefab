@@ -323,7 +323,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: -1
+        _actionId: 2
         _elementType: 0
         _elementIdentifierId: 2
         _axisRange: 0
@@ -334,7 +334,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: -1
+        _actionId: 2
         _elementType: 0
         _elementIdentifierId: 3
         _axisRange: 0
@@ -367,7 +367,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: -1
+        _actionId: 2
         _elementType: 1
         _elementIdentifierId: 6
         _axisRange: 0
@@ -378,7 +378,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: -1
+        _actionId: 2
         _elementType: 1
         _elementIdentifierId: 7
         _axisRange: 0
@@ -389,7 +389,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: -1
+        _actionId: 2
         _elementType: 1
         _elementIdentifierId: 8
         _axisRange: 0
@@ -400,7 +400,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: -1
+        _actionId: 2
         _elementType: 1
         _elementIdentifierId: 9
         _axisRange: 0
@@ -411,7 +411,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: -1
+        _actionId: 2
         _elementType: 1
         _elementIdentifierId: 10
         _axisRange: 0
@@ -422,7 +422,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: -1
+        _actionId: 2
         _elementType: 1
         _elementIdentifierId: 11
         _axisRange: 0
@@ -433,7 +433,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: -1
+        _actionId: 2
         _elementType: 1
         _elementIdentifierId: 12
         _axisRange: 0
@@ -444,7 +444,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: -1
+        _actionId: 2
         _elementType: 1
         _elementIdentifierId: 13
         _axisRange: 0
@@ -455,7 +455,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: -1
+        _actionId: 2
         _elementType: 1
         _elementIdentifierId: 14
         _axisRange: 0
@@ -466,7 +466,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: -1
+        _actionId: 2
         _elementType: 1
         _elementIdentifierId: 15
         _axisRange: 0
@@ -477,7 +477,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: -1
+        _actionId: 2
         _elementType: 1
         _elementIdentifierId: 16
         _axisRange: 0
@@ -488,7 +488,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: -1
+        _actionId: 2
         _elementType: 1
         _elementIdentifierId: 17
         _axisRange: 0
@@ -499,7 +499,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: -1
+        _actionId: 2
         _elementType: 1
         _elementIdentifierId: 18
         _axisRange: 0
@@ -510,7 +510,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: -1
+        _actionId: 2
         _elementType: 1
         _elementIdentifierId: 19
         _axisRange: 0
@@ -521,7 +521,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: -1
+        _actionId: 2
         _elementType: 1
         _elementIdentifierId: 20
         _axisRange: 0
@@ -532,7 +532,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: -1
+        _actionId: 2
         _elementType: 1
         _elementIdentifierId: 21
         _axisRange: 0
@@ -543,7 +543,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: -1
+        _actionId: 2
         _elementType: 1
         _elementIdentifierId: 22
         _axisRange: 0
@@ -554,7 +554,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: -1
+        _actionId: 2
         _elementType: 1
         _elementIdentifierId: 23
         _axisRange: 0
@@ -565,7 +565,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: -1
+        _actionId: 2
         _elementType: 1
         _elementIdentifierId: 24
         _axisRange: 0
@@ -576,7 +576,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: -1
+        _actionId: 2
         _elementType: 1
         _elementIdentifierId: 25
         _axisRange: 0
@@ -587,7 +587,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: -1
+        _actionId: 2
         _elementType: 1
         _elementIdentifierId: 26
         _axisRange: 0
@@ -598,7 +598,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: -1
+        _actionId: 2
         _elementType: 1
         _elementIdentifierId: 27
         _axisRange: 0
@@ -657,8 +657,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd61edc4790f546fdbf32bfcc602dab3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _switchPanel: {fileID: 0}
+  _emergencyPowerSwitch: {fileID: 0}
   _eventPrompt: {fileID: 0}
   _windShieldPrompt: {fileID: 0}
+  _EffectsAnimations: {fileID: 0}
+  _cockpitActivated: 0
+  _hyperDrive1Primed: 0
+  _hyperDrive2Primed: 0
+  _emergencyPowerOn: 0
+  _powerOutage: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
