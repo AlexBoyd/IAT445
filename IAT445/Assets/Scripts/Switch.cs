@@ -27,10 +27,25 @@ public class Switch : Interactable {
 
 	public  void pressed() 
 	{
+//		if(Audio)
+//		{
+//			if (_isOn) {
+//				Audio.time = Audio.clip.length;
+//				Audio.pitch = -1;
+//			} else {
+//				
+//				Audio.time = 0;
+//				Audio.pitch = 1;
+//			}
+//		}
+
+
 		_animator.SetBool ("Up", !_isOn);
 		_isOn = !_isOn;
 
+
 	}
+
 
 	public override void triggerPressedEvent()
 	{
