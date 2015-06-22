@@ -10,7 +10,8 @@ public class SequenceListener : MonoBehaviour
 
 	Interactable[] _interectables;
 	Switch[] _switches;
-	SwitchPanel _switchPanel;
+	public SwitchPanel _switchPanel;
+	public SwitchPanel _emergencyPowerSwitch;
 	public Text _eventPrompt;
 
 	string _requiredEvent;
@@ -22,11 +23,13 @@ public class SequenceListener : MonoBehaviour
 	public bool _cockpitActivated = false;
 	public bool _hyperDrive1Primed;
 	public bool _hyperDrive2Primed;
-
+	public bool _emergencyPowerOn;
+	public bool _powerOutage;
+	
 	void Awake ()
 	{
 		_interectables = GameObject.FindObjectsOfType<Interactable> () as Interactable[];
-		_switchPanel = GameObject.FindObjectOfType<SwitchPanel> () as SwitchPanel;
+		//_switchPanel = GameObject.FindObjectOfType<SwitchPanel> () as SwitchPanel;
 
 	}
 
@@ -39,6 +42,7 @@ public class SequenceListener : MonoBehaviour
 
 
 		_switchPanel.TriggerEvent += eventTriggered;
+		_emergencyPowerSwitch.TriggerEvent += eventTriggered;
 	}
 
 	void OnDisable ()
@@ -49,13 +53,18 @@ public class SequenceListener : MonoBehaviour
 		}
 
 		_switchPanel.TriggerEvent -= eventTriggered;
+		_emergencyPowerSwitch.TriggerEvent -= eventTriggered;
 	}
 
 
 	void eventTriggered (string eventName)
 	{
-		if (!_cockpitActivated)
-			return;
+		if (_cockpitActivated) {
+			if (eventName.Equals ("switchPanel")) {
+				Debug.Log ("SwitchPanel");
+				_windShieldPrompt.showLifeOK ();
+			}
+		}
 
 //		if (eventName == "gravity_button") 
 //		{
@@ -75,10 +84,11 @@ public class SequenceListener : MonoBehaviour
 //		}
 //
 //
-		if (eventName.Equals ("switchPanel")) {
-			Debug.Log ("SwitchPanel");
-			_windShieldPrompt.showLifeOK ();
+		if (eventName == "emergencyPower" && !_emergencyPowerOn && _powerOutage) {
+			_EffectsAnimations.Play ("EmergencyPower");
+			_emergencyPowerOn = true;
 		}
+
 	}
 
 	void pressedEvent (Interactable interactable)
@@ -116,6 +126,7 @@ public class SequenceListener : MonoBehaviour
 				_hyperDrive1Primed = false;
 			} else if (_hyperDrive2Primed) {
 				_EffectsAnimations.Play ("HyperDriveFailure");
+				_powerOutage = true;
 				_hyperDrive2Primed = false;
 
 			}
