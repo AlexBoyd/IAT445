@@ -58,6 +58,7 @@ GameObject:
   - 4: {fileID: 408942}
   - 82: {fileID: 8232720}
   - 114: {fileID: 11426018}
+  - 114: {fileID: 11444632}
   m_Layer: 0
   m_Name: HyperdriveFailure
   m_TagString: Untagged
@@ -211,6 +212,7 @@ GameObject:
   - 4: {fileID: 406968}
   - 82: {fileID: 8206990}
   - 114: {fileID: 11411660}
+  - 114: {fileID: 11440136}
   m_Layer: 0
   m_Name: HyperDriveSuccess
   m_TagString: Untagged
@@ -939,8 +941,8 @@ MonoBehaviour:
   useSimple: 0
   globalScale: 1
   gain: 0
-  enableReflections: 0
-  enableReverb: 0
+  enableReflections: 1
+  enableReverb: 1
   dimensions: {x: 5, y: 5, z: 3}
   rK01: {x: 0, y: 0}
   rK23: {x: 0, y: 0}
@@ -962,6 +964,30 @@ MonoBehaviour:
   priority: 0
   frequencyHint: 0
   useSimple: 0
+--- !u!114 &11440136
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 191804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f45936be224b644e8962fb4066b25709, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetTransform: {fileID: 431178}
+--- !u!114 &11444632
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 124798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f45936be224b644e8962fb4066b25709, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetTransform: {fileID: 431178}
 --- !u!114 &11462470
 MonoBehaviour:
   m_ObjectHideFlags: 1
