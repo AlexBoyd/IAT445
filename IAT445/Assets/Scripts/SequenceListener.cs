@@ -168,6 +168,9 @@ public class SequenceListener : MonoBehaviour
 			//bringConsoleBack ();
 
 			disableStaticAudio ();
+
+			_emergencyPowerSwitch.transform.GetComponent<Interactable> ().disableInteractable();
+
 		}
 		if (eventName == "safetyOverride" && _emergencyPowerOn) {
 			_safetyOverride = true;
@@ -436,7 +439,6 @@ public class SequenceListener : MonoBehaviour
 		float currentRotation = _skyboxMaterial.GetFloat ("_Rotation");
 		float newRotation = Random.Range (0, 5);
 		float time = Mathf.Abs (newRotation - currentRotation) *10f;
-		Debug.LogWarning ("Time:" + time);
 		_skyboxMaterial.DOFloat (newRotation,"_Rotation", time);
 		Invoke ("ChangeSkyBoxRotation",time+0.1f);
 	}
