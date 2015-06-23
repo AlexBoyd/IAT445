@@ -22,6 +22,7 @@ public class Interactable : MonoBehaviour {
 
 	public event InterectableDelegate PressedEvent;
 	public event InterectableDelegate ReleasedEvent;
+	public event InterectableDelegate HoldEvent;
 
 	float _pressStartTime ;
 	public float _pressDuration;
@@ -55,6 +56,12 @@ public class Interactable : MonoBehaviour {
 	{
 		if (ReleasedEvent != null)
 			ReleasedEvent (this);
+	}
+
+	void OnHoldEvent()
+	{
+		if (HoldEvent != null)
+			HoldEvent (this);
 	}
 
 	protected void Awake()
@@ -122,5 +129,15 @@ public class Interactable : MonoBehaviour {
 
 		OnReleasedEvent ();
 	}
+
+	public virtual void triggerHoldEvent()
+	{
+		if (!_interactable)
+			return;
+
+		_pressDuration = Time.time - _pressStartTime;
+		OnHoldEvent ();
+	}
+
 
 }

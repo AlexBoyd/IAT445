@@ -79,6 +79,7 @@ public class SequenceListener : MonoBehaviour
 		foreach (Interactable i in _interectables) {
 			i.PressedEvent += pressedEvent;
 			i.ReleasedEvent += releasedEvent;
+			i.HoldEvent += holdEvent;
 		}
 
 
@@ -91,6 +92,7 @@ public class SequenceListener : MonoBehaviour
 		foreach (Interactable i in _interectables) {
 			i.PressedEvent -= pressedEvent;
 			i.ReleasedEvent -= releasedEvent;
+			i.HoldEvent -= holdEvent;
 		}
 
 		_switchPanel.TriggerEvent -= eventTriggered;
@@ -167,19 +169,25 @@ public class SequenceListener : MonoBehaviour
 
 	void releasedEvent (Interactable interactable)
 	{
-		if (interactable._eventName.Equals ("initializeDrill") && interactable._pressDuration > 4) {
-			_cockpitActivated = !_cockpitActivated;
-			if (_cockpitActivated) {
-				//_windShieldPrompt.ARText.text = "Diagnostic Mode Activated";
-				_minieventPrompt.text = "Diagnostic Mode Activated";
-				bringConsoleBack ();
-				Debug.Log ("Pressed for 4 seconds the initialize drill!");
-			} else {
-				//_windShieldPrompt.ARText.text = "Diagnostic Mode Disabled";
-				hideConsole ();
-				_minieventPrompt.text = "Diagnostic Mode Disabled";
-			}
-		} else if (interactable._eventName.Equals ("initializeDrill") && interactable._pressDuration <= 4) {
+//		if (interactable._eventName.Equals ("initializeDrill") && interactable._pressDuration > 4) {
+//			_cockpitActivated = !_cockpitActivated;
+//			if (_cockpitActivated) {
+//				//_windShieldPrompt.ARText.text = "Diagnostic Mode Activated";
+//				_minieventPrompt.text = "Diagnostic Mode Activated";
+//				bringConsoleBack ();
+//				Debug.Log ("Pressed for 4 seconds the initialize drill!");
+//			} else {
+//				//_windShieldPrompt.ARText.text = "Diagnostic Mode Disabled";
+//				hideConsole ();
+//				_minieventPrompt.text = "Diagnostic Mode Disabled";
+//			}
+//		} else
+		if (interactable._eventName.Equals ("initializeDrill")) {
+			_enableModeChange = true;
+		}
+
+
+		if (interactable._eventName.Equals ("initializeDrill") && interactable._pressDuration <= 4) {
 			if (_hyperDrive1Primed || (_powerBypass && _hyperDrive2Primed)) {
 
 				hideConsole ();
@@ -216,6 +224,63 @@ public class SequenceListener : MonoBehaviour
 			}
 		} 
 	}
+
+	bool _enableModeChange = true;
+
+	void holdEvent (Interactable interactable)
+	{
+		if (interactable._eventName.Equals ("initializeDrill") && interactable._pressDuration > 4 && _enableModeChange) {
+			_cockpitActivated = !_cockpitActivated;
+			_enableModeChange = false;
+			if (_cockpitActivated) {
+				//_windShieldPrompt.ARText.text = "Diagnostic Mode Activated";
+				_minieventPrompt.text = "Diagnostic Mode Activated";
+				bringConsoleBack ();
+				Debug.Log ("Pressed for 4 seconds the initialize drill!");
+			} else {
+				//_windShieldPrompt.ARText.text = "Diagnostic Mode Disabled";
+				hideConsole ();
+				_minieventPrompt.text = "Diagnostic Mode Disabled";
+			}
+		} 
+//		else if (interactable._eventName.Equals ("initializeDrill") && interactable._pressDuration <= 4) {
+//			if (_hyperDrive1Primed || (_powerBypass && _hyperDrive2Primed)) {
+//
+//				hideConsole ();
+//				//Invoke ("bringConsoleBack", 13.5f);
+//				StartCoroutine (switchSpaceVisual ());
+//
+//				_EffectsAnimations.Play ("HyperDriveSuccess");
+//				_windShieldPrompt.ARText.text = string.Empty;
+//
+//				_hyperDrive1Primed = false;
+//				//				enableStaticAudio ();
+//			} else if (_hyperDrive2Primed) {
+//
+//				hideConsole ();
+//
+//				_EffectsAnimations.Play ("HyperDriveFailure");
+//				_powerOutage = true;
+//				_hyperDrive2Primed = false;
+//				_emergencyPowerOn = false;
+//				_windShieldPrompt.ARText.text = string.Empty;
+//
+//
+//				StartCoroutine (switchSpaceVisual ());
+//
+//				Debug.LogWarning ("disableAllInteractables");
+//
+//				// Disable all
+//				disableAllInteractables ();
+//				// Enable the emergency switch
+//				_emergencyPowerSwitch.GetComponentInChildren<Interactable> ().enableInteractable (true);
+//				//
+//				//				enableStaticAudio ();
+//
+//			}
+//		} 
+	}
+
 
 	public IEnumerator switchSpaceVisual() {
 		yield return new WaitForSeconds (1.2f);

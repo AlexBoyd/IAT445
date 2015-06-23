@@ -97,15 +97,13 @@ public class CharView : MonoBehaviour
 		if (player.GetButtonDown ("Use")) 
 		{
 			if (_currentFocus != null) {
-				StartCoroutine (buttonPressed (_currentFocus.GetComponent<Interactable>()));
 				_currentFocus.GetComponent<Interactable> ().triggerPressedEvent ();
+
+				StartCoroutine (buttonPressed (_currentFocus.GetComponent<Interactable>()));
+
 			}
 		}
-//		if (player.GetButtonUp ("Use")) 
-//		{
-//			if(_currentFocus!=null)
-//				_currentFocus.GetComponent<Interactable>().triggerReleasedEvent();
-//		}
+
 	}
 	
 	void Update()
@@ -120,11 +118,16 @@ public class CharView : MonoBehaviour
 	{
 		while (true) 
 		{
+			if (player.GetButton ("Use"))
+			{
+				interactable.triggerHoldEvent ();
+			}
 			if (player.GetButtonUp ("Use")) 
 			{
 				interactable.triggerReleasedEvent ();
 				yield break;
 			}
+
 			yield return null;
 		}
 
