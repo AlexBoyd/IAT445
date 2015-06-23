@@ -7,7 +7,7 @@ public class Keypad : MonoBehaviour
 
 	public KeypadButton[] _keypadButtons;
 
-	public string _eventName;
+//	public string _eventName;
 
 	public string _currentInput;
 
@@ -20,10 +20,10 @@ public class Keypad : MonoBehaviour
 
 	public AudioSource _KeypadAudio;
 
-	void OnTriggerEvent ()
+	void OnTriggerEvent (string eventName)
 	{
 		if (TriggerEvent != null)
-			TriggerEvent (_eventName);
+			TriggerEvent ("keypad_"+eventName);
 	}
 
 	void Awake ()
@@ -51,15 +51,17 @@ public class Keypad : MonoBehaviour
 	{	
 		_KeypadAudio.Play ();
 		if (keyValue == "#") {
-			if (_currentInput == "8717") {
-				ConsoleTxt.text = "HyperDrive Primed";
-				_currentInput = string.Empty;
-				_SequenceListener._hyperDrive1Primed = true;
-			} else if (_currentInput == "7178") {
-				ConsoleTxt.text = "HyperDrive Primed";
-				_currentInput = string.Empty;
-				_SequenceListener._hyperDrive2Primed = true;
-			}
+			OnTriggerEvent (_currentInput);
+			_currentInput = string.Empty;
+//			if (_currentInput == "8717") {
+//				ConsoleTxt.text = "HyperDrive Primed";
+//				_currentInput = string.Empty;
+//				_SequenceListener._hyperDrive1Primed = true;
+//			} else if (_currentInput == "7178") {
+//				ConsoleTxt.text = "HyperDrive Primed";
+//				_currentInput = string.Empty;
+//				_SequenceListener._hyperDrive2Primed = true;
+//			}
 		} else if (keyValue == "*") {
 			_currentInput = string.Empty;
 

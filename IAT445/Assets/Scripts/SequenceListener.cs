@@ -27,9 +27,12 @@ public class SequenceListener : MonoBehaviour
 	public bool _cockpitActivated = false;
 	public bool _hyperDrive1Primed;
 	public bool _hyperDrive2Primed;
+	public bool _hyperDrive2Done;
+	public bool _hyperDrive3Primed;
 	public bool _emergencyPowerOn;
 	public bool _powerOutage;
 	public bool _powerBypass;
+	public bool _safetyOverride;
 
 	public Interactable _removablePanel;
 	public CharView _charview;
@@ -41,7 +44,12 @@ public class SequenceListener : MonoBehaviour
 
 	public Animator _backPanelCoverAnim;
 
+	public Material _skyboxMaterial;
+
 	Vector3 _openConsolePos;
+	public Keypad _keypad;
+
+	public Text	ConsoleTxt;
 
 	void disableAllInteractables ()
 	{
@@ -66,6 +74,7 @@ public class SequenceListener : MonoBehaviour
 	void Awake ()
 	{
 		_interectables = GameObject.FindObjectsOfType<Interactable> () as Interactable[];
+//		_keypad = GameObject.FindObjectOfType<Keypad> ();
 		//_switchPanel = GameObject.FindObjectOfType<SwitchPanel> () as SwitchPanel;
 
 		_openConsolePos = _consoleParent.position;
@@ -85,6 +94,9 @@ public class SequenceListener : MonoBehaviour
 
 		_switchPanel.TriggerEvent += eventTriggered;
 		_emergencyPowerSwitch.TriggerEvent += eventTriggered;
+		_keypad.TriggerEvent += eventTriggered;
+
+
 	}
 
 	void OnDisable ()
@@ -97,6 +109,7 @@ public class SequenceListener : MonoBehaviour
 
 		_switchPanel.TriggerEvent -= eventTriggered;
 		_emergencyPowerSwitch.TriggerEvent -= eventTriggered;
+		_keypad.TriggerEvent -= eventTriggered;
 	}
 
 
@@ -106,6 +119,25 @@ public class SequenceListener : MonoBehaviour
 			if (eventName.Equals ("switchPanel")) {
 				Debug.Log ("SwitchPanel");
 				//_windShieldPrompt.showLifeOK ();
+			}
+		}
+
+		if (eventName.StartsWith ("keypad")) {
+			if (eventName.Contains("8717")) 
+			{
+				ConsoleTxt.text = "HyperDrive Primed";
+				_hyperDrive1Primed = true;
+			} else if (eventName.Contains("7178")) 
+			{
+				ConsoleTxt.text = "HyperDrive Primed";
+				if (_hyperDrive2Done)
+					_hyperDrive3Primed = true;
+				else
+					_hyperDrive2Primed = true;
+			}
+			else
+			{
+				ConsoleTxt.text = "Wrong Launch Code";
 			}
 		}
 
@@ -136,6 +168,9 @@ public class SequenceListener : MonoBehaviour
 			//bringConsoleBack ();
 
 			disableStaticAudio ();
+		}
+		if (eventName == "safetyOverride" && _emergencyPowerOn) {
+			_safetyOverride = true;
 		}
 
 	}
@@ -188,7 +223,7 @@ public class SequenceListener : MonoBehaviour
 
 
 		if (interactable._eventName.Equals ("initializeDrill") && interactable._pressDuration <= 4) {
-			if (_hyperDrive1Primed || (_powerBypass && _hyperDrive2Primed)) {
+			if (_hyperDrive1Primed) {// || (_powerBypass && _hyperDrive2Primed)) {
 
 				hideConsole ();
 				//Invoke ("bringConsoleBack", 13.5f);
@@ -198,9 +233,8 @@ public class SequenceListener : MonoBehaviour
 				_windShieldPrompt.ARText.text = string.Empty;
 
 				_hyperDrive1Primed = false;
-//				enableStaticAudio ();
 			} else if (_hyperDrive2Primed) {
-
+				
 				hideConsole ();
 
 				_EffectsAnimations.Play ("HyperDriveFailure");
@@ -220,7 +254,19 @@ public class SequenceListener : MonoBehaviour
 				_emergencyPowerSwitch.GetComponentInChildren<Interactable> ().enableInteractable (true);
 //
 //				enableStaticAudio ();
+				_hyperDrive2Primed = false;
+				_hyperDrive2Done = true;
+			} else if (_hyperDrive3Primed && _powerBypass && _safetyOverride) {
+				hideConsole ();
+				//Invoke ("bringConsoleBack", 13.5f);
+				StartCoroutine (switchSpaceVisual ());
 
+				_EffectsAnimations.Play ("HyperDriveSuccess");
+				_windShieldPrompt.ARText.text = string.Empty;
+
+				_hyperDrive1Primed = false;				
+			} else {
+				ConsoleTxt.text = "ERROR";
 			}
 		} 
 	}
@@ -360,16 +406,35 @@ public class SequenceListener : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-	
+		ChangeSkyBoxRotation ();
+		
+//		_skyboxMaterial.DOFloat (360.0f,"_Rotation", 10f);
+
 //		promptRandomInteractable ();
 	}
 
+//	float _currentSkyboxRotation, _desiredSkyboxRotation, _duration;
+
 	void Update ()
 	{
-		if (Input.GetKeyDown (KeyCode.Alpha1))
-			enableAllInteractables ();
-		if (Input.GetKeyDown (KeyCode.Alpha2))
-			disableAllInteractables ();
+		
+//		_currentSkyboxRotation = Mathf.Lerp (_currentSkyboxRotation, _desiredSkyboxRotation, Time.deltaTime);
+//		_skyboxMaterial.SetFloat ("_Rotation", _currentSkyboxRotation);
+
+//		if (Input.GetKeyDown (KeyCode.Alpha1))
+//			enableAllInteractables ();
+//		if (Input.GetKeyDown (KeyCode.Alpha2))
+//			disableAllInteractables ();
+	}
+
+	void ChangeSkyBoxRotation()
+	{
+		float currentRotation = _skyboxMaterial.GetFloat ("_Rotation");
+		float newRotation = Random.Range (0, 5);
+		float time = Mathf.Abs (newRotation - currentRotation) *10f;
+		Debug.LogWarning ("Time:" + time);
+		_skyboxMaterial.DOFloat (newRotation,"_Rotation", time);
+		Invoke ("ChangeSkyBoxRotation",time+0.1f);
 	}
 
 	void promptRandomInteractable ()

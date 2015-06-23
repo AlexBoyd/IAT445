@@ -89,8 +89,6 @@ public class OVRCameraRig : MonoBehaviour
 	#region Unity Messages
 	private void Awake()
 	{
-		
-
 		EnsureGameObjectIntegrity();
 
 		resetPosition ();	
