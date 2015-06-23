@@ -341,7 +341,7 @@ Transform:
   m_PrefabParentObject: {fileID: 483738, guid: ff83e688d94201f4cac0b35f827362a7, type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 81507829}
-  m_LocalRotation: {x: .282568455, y: -.306465298, z: .729242504, w: -.542622745}
+  m_LocalRotation: {x: .282568485, y: -.306465328, z: .729242563, w: -.542622805}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: .99999994}
   m_Children: []
@@ -5274,6 +5274,29 @@ Prefab:
       propertyPath: _sequenceListener
       value: 
       objectReference: {fileID: 227074333}
+    - target: {fileID: 11423764, guid: 2c1425f03d17349f7b6239a3e44f0ecb, type: 2}
+      propertyPath: gain
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 11462470, guid: 2c1425f03d17349f7b6239a3e44f0ecb, type: 2}
+      propertyPath: frequencyHint
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8252662, guid: 2c1425f03d17349f7b6239a3e44f0ecb, type: 2}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24394052, guid: af2728b36671b47eebaf406e5992d762,
+        type: 2}
+    - target: {fileID: 8206990, guid: 2c1425f03d17349f7b6239a3e44f0ecb, type: 2}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24390228, guid: af2728b36671b47eebaf406e5992d762,
+        type: 2}
+    - target: {fileID: 8232720, guid: 2c1425f03d17349f7b6239a3e44f0ecb, type: 2}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24390228, guid: af2728b36671b47eebaf406e5992d762,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2c1425f03d17349f7b6239a3e44f0ecb, type: 2}
   m_IsPrefabParent: 0
