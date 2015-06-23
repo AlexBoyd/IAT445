@@ -11,3 +11,5 @@ EditorBuildSettings:
     path: Assets/Scenes/DanScene.unity
   - enabled: 1
     path: Assets/Scenes/SharedScene.unity
+  - enabled: 0
+    path: Assets/Scenes/TestDanHeavierScene.unity
