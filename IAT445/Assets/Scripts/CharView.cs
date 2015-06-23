@@ -24,7 +24,10 @@ public class CharView : MonoBehaviour
 	public GameObject _3dCrosshair;
 	public LayerMask _3dLayerMask;
 
+	public float _crosshairZOffset;
+
 	void Awake() 
+
 	{
 		player = ReInput.players.GetPlayer (playerId);
 	}
@@ -82,10 +85,15 @@ public class CharView : MonoBehaviour
 	void check3DCrosshair()
 	{
 		RaycastHit hit;
-		if (Physics.Raycast (new Ray (transform.position, (_centerReference.position - transform.position).normalized), out hit, Mathf.Infinity,_3dLayerMask)) 
+		Ray r = new Ray (transform.position, (_centerReference.position - transform.position).normalized);
+
+		if (Physics.Raycast (r, out hit, Mathf.Infinity,_3dLayerMask)) 
 		{
 			_3dCrosshair.SetActive (true);
-			_3dCrosshair.transform.position = Vector3.Distance(_3dCrosshair.transform.position,hit.point) > 1 ?  hit.point :  Vector3.Lerp(_3dCrosshair.transform.position,hit.point,Time.deltaTime * 15);
+
+			Vector3 newHitPoint = hit.point - r.direction * _crosshairZOffset;
+
+			_3dCrosshair.transform.position = Vector3.Distance(_3dCrosshair.transform.position,newHitPoint) > 1 ?  newHitPoint :  Vector3.Lerp(_3dCrosshair.transform.position,newHitPoint,Time.deltaTime * 15);
 
 		}
 		else
