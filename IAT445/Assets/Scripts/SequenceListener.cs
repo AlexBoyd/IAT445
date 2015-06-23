@@ -15,10 +15,12 @@ public class SequenceListener : MonoBehaviour
 	public SwitchPanel _switchPanel;
 	public SwitchPanel _emergencyPowerSwitch;
 	public Text _eventPrompt;
+	public Text _minieventPrompt;
 
 	string _requiredEvent;
 
 	public ARWindShield _windShieldPrompt;
+	public Transform _consoleParent;
 
 	public Animation _EffectsAnimations;
 
@@ -33,6 +35,13 @@ public class SequenceListener : MonoBehaviour
 	public CharView _charview;
 	public AudioSource _staticAudio;
 
+	public GameObject[] _spaceScenes;
+
+	public GameObject _powerOutageMsg;
+
+	public Animator _backPanelCoverAnim;
+
+	Vector3 _openConsolePos;
 
 	void disableAllInteractables ()
 	{
@@ -59,7 +68,10 @@ public class SequenceListener : MonoBehaviour
 		_interectables = GameObject.FindObjectsOfType<Interactable> () as Interactable[];
 		//_switchPanel = GameObject.FindObjectOfType<SwitchPanel> () as SwitchPanel;
 
-
+		_openConsolePos = _consoleParent.position;
+		Vector3 desiredStartingConsolePos = _openConsolePos;
+		desiredStartingConsolePos.y -= 2.5f;
+		_consoleParent.position = desiredStartingConsolePos;
 	}
 
 	void OnEnable ()
@@ -116,8 +128,11 @@ public class SequenceListener : MonoBehaviour
 		if (eventName == "emergencyPower" && !_emergencyPowerOn && _powerOutage) {
 			_EffectsAnimations.Play ("EmergencyPower");
 			_emergencyPowerOn = true;
-
+			_powerOutageMsg.SetActive (false);
 			enableAllInteractables (true);
+
+			//bringConsoleBack ();
+
 			disableStaticAudio ();
 		}
 
@@ -155,24 +170,39 @@ public class SequenceListener : MonoBehaviour
 		if (interactable._eventName.Equals ("initializeDrill") && interactable._pressDuration > 4) {
 			_cockpitActivated = !_cockpitActivated;
 			if (_cockpitActivated) {
-				_windShieldPrompt.ARText.text = "Diagnostic Mode Activated";
+				//_windShieldPrompt.ARText.text = "Diagnostic Mode Activated";
+				_minieventPrompt.text = "Diagnostic Mode Activated";
+				bringConsoleBack ();
 				Debug.Log ("Pressed for 4 seconds the initialize drill!");
 			} else {
-				_windShieldPrompt.ARText.text = "Diagnostic Mode Disabled";
+				//_windShieldPrompt.ARText.text = "Diagnostic Mode Disabled";
+				hideConsole ();
+				_minieventPrompt.text = "Diagnostic Mode Disabled";
 			}
 		} else if (interactable._eventName.Equals ("initializeDrill") && interactable._pressDuration <= 4) {
 			if (_hyperDrive1Primed || (_powerBypass && _hyperDrive2Primed)) {
+
+				hideConsole ();
+				//Invoke ("bringConsoleBack", 13.5f);
+				StartCoroutine (switchSpaceVisual ());
+
 				_EffectsAnimations.Play ("HyperDriveSuccess");
 				_windShieldPrompt.ARText.text = string.Empty;
 
 				_hyperDrive1Primed = false;
 //				enableStaticAudio ();
 			} else if (_hyperDrive2Primed) {
+
+				hideConsole ();
+
 				_EffectsAnimations.Play ("HyperDriveFailure");
 				_powerOutage = true;
 				_hyperDrive2Primed = false;
 				_emergencyPowerOn = false;
 				_windShieldPrompt.ARText.text = string.Empty;
+
+
+				StartCoroutine (switchSpaceVisual ());
 
 				Debug.LogWarning ("disableAllInteractables");
 
@@ -186,6 +216,45 @@ public class SequenceListener : MonoBehaviour
 			}
 		} 
 	}
+
+	public IEnumerator switchSpaceVisual() {
+		yield return new WaitForSeconds (1.2f);
+		_spaceScenes [0].SetActive (false);
+		_spaceScenes [1].SetActive (false);
+		yield return new WaitForSeconds (10f);
+
+		if (_emergencyPowerOn) {
+			//I have already passed through the problems and fixed it, ready to get back home
+			_spaceScenes [0].SetActive (true);
+		} else {
+			if (_powerOutage) {
+				//Things just went really bad D: so don't show anything, just stars all the way
+				//Oh, show the power outage thingy on the miniconsole
+				_powerOutageMsg.SetActive(true);
+				//And pop the back panel
+				_backPanelCoverAnim.Play("BackPanelCoverAnimation",0);
+			} else {
+				//This is the start of my journey, take me to the nebulas!
+				_spaceScenes [1].SetActive (true);
+			}
+		}
+	}
+
+	public void hideConsole() {
+		_minieventPrompt.text = "";
+		_consoleParent.DOKill ();
+		Vector3 desiredPos = _openConsolePos;
+		desiredPos.y -= 2;
+		_consoleParent.DOMove(desiredPos, 1.2f);
+
+		_cockpitActivated = false;
+	}
+
+	public void bringConsoleBack() {
+		_consoleParent.DOKill ();
+		_consoleParent.DOMove (_openConsolePos, 1.2f);
+	}
+
 	public void disableStaticAudio ()
 	{
 		Debug.LogWarning ("Disable static!");
