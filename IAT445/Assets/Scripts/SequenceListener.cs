@@ -35,6 +35,7 @@ public class SequenceListener : MonoBehaviour
 	public bool _powerBypass;
 	public bool _safetyOverride;
 
+
 	public Interactable _removablePanel;
 	public CharView _charview;
 	public AudioSource _staticAudio;
@@ -47,6 +48,8 @@ public class SequenceListener : MonoBehaviour
 	public Animator _backPanelCoverAnim;
 
 	public Material _skyboxMaterial;
+	public AudioSource _steamAudio, _hyperdrivePrimedAudio,_hyperdriveErrorAudio;
+	public float _diagnosticHoldTime = 2;
 
 	Vector3 _openConsolePos;
 	public Keypad _keypad;
@@ -129,6 +132,7 @@ public class SequenceListener : MonoBehaviour
 			{
 				ConsoleTxt.text = "HyperDrive Primed";
 				_hyperDrive1Primed = true;
+				_hyperdrivePrimedAudio.Play ();
 
 			} else if (eventName.Contains("7178")) 
 			{
@@ -137,10 +141,12 @@ public class SequenceListener : MonoBehaviour
 					_hyperDrive3Primed = true;
 				else
 					_hyperDrive2Primed = true;
+				_hyperdrivePrimedAudio.Play ();
 			}
 			else
 			{
 				ConsoleTxt.text = "Wrong Launch Code";
+				_hyperdriveErrorAudio.Play ();
 			}
 		}
 
@@ -206,7 +212,7 @@ public class SequenceListener : MonoBehaviour
 		}
 
 
-		if (interactable._eventName.Equals ("initializeDrill") && interactable._pressDuration <= 4) {
+		if (interactable._eventName.Equals ("initializeDrill") && interactable._pressDuration <= _diagnosticHoldTime) {
 			if (_hyperDrive1Primed) {// || (_powerBypass && _hyperDrive2Primed)) {
 
 				hideConsole ();
@@ -254,10 +260,13 @@ public class SequenceListener : MonoBehaviour
 				_hyperDrive1Primed = false;	
 				StartCoroutine (gameOver ());
 			} else {
-				if (_hyperDrive3Primed && _powerBypass && !_safetyOverride)
+				if (_hyperDrive3Primed && _powerBypass && !_safetyOverride) {
 					ConsoleTxt.text = "SAFETY LOCK ACTIVATED";
-				else if (_hyperDrive3Primed && !_powerBypass)
+					_hyperdriveErrorAudio.Play ();
+				} else if (_hyperDrive3Primed && !_powerBypass) {
 					ConsoleTxt.text = "ERROR IN POWER SYSTEM";
+					_hyperdriveErrorAudio.Play ();
+				}
 			
 		
 			}
@@ -273,9 +282,9 @@ public class SequenceListener : MonoBehaviour
 		while (true) 
 		{
 			ConsoleTxt.text = "Welcome Back";
-			yield return new WaitForSeconds (1.5f);
+			yield return new WaitForSeconds (1.25f);
 			ConsoleTxt.text = "Thanks for playing";
-			yield return new WaitForSeconds (1.5f);
+			yield return new WaitForSeconds (1.25f);
 		}
 	}
 
@@ -283,7 +292,7 @@ public class SequenceListener : MonoBehaviour
 
 	void holdEvent (Interactable interactable)
 	{
-		if (interactable._eventName.Equals ("initializeDrill") && interactable._pressDuration > 4 && _enableModeChange) {
+		if (interactable._eventName.Equals ("initializeDrill") && interactable._pressDuration > _diagnosticHoldTime && _enableModeChange) {
 			_cockpitActivated = !_cockpitActivated;
 			_enableModeChange = false;
 			if (_cockpitActivated) {
@@ -334,14 +343,16 @@ public class SequenceListener : MonoBehaviour
 		_consoleParent.DOKill ();
 		Vector3 desiredPos = _openConsolePos;
 		desiredPos.y -= 2;
-		_consoleParent.DOMove(desiredPos, 1.2f);
+		_consoleParent.DOMove(desiredPos, 1.4f);
 
 		_cockpitActivated = false;
+		_steamAudio.Play ();
 	}
 
 	public void bringConsoleBack() {
 		_consoleParent.DOKill ();
-		_consoleParent.DOMove (_openConsolePos, 1.2f);
+		_consoleParent.DOMove (_openConsolePos, 1.4f);
+		_steamAudio.Play ();
 	}
 
 	public void disableStaticAudio ()
