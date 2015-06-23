@@ -329,24 +329,28 @@ public class SequenceListener : MonoBehaviour
 
 
 	public IEnumerator switchSpaceVisual() {
-		yield return new WaitForSeconds (1.2f);
+		yield return new WaitForSeconds (1.4f);
 		_spaceScenes [0].SetActive (false);
 		_spaceScenes [1].SetActive (false);
-		yield return new WaitForSeconds (10f);
+        _spaceScenes[2].SetActive(true);
+		yield return new WaitForSeconds (9.5f);
 
 		if (_emergencyPowerOn) {
 			//I have already passed through the problems and fixed it, ready to get back home
 			_spaceScenes [0].SetActive (true);
+            _spaceScenes[2].SetActive(false);
 		} else {
 			if (_powerOutage) {
 				//Things just went really bad D: so don't show anything, just stars all the way
 				//Oh, show the power outage thingy on the miniconsole
+                _spaceScenes[2].SetActive(true);
 				_powerOutageMsg.SetActive(true);
 				//And pop the back panel
 				_backPanelCoverAnim.Play("BackPanelCoverAnimation",0);
 			} else {
 				//This is the start of my journey, take me to the nebulas!
 				_spaceScenes [1].SetActive (true);
+                _spaceScenes[2].SetActive(false);
 			}
 		}
 	}
