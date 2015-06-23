@@ -26,6 +26,7 @@ public class SequenceListener : MonoBehaviour
 
 	public bool _cockpitActivated = false;
 	public bool _hyperDrive1Primed;
+	public bool _hyperDrive1Done;
 	public bool _hyperDrive2Primed;
 	public bool _hyperDrive2Done;
 	public bool _hyperDrive3Primed;
@@ -39,6 +40,7 @@ public class SequenceListener : MonoBehaviour
 	public AudioSource _staticAudio;
 
 	public GameObject[] _spaceScenes;
+	public SkyboxRotate _strandedSpaceRotation;
 
 	public GameObject _powerOutageMsg;
 
@@ -123,10 +125,11 @@ public class SequenceListener : MonoBehaviour
 		}
 
 		if (eventName.StartsWith ("keypad")) {
-			if (eventName.Contains("8717")) 
+			if (eventName.Contains("8717") && !_hyperDrive1Done) 
 			{
 				ConsoleTxt.text = "HyperDrive Primed";
 				_hyperDrive1Primed = true;
+
 			} else if (eventName.Contains("7178")) 
 			{
 				ConsoleTxt.text = "HyperDrive Primed";
@@ -141,35 +144,8 @@ public class SequenceListener : MonoBehaviour
 			}
 		}
 
-//		if (eventName == "gravity_button") 
-//		{
-//			_windShieldPrompt.showGravity ();
-//		}
-//		if (eventName == "engines_button") 
-//		{
-//			_windShieldPrompt.showEngines ();
-//		}
-//		if (eventName == "powers_button") 
-//		{
-//			_windShieldPrompt.showPowers();
-//		}
-//		if (eventName == "life_button") 
-//		{
-//			_windShieldPrompt.showLife ();
-//		}
-//
-//
 		if (eventName == "emergencyPower" && !_emergencyPowerOn && _powerOutage) {
-			_EffectsAnimations.Play ("EmergencyPower");
-			_emergencyPowerOn = true;
-			_powerOutageMsg.SetActive (false);
-			enableAllInteractables (true);
-
-			//bringConsoleBack ();
-
-			disableStaticAudio ();
-
-			_emergencyPowerSwitch.transform.GetComponent<Interactable> ().disableInteractable();
+			automaticPowerBack ();
 
 		}
 		if (eventName == "safetyOverride" && _emergencyPowerOn) {
@@ -205,21 +181,26 @@ public class SequenceListener : MonoBehaviour
 		}
 	}
 
+	void automaticPowerBack()
+	{
+		
+		_EffectsAnimations.Play ("EmergencyPower");
+		_emergencyPowerOn = true;
+		_powerOutageMsg.SetActive (false);
+		enableAllInteractables (true);
+
+		disableStaticAudio ();
+
+		_emergencyPowerSwitch.transform.GetComponent<Interactable> ().disableInteractable();
+
+		_strandedSpaceRotation.enabled = true;
+
+		CancelInvoke ("automaticPowerBack");
+	}
+
 	void releasedEvent (Interactable interactable)
 	{
-//		if (interactable._eventName.Equals ("initializeDrill") && interactable._pressDuration > 4) {
-//			_cockpitActivated = !_cockpitActivated;
-//			if (_cockpitActivated) {
-//				//_windShieldPrompt.ARText.text = "Diagnostic Mode Activated";
-//				_minieventPrompt.text = "Diagnostic Mode Activated";
-//				bringConsoleBack ();
-//				Debug.Log ("Pressed for 4 seconds the initialize drill!");
-//			} else {
-//				//_windShieldPrompt.ARText.text = "Diagnostic Mode Disabled";
-//				hideConsole ();
-//				_minieventPrompt.text = "Diagnostic Mode Disabled";
-//			}
-//		} else
+
 		if (interactable._eventName.Equals ("initializeDrill")) {
 			_enableModeChange = true;
 		}
@@ -236,6 +217,7 @@ public class SequenceListener : MonoBehaviour
 				_windShieldPrompt.ARText.text = string.Empty;
 
 				_hyperDrive1Primed = false;
+				_hyperDrive1Done = true;
 			} else if (_hyperDrive2Primed) {
 				
 				hideConsole ();
@@ -259,6 +241,8 @@ public class SequenceListener : MonoBehaviour
 //				enableStaticAudio ();
 				_hyperDrive2Primed = false;
 				_hyperDrive2Done = true;
+				Invoke ("automaticPowerBack", 70);
+				_strandedSpaceRotation.enabled = false;
 			} else if (_hyperDrive3Primed && _powerBypass && _safetyOverride) {
 				hideConsole ();
 				//Invoke ("bringConsoleBack", 13.5f);
@@ -267,11 +251,32 @@ public class SequenceListener : MonoBehaviour
 				_EffectsAnimations.Play ("HyperDriveSuccess");
 				_windShieldPrompt.ARText.text = string.Empty;
 
-				_hyperDrive1Primed = false;				
+				_hyperDrive1Primed = false;	
+				StartCoroutine (gameOver ());
 			} else {
-				ConsoleTxt.text = "ERROR";
+				if (_hyperDrive3Primed && _powerBypass && !_safetyOverride)
+					ConsoleTxt.text = "SAFETY LOCK ACTIVATED";
+				else if (_hyperDrive3Primed && !_powerBypass)
+					ConsoleTxt.text = "ERROR IN POWER SYSTEM";
+			
+		
 			}
 		} 
+	}
+
+	IEnumerator gameOver()
+	{
+		yield return new WaitForSeconds (12.5f);
+
+		disableAllInteractables ();
+
+		while (true) 
+		{
+			ConsoleTxt.text = "Welcome Back";
+			yield return new WaitForSeconds (1.5f);
+			ConsoleTxt.text = "Thanks for playing";
+			yield return new WaitForSeconds (1.5f);
+		}
 	}
 
 	bool _enableModeChange = true;
@@ -292,42 +297,6 @@ public class SequenceListener : MonoBehaviour
 				_minieventPrompt.text = "Diagnostic Mode Disabled";
 			}
 		} 
-//		else if (interactable._eventName.Equals ("initializeDrill") && interactable._pressDuration <= 4) {
-//			if (_hyperDrive1Primed || (_powerBypass && _hyperDrive2Primed)) {
-//
-//				hideConsole ();
-//				//Invoke ("bringConsoleBack", 13.5f);
-//				StartCoroutine (switchSpaceVisual ());
-//
-//				_EffectsAnimations.Play ("HyperDriveSuccess");
-//				_windShieldPrompt.ARText.text = string.Empty;
-//
-//				_hyperDrive1Primed = false;
-//				//				enableStaticAudio ();
-//			} else if (_hyperDrive2Primed) {
-//
-//				hideConsole ();
-//
-//				_EffectsAnimations.Play ("HyperDriveFailure");
-//				_powerOutage = true;
-//				_hyperDrive2Primed = false;
-//				_emergencyPowerOn = false;
-//				_windShieldPrompt.ARText.text = string.Empty;
-//
-//
-//				StartCoroutine (switchSpaceVisual ());
-//
-//				Debug.LogWarning ("disableAllInteractables");
-//
-//				// Disable all
-//				disableAllInteractables ();
-//				// Enable the emergency switch
-//				_emergencyPowerSwitch.GetComponentInChildren<Interactable> ().enableInteractable (true);
-//				//
-//				//				enableStaticAudio ();
-//
-//			}
-//		} 
 	}
 
 
@@ -357,6 +326,8 @@ public class SequenceListener : MonoBehaviour
 			}
 		}
 	}
+
+
 
 	public void hideConsole() {
 		_minieventPrompt.text = "";

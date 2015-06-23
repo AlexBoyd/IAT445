@@ -99,8 +99,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 106134}
-  m_LocalRotation: {x: 3.29272304e-10, y: .275221556, z: -3.29272248e-10, w: .961380839}
-  m_LocalPosition: {x: 166.481003, y: -84.0690002, z: 432.756012}
+  m_LocalRotation: {x: 3.49960172e-10, y: .337072611, z: -3.07194298e-10, w: .94147867}
+  m_LocalPosition: {x: 166.636002, y: -84.0690002, z: 432.970001}
   m_LocalScale: {x: .188125372, y: .187146053, z: .188125297}
   m_Children:
   - {fileID: 430792}
@@ -169,7 +169,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: c85415d29d87e461d8e96cce7f43f210, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: .5
+  m_Pitch: 1
   Loop: 0
   Mute: 0
   Priority: 128
@@ -255,11 +255,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _meshRenderer: {fileID: 13782894}
+  _materialIndex: 0
   _boxColor: {r: 1, g: 1, b: 1, a: 1}
+  _originalMaterial: {fileID: 0}
   _eventName: powers_button
   _eventNamePretty: red button
   _pressDuration: 0
   Audio: {fileID: 8241806}
+  _interactable: 1
 --- !u!114 &11482016
 MonoBehaviour:
   m_ObjectHideFlags: 1

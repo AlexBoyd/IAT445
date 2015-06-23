@@ -660,14 +660,33 @@ MonoBehaviour:
   _switchPanel: {fileID: 0}
   _emergencyPowerSwitch: {fileID: 0}
   _eventPrompt: {fileID: 0}
+  _minieventPrompt: {fileID: 0}
   _windShieldPrompt: {fileID: 0}
+  _consoleParent: {fileID: 0}
   _EffectsAnimations: {fileID: 0}
   _cockpitActivated: 0
   _hyperDrive1Primed: 0
+  _hyperDrive1Done: 0
   _hyperDrive2Primed: 0
+  _hyperDrive2Done: 0
+  _hyperDrive3Primed: 0
   _emergencyPowerOn: 0
   _powerOutage: 0
   _powerBypass: 0
+  _safetyOverride: 0
+  _removablePanel: {fileID: 0}
+  _charview: {fileID: 0}
+  _staticAudio: {fileID: 0}
+  _spaceScenes:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _strandedSpaceRotation: {fileID: 0}
+  _powerOutageMsg: {fileID: 0}
+  _backPanelCoverAnim: {fileID: 0}
+  _skyboxMaterial: {fileID: 2100000, guid: 1b5d6dd22ac4aca47817c7ef59058665, type: 2}
+  _keypad: {fileID: 0}
+  ConsoleTxt: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

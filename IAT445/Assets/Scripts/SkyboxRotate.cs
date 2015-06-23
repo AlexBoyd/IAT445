@@ -27,8 +27,8 @@ public class SkyboxRotate : MonoBehaviour {
 		currentHorizontal = Mathf.Lerp (currentHorizontal, h, Time.deltaTime);
 		currentVertical = Mathf.Lerp (currentVertical, v, Time.deltaTime);
 
-		Quaternion horizontalRotation = Quaternion.AngleAxis( currentVertical,transform.right);
-		Quaternion verticalRotation = Quaternion.AngleAxis (currentHorizontal, -transform.up);
+		Quaternion horizontalRotation = Quaternion.AngleAxis( currentVertical,Vector3.right);
+		Quaternion verticalRotation = Quaternion.AngleAxis (currentHorizontal,-Vector3.up);
 
 		transform.rotation = Quaternion.Slerp (transform.rotation, transform.rotation* horizontalRotation * verticalRotation, rotationSpeed * Time.deltaTime);
 
