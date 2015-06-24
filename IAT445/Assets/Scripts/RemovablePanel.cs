@@ -31,15 +31,22 @@ public class RemovablePanel : Interactable
         {
             closed = false;
             _rotateCoverPivot.DOKill();
-            _rotateCoverPivot.DOLocalRotate(_openRotation,1);
+            _rotateCoverPivot.DOLocalRotate(_openRotation,1).OnComplete(ReactivateInteractable);
+            _interactable = false;
         }
         else
         {
             closed = true;
             _rotateCoverPivot.DOKill();
-            _rotateCoverPivot.DOLocalRotate(_originalRotation,1);
+            _rotateCoverPivot.DOLocalRotate(_originalRotation, 1).OnComplete(ReactivateInteractable);
+            _interactable = false;
         }
 	}
+
+    public void ReactivateInteractable()
+    {
+        _interactable = true;
+    }
 
 	public override void triggerPressedEvent ()
 	{

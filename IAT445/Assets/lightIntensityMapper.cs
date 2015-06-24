@@ -19,8 +19,8 @@ public class lightIntensityMapper : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		_mat.SetColor ("_EmissionColor", _sourceLight.color * _sourceLight.intensity * 0.1f);
-        if (_sourceLight.intensity > 0.1f)
+		//_mat.SetColor ("_EmissionColor", _sourceLight.color * _sourceLight.intensity * 0.1f);
+        if (_sourceLight.intensity > 0.05f)
         {
             for (int i = 0; i < _turnedOnObj.Length; i++)
             {
