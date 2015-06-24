@@ -66,7 +66,6 @@ public class Interactable : MonoBehaviour {
 
 	protected void Awake()
 	{
-
 		if (_sharedLitMaterial == null) 
 		{
 			_sharedLitMaterial = Resources.Load("UltraGlow") as Material;
