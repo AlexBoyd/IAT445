@@ -538,6 +538,10 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 86b0c10fb9d1f82459a6787a1353aeab, type: 2}
+    - target: {fileID: 100000, guid: 4892bb61744334f4a83d747ea3dee49d, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4892bb61744334f4a83d747ea3dee49d, type: 3}
   m_IsPrefabParent: 0
@@ -2450,6 +2454,46 @@ Prefab:
     - target: {fileID: 11479868, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
       propertyPath: _diagnosticHoldTime
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11477424, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
+      propertyPath: _userData.joystickMaps.Array.data[0].actionElementMaps.Array.data[20]._actionId
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11477424, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
+      propertyPath: _userData.joystickMaps.Array.data[0].actionElementMaps.Array.data[21]._actionId
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11477424, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
+      propertyPath: _userData.joystickMaps.Array.data[0].actionElementMaps.Array.data[22]._actionId
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11477424, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
+      propertyPath: _userData.joystickMaps.Array.data[0].actionElementMaps.Array.data[23]._actionId
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11477424, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
+      propertyPath: _userData.joystickMaps.Array.data[0].actionElementMaps.Array.data[24]._actionId
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11477424, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
+      propertyPath: _userData.joystickMaps.Array.data[0].actionElementMaps.Array.data[25]._actionId
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11477424, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
+      propertyPath: _userData.joystickMaps.Array.data[0].actionElementMaps.Array.data[26]._actionId
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11477424, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
+      propertyPath: _userData.joystickMaps.Array.data[0].actionElementMaps.Array.data[27]._actionId
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11477424, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
+      propertyPath: _userData.joystickMaps.Array.data[0].actionElementMaps.Array.data[3]._actionId
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11477424, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
+      propertyPath: _userData.joystickMaps.Array.data[0].actionElementMaps.Array.data[2]._actionId
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
