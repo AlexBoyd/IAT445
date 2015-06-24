@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: UltraGlow
+  m_Name: UltraGlowForPanel
   m_Shader: {fileID: 4800000, guid: c86e690747c1e334e8a793d2c20be02e, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
@@ -26,7 +26,7 @@ Material:
         first:
           name: _BumpMap
         second:
-          m_Texture: {fileID: 0}
+          m_Texture: {fileID: 2800000, guid: 06aa1295862b933459f37ae10161537d, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -130,15 +130,15 @@ Material:
       data:
         first:
           name: _Emission
-        second: 1.5
+        second: 1.21399999
       data:
         first:
           name: _GlowPower
-        second: 8.40999985
+        second: 6.26000023
       data:
         first:
           name: _Albedo
-        second: .157000005
+        second: .185000002
     m_Colors:
       data:
         first:

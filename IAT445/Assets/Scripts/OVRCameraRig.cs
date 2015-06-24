@@ -72,6 +72,7 @@ public class OVRCameraRig : MonoBehaviour
 
 	public float _maxXOffset;
 	public float _maxZOffset;
+	public float _minYHeight;
 
 	public Vector3 _initialRightEyePos;
 	public Vector3 _initialLeftEyePos;
@@ -170,21 +171,21 @@ public class OVRCameraRig : MonoBehaviour
 		Vector3 intendedCenterPos = 0.5f * (hmdLeftEye.position + hmdRightEye.position);
 		Vector3 deltaCenterEye = intendedCenterPos - _initialCenterEyePos;
 		deltaCenterEye = new Vector3 ((Mathf.Min (Mathf.Abs (deltaCenterEye.x), _maxXOffset) * Mathf.Sign (deltaCenterEye.x)),
-		                              deltaCenterEye.y,
+		                              Mathf.Max (deltaCenterEye.y, _minYHeight), 
 			Mathf.Min (Mathf.Abs (deltaCenterEye.z), _maxZOffset) * Mathf.Sign (deltaCenterEye.z));
 		centerEyeAnchor.localPosition = _initialCenterEyePos + deltaCenterEye;
 
 		Vector3 intendedLeftEye = monoscopic ? centerEyeAnchor.localPosition : hmdLeftEye.position;
 		Vector3 deltaLeftEye = intendedLeftEye - _initialLeftEyePos;
 		deltaLeftEye = new Vector3 ((Mathf.Min (Mathf.Abs (deltaLeftEye.x), _maxXOffset) * Mathf.Sign (deltaLeftEye.x)),
-		                            deltaCenterEye.y,
+		                            Mathf.Max (deltaLeftEye.y, _minYHeight),
 			Mathf.Min (Mathf.Abs (deltaLeftEye.z), _maxZOffset) * Mathf.Sign (deltaLeftEye.z));
 		
 
 		Vector3 intendedRightEye = monoscopic ? centerEyeAnchor.localPosition : hmdRightEye.position;
 		Vector3 deltaRightEye = intendedRightEye - _initialRightEyePos;
 		deltaRightEye = new Vector3 ((Mathf.Min (Mathf.Abs (deltaRightEye.x), _maxXOffset) * Mathf.Sign (deltaRightEye.x)),
-		                             deltaCenterEye.y,
+		                             Mathf.Max (deltaRightEye.y, _minYHeight),
 			Mathf.Min (Mathf.Abs (deltaRightEye.z), _maxZOffset) * Mathf.Sign (deltaRightEye.z));
 		
 

@@ -341,7 +341,7 @@ Transform:
   m_PrefabParentObject: {fileID: 483738, guid: ff83e688d94201f4cac0b35f827362a7, type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 81507829}
-  m_LocalRotation: {x: .282568485, y: -.306465328, z: .729242563, w: -.542622805}
+  m_LocalRotation: {x: .282568455, y: -.306465298, z: .729242504, w: -.542622745}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: .99999994}
   m_Children: []
@@ -1296,7 +1296,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1436035115}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.0343322754, y: 1.96599996, z: -.26699999}
+  m_LocalPosition: {x: -.0343322754, y: 2.00699997, z: -.367000014}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 421184790}
@@ -3731,6 +3731,10 @@ Prefab:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 4300002, guid: 8581d1edfd80a44e78b52405e8d4a693, type: 3}
+    - target: {fileID: 6463968, guid: 79d8359371c114be4a3aab04156f3954, type: 2}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 79d8359371c114be4a3aab04156f3954, type: 2}
   m_IsPrefabParent: 0
@@ -8497,8 +8501,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f2af76ed92c74a02aaf124d5d91ddaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxXOffset: .400000006
-  _maxZOffset: .400000006
+  _maxXOffset: .800000012
+  _maxZOffset: .800000012
+  _minYHeight: -.300000012
   _initialRightEyePos: {x: 0, y: 0, z: 0}
   _initialLeftEyePos: {x: 0, y: 0, z: 0}
   _initialCenterEyePos: {x: 0, y: 0, z: 0}
