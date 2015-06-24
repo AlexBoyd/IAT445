@@ -5074,7 +5074,7 @@ AnimationClip:
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 31
-      - time: 16.4333324
+      - time: 17.8500004
         value: 1
         inSlope: Infinity
         outSlope: Infinity
@@ -5356,7 +5356,7 @@ AnimationClip:
   m_AnimationClipSettings:
     serializedVersion: 2
     m_StartTime: 0
-    m_StopTime: 17.1499996
+    m_StopTime: 17.8500004
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -5428,7 +5428,7 @@ AnimationClip:
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 31
-      - time: 16.4333324
+      - time: 17.8500004
         value: 1
         inSlope: Infinity
         outSlope: Infinity
