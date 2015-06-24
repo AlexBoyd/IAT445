@@ -67,7 +67,7 @@ public class Keypad : MonoBehaviour
 
 		} else {
 			
-			_currentInput += _currentInput.Length < 2 ? keyValue : "";
+			_currentInput += _currentInput.Length < 5 ? keyValue : "";
 		}
 		_keypadInput.text = _currentInput;
 	}
