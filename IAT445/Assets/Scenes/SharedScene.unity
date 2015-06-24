@@ -8501,8 +8501,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f2af76ed92c74a02aaf124d5d91ddaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxXOffset: .400000006
-  _maxZOffset: .400000006
+  _maxXOffset: .800000012
+  _maxZOffset: .800000012
+  _minYHeight: -.300000012
   _initialRightEyePos: {x: 0, y: 0, z: 0}
   _initialLeftEyePos: {x: 0, y: 0, z: 0}
   _initialCenterEyePos: {x: 0, y: 0, z: 0}
