@@ -341,7 +341,7 @@ Transform:
   m_PrefabParentObject: {fileID: 483738, guid: ff83e688d94201f4cac0b35f827362a7, type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 81507829}
-  m_LocalRotation: {x: .282568455, y: -.306465298, z: .729242504, w: -.542622745}
+  m_LocalRotation: {x: .282568485, y: -.306465328, z: .729242563, w: -.542622805}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: .99999994}
   m_Children: []
@@ -1300,7 +1300,7 @@ Transform:
   m_Children:
   - {fileID: 421184790}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
 --- !u!1 &248699584
 GameObject:
   m_ObjectHideFlags: 0
@@ -3756,6 +3756,10 @@ Prefab:
       propertyPath: _userData.joystickMaps.Array.data[0].actionElementMaps.Array.data[2]._actionId
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 11479868, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
+      propertyPath: _emergencySparks
+      value: 
+      objectReference: {fileID: 2002591980}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
   m_IsPrefabParent: 0
@@ -4269,7 +4273,7 @@ Transform:
   - {fileID: 1284143480}
   - {fileID: 590411825}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!114 &868778302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5209,7 +5213,7 @@ Transform:
   m_Children:
   - {fileID: 172574367}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!114 &1123110555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5852,7 +5856,7 @@ Transform:
   - {fileID: 773566344}
   - {fileID: 1132029828}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
 --- !u!1001 &1263027963
 Prefab:
   m_ObjectHideFlags: 0
@@ -8309,6 +8313,14 @@ Prefab:
       propertyPath: m_IntensityMultiplier
       value: .899999976
       objectReference: {fileID: 0}
+    - target: {fileID: 487876, guid: 2c1425f03d17349f7b6239a3e44f0ecb, type: 2}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 436842, guid: 2c1425f03d17349f7b6239a3e44f0ecb, type: 2}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2c1425f03d17349f7b6239a3e44f0ecb, type: 2}
   m_IsPrefabParent: 0
@@ -9103,7 +9115,7 @@ Transform:
   - {fileID: 1081692338}
   - {fileID: 83311176}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
 --- !u!114 &1778749670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9579,12 +9591,12 @@ GameObject:
   m_Component:
   - 4: {fileID: 2002591981}
   m_Layer: 0
-  m_Name: NewThingsFromDanielToShowAndHideOnEvents
+  m_Name: EmergencyEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2002591981
 Transform:
   m_ObjectHideFlags: 0
@@ -9599,8 +9611,8 @@ Transform:
   - {fileID: 1781967374}
   - {fileID: 1054754665}
   - {fileID: 1775611597}
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_Father: {fileID: 1980736863}
+  m_RootOrder: 12
 --- !u!1001 &2020880226
 Prefab:
   m_ObjectHideFlags: 0
