@@ -1,17 +1,17 @@
 fileFormatVersion: 2
-guid: a086080443e55cd46b5c6ec867d53093
-timeCreated: 1435084435
+guid: 96e46d0da02f06e4393b820e9af65fc9
+timeCreated: 1435113194
 licenseType: Pro
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
-    100000: Light
+    100000: EmergencyPlaque
     100002: //RootNode
-    400000: Light
+    400000: EmergencyPlaque
     400002: //RootNode
-    2300000: Light
-    3300000: Light
-    4300000: Light
+    2300000: EmergencyPlaque
+    3300000: EmergencyPlaque
+    4300000: EmergencyPlaque
   materials:
     importMaterials: 1
     materialName: 0

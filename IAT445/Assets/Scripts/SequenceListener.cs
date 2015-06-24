@@ -47,6 +47,7 @@ public class SequenceListener : MonoBehaviour
 
 	public Animator _backPanelCoverAnim;
 
+	public GameObject _emergencySparks;
 	public Material _skyboxMaterial;
 	public AudioSource _steamAudio, _hyperdrivePrimedAudio, _hyperdriveErrorAudio;
 	public float _diagnosticHoldTime = 2;
@@ -196,6 +197,7 @@ public class SequenceListener : MonoBehaviour
 		_emergencyPowerSwitch.transform.GetComponent<Interactable> ().disableInteractable ();
 
 		_strandedSpaceRotation.enabled = true;
+		_emergencySparks.SetActive (false);
 
 		CancelInvoke ("automaticPowerBack");
 	}
@@ -245,6 +247,7 @@ public class SequenceListener : MonoBehaviour
 				_hyperDrive2Done = true;
 				Invoke ("automaticPowerBack", 70);
 				_strandedSpaceRotation.enabled = false;
+				_emergencySparks.SetActive (true);
 			} else if (_hyperDrive3Primed && _powerBypass && _safetyOverride) {
 				hideConsole ();
 				//Invoke ("bringConsoleBack", 13.5f);
