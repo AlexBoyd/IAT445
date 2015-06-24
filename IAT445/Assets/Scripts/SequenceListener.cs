@@ -277,7 +277,7 @@ public class SequenceListener : MonoBehaviour
 
 	IEnumerator gameOver ()
 	{
-		yield return new WaitForSeconds (12.5f);
+		yield return new WaitForSeconds (16f);
 
 		disableAllInteractables ();
 
