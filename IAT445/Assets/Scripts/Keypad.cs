@@ -23,7 +23,7 @@ public class Keypad : MonoBehaviour
 	void OnTriggerEvent (string eventName)
 	{
 		if (TriggerEvent != null)
-			TriggerEvent ("keypad_"+eventName);
+			TriggerEvent ("keypad_" + eventName);
 	}
 
 	void Awake ()
@@ -67,7 +67,7 @@ public class Keypad : MonoBehaviour
 
 		} else {
 			
-			_currentInput += _currentInput.Length < 4 ? keyValue : "";
+			_currentInput += _currentInput.Length < 2 ? keyValue : "";
 		}
 		_keypadInput.text = _currentInput;
 	}
