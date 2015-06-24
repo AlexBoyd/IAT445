@@ -79,7 +79,7 @@ public class OVRCameraRig : MonoBehaviour
 
 	public AstronautIK _astronautIK;
 
-	public void resetPosition()
+	public void resetPosition ()
 	{
 		_initialRightEyePos = rightEyeAnchor.transform.localPosition;
 		_initialLeftEyePos = leftEyeAnchor.transform.localPosition;
@@ -87,63 +87,71 @@ public class OVRCameraRig : MonoBehaviour
 	}
 
 	#region Unity Messages
-	private void Awake()
+	private void Awake ()
 	{
-		EnsureGameObjectIntegrity();
+		EnsureGameObjectIntegrity ();
 
 		resetPosition ();	
 
 		if (!Application.isPlaying)
 			return;
 
-		OVRManager.Created += () => { needsCameraConfigure = true; };
-		OVRManager.NativeTextureScaleModified += (prev, current) => { needsCameraConfigure = true; };
-		OVRManager.VirtualTextureScaleModified += (prev, current) => { needsCameraConfigure = true; };
-		OVRManager.EyeTextureAntiAliasingModified += (prev, current) => { needsCameraConfigure = true; };
-		OVRManager.EyeTextureDepthModified += (prev, current) => { needsCameraConfigure = true; };
-		OVRManager.EyeTextureFormatModified += (prev, current) => { needsCameraConfigure = true; };
-		OVRManager.MonoscopicModified += (prev, current) => { needsCameraConfigure = true; };
-		OVRManager.HdrModified += (prev, current) => { needsCameraConfigure = true; };
+		OVRManager.Created += () => {
+			needsCameraConfigure = true; };
+		OVRManager.NativeTextureScaleModified += (prev, current) => {
+			needsCameraConfigure = true; };
+		OVRManager.VirtualTextureScaleModified += (prev, current) => {
+			needsCameraConfigure = true; };
+		OVRManager.EyeTextureAntiAliasingModified += (prev, current) => {
+			needsCameraConfigure = true; };
+		OVRManager.EyeTextureDepthModified += (prev, current) => {
+			needsCameraConfigure = true; };
+		OVRManager.EyeTextureFormatModified += (prev, current) => {
+			needsCameraConfigure = true; };
+		OVRManager.MonoscopicModified += (prev, current) => {
+			needsCameraConfigure = true; };
+		OVRManager.HdrModified += (prev, current) => {
+			needsCameraConfigure = true; };
 	}
 
-	private void Start()
+	private void Start ()
 	{
-		EnsureGameObjectIntegrity();
+		EnsureGameObjectIntegrity ();
 
 		if (!Application.isPlaying)
 			return;
 
-		UpdateCameras();
-		UpdateAnchors();
+		UpdateCameras ();
+		UpdateAnchors ();
 	}
 
 	#if !UNITY_ANDROID || UNITY_EDITOR
-	private void LateUpdate()
+	private void LateUpdate ()
 	#else
 	private void Update()
 	#endif
 	{
 
 
-		EnsureGameObjectIntegrity();
+		EnsureGameObjectIntegrity ();
 
 		if (!Application.isPlaying)
 			return;
 
-		UpdateCameras();
-		UpdateAnchors();
+		UpdateCameras ();
+		UpdateAnchors ();
 	}
 
 	#endregion
 
-	private new void UpdateAnchors()
+	private new void UpdateAnchors ()
 	{
 
 		bool monoscopic = OVRManager.instance.monoscopic;
 
-		OVRPose tracker = OVRManager.tracker.GetPose(0f);
-		OVRPose hmdLeftEye = OVRManager.display.GetEyePose(OVREye.Left);
-		OVRPose hmdRightEye = OVRManager.display.GetEyePose(OVREye.Right);
+		OVRPose tracker = OVRManager.tracker.GetPose (0f);
+		OVRPose hmdLeftEye = OVRManager.display.GetEyePose (OVREye.Left);
+		OVRPose hmdRightEye = OVRManager.display.GetEyePose (OVREye.Right);
 
 		trackerAnchor.localRotation = tracker.orientation;
 		centerEyeAnchor.localRotation = hmdLeftEye.orientation; // using left eye for now
@@ -161,23 +169,23 @@ public class OVRCameraRig : MonoBehaviour
 
 		Vector3 intendedCenterPos = 0.5f * (hmdLeftEye.position + hmdRightEye.position);
 		Vector3 deltaCenterEye = intendedCenterPos - _initialCenterEyePos;
-		deltaCenterEye = new Vector3 ((Mathf.Min (Mathf.Abs (deltaCenterEye.x), _maxXOffset) * Mathf.Sign(deltaCenterEye.x)),
-					0,
-			Mathf.Min (Mathf.Abs (deltaCenterEye.z), _maxZOffset) * Mathf.Sign(deltaCenterEye.z));
+		deltaCenterEye = new Vector3 ((Mathf.Min (Mathf.Abs (deltaCenterEye.x), _maxXOffset) * Mathf.Sign (deltaCenterEye.x)),
+		                              deltaCenterEye.y,
+			Mathf.Min (Mathf.Abs (deltaCenterEye.z), _maxZOffset) * Mathf.Sign (deltaCenterEye.z));
 		centerEyeAnchor.localPosition = _initialCenterEyePos + deltaCenterEye;
 
 		Vector3 intendedLeftEye = monoscopic ? centerEyeAnchor.localPosition : hmdLeftEye.position;
 		Vector3 deltaLeftEye = intendedLeftEye - _initialLeftEyePos;
-		deltaLeftEye = new Vector3 ((Mathf.Min (Mathf.Abs (deltaLeftEye.x), _maxXOffset) * Mathf.Sign(deltaLeftEye.x)),
-			0,
-			Mathf.Min (Mathf.Abs (deltaLeftEye.z), _maxZOffset) * Mathf.Sign(deltaLeftEye.z));
+		deltaLeftEye = new Vector3 ((Mathf.Min (Mathf.Abs (deltaLeftEye.x), _maxXOffset) * Mathf.Sign (deltaLeftEye.x)),
+		                            deltaCenterEye.y,
+			Mathf.Min (Mathf.Abs (deltaLeftEye.z), _maxZOffset) * Mathf.Sign (deltaLeftEye.z));
 		
 
 		Vector3 intendedRightEye = monoscopic ? centerEyeAnchor.localPosition : hmdRightEye.position;
 		Vector3 deltaRightEye = intendedRightEye - _initialRightEyePos;
-		deltaRightEye = new Vector3 ((Mathf.Min (Mathf.Abs (deltaRightEye.x), _maxXOffset) * Mathf.Sign(deltaRightEye.x)),
-			0,
-			Mathf.Min (Mathf.Abs (deltaRightEye.z), _maxZOffset) * Mathf.Sign(deltaRightEye.z));
+		deltaRightEye = new Vector3 ((Mathf.Min (Mathf.Abs (deltaRightEye.x), _maxXOffset) * Mathf.Sign (deltaRightEye.x)),
+		                             deltaCenterEye.y,
+			Mathf.Min (Mathf.Abs (deltaRightEye.z), _maxZOffset) * Mathf.Sign (deltaRightEye.z));
 		
 
 		leftEyeAnchor.localPosition = _initialLeftEyePos + deltaLeftEye;//monoscopic ? centerEyeAnchor.localPosition : hmdLeftEye.position;
@@ -190,21 +198,19 @@ public class OVRCameraRig : MonoBehaviour
 		_astronautIK._zOffset = deltaZ;
 
 
-		if (UpdatedAnchors != null)
-		{
-			UpdatedAnchors(this);
+		if (UpdatedAnchors != null) {
+			UpdatedAnchors (this);
 		}
 	}
 
-	private void UpdateCameras()
+	private void UpdateCameras ()
 	{
 		if (!OVRManager.instance.isVRPresent)
 			return;
 
-		if (needsCameraConfigure)
-		{
-			leftEyeCamera = ConfigureCamera(OVREye.Left);
-			rightEyeCamera = ConfigureCamera(OVREye.Right);
+		if (needsCameraConfigure) {
+			leftEyeCamera = ConfigureCamera (OVREye.Left);
+			rightEyeCamera = ConfigureCamera (OVREye.Right);
 
 			#if !UNITY_ANDROID || UNITY_EDITOR
 			needsCameraConfigure = false;
@@ -212,29 +218,27 @@ public class OVRCameraRig : MonoBehaviour
 		}
 	}
 
-	public void EnsureGameObjectIntegrity()
+	public void EnsureGameObjectIntegrity ()
 	{
 		if (trackingSpace == null)
-			trackingSpace = ConfigureRootAnchor(trackingSpaceName);
+			trackingSpace = ConfigureRootAnchor (trackingSpaceName);
 
 		if (leftEyeAnchor == null)
-			leftEyeAnchor = ConfigureEyeAnchor(trackingSpace, OVREye.Left);
+			leftEyeAnchor = ConfigureEyeAnchor (trackingSpace, OVREye.Left);
 
 		if (centerEyeAnchor == null)
-			centerEyeAnchor = ConfigureEyeAnchor(trackingSpace, OVREye.Center);
+			centerEyeAnchor = ConfigureEyeAnchor (trackingSpace, OVREye.Center);
 
 		if (rightEyeAnchor == null)
-			rightEyeAnchor = ConfigureEyeAnchor(trackingSpace, OVREye.Right);
+			rightEyeAnchor = ConfigureEyeAnchor (trackingSpace, OVREye.Right);
 
 		if (trackerAnchor == null)
-			trackerAnchor = ConfigureTrackerAnchor(trackingSpace);
+			trackerAnchor = ConfigureTrackerAnchor (trackingSpace);
 
-		if (leftEyeCamera == null)
-		{
-			leftEyeCamera = leftEyeAnchor.GetComponent<Camera>();
-			if (leftEyeCamera == null)
-			{
-				leftEyeCamera = leftEyeAnchor.gameObject.AddComponent<Camera>();
+		if (leftEyeCamera == null) {
+			leftEyeCamera = leftEyeAnchor.GetComponent<Camera> ();
+			if (leftEyeCamera == null) {
+				leftEyeCamera = leftEyeAnchor.gameObject.AddComponent<Camera> ();
 			}
 			#if UNITY_ANDROID && !UNITY_EDITOR
 			if (leftEyeCamera.GetComponent<OVRPostRender>() == null)
@@ -244,12 +248,10 @@ public class OVRCameraRig : MonoBehaviour
 			#endif
 		}
 
-		if (rightEyeCamera == null)
-		{
-			rightEyeCamera = rightEyeAnchor.GetComponent<Camera>();
-			if (rightEyeCamera == null)
-			{
-				rightEyeCamera = rightEyeAnchor.gameObject.AddComponent<Camera>();
+		if (rightEyeCamera == null) {
+			rightEyeCamera = rightEyeAnchor.GetComponent<Camera> ();
+			if (rightEyeCamera == null) {
+				rightEyeCamera = rightEyeAnchor.gameObject.AddComponent<Camera> ();
 			}
 			#if UNITY_ANDROID && !UNITY_EDITOR
 			if (rightEyeCamera.GetComponent<OVRPostRender>() == null)
@@ -260,13 +262,12 @@ public class OVRCameraRig : MonoBehaviour
 		}
 	}
 
-	private Transform ConfigureRootAnchor(string name)
+	private Transform ConfigureRootAnchor (string name)
 	{
-		Transform root = transform.Find(name);
+		Transform root = transform.Find (name);
 
-		if (root == null)
-		{
-			root = new GameObject(name).transform;
+		if (root == null) {
+			root = new GameObject (name).transform;
 		}
 
 		root.parent = transform;
@@ -277,25 +278,22 @@ public class OVRCameraRig : MonoBehaviour
 		return root;
 	}
 
-	private Transform ConfigureEyeAnchor(Transform root, OVREye eye)
+	private Transform ConfigureEyeAnchor (Transform root, OVREye eye)
 	{
-		string name = eye.ToString() + eyeAnchorName;
-		Transform anchor = transform.Find(root.name + "/" + name);
+		string name = eye.ToString () + eyeAnchorName;
+		Transform anchor = transform.Find (root.name + "/" + name);
 
-		if (anchor == null)
-		{
-			anchor = transform.Find(name);
+		if (anchor == null) {
+			anchor = transform.Find (name);
 		}
 
-		if (anchor == null)
-		{
-			string legacyName = legacyEyeAnchorName + eye.ToString();
-			anchor = transform.Find(legacyName);
+		if (anchor == null) {
+			string legacyName = legacyEyeAnchorName + eye.ToString ();
+			anchor = transform.Find (legacyName);
 		}
 
-		if (anchor == null)
-		{
-			anchor = new GameObject(name).transform;
+		if (anchor == null) {
+			anchor = new GameObject (name).transform;
 		}
 
 		anchor.name = name;
@@ -307,14 +305,13 @@ public class OVRCameraRig : MonoBehaviour
 		return anchor;
 	}
 
-	private Transform ConfigureTrackerAnchor(Transform root)
+	private Transform ConfigureTrackerAnchor (Transform root)
 	{
 		string name = trackerAnchorName;
-		Transform anchor = transform.Find(root.name + "/" + name);
+		Transform anchor = transform.Find (root.name + "/" + name);
 
-		if (anchor == null)
-		{
-			anchor = new GameObject(name).transform;
+		if (anchor == null) {
+			anchor = new GameObject (name).transform;
 		}
 
 		anchor.parent = root;
@@ -325,16 +322,16 @@ public class OVRCameraRig : MonoBehaviour
 		return anchor;
 	}
 
-	private Camera ConfigureCamera(OVREye eye)
+	private Camera ConfigureCamera (OVREye eye)
 	{
 		Transform anchor = (eye == OVREye.Left) ? leftEyeAnchor : rightEyeAnchor;
-		Camera cam = anchor.GetComponent<Camera>();
+		Camera cam = anchor.GetComponent<Camera> ();
 
-		OVRDisplay.EyeRenderDesc eyeDesc = OVRManager.display.GetEyeRenderDesc(eye);
+		OVRDisplay.EyeRenderDesc eyeDesc = OVRManager.display.GetEyeRenderDesc (eye);
 
 		cam.fieldOfView = eyeDesc.fov.y;
 		cam.aspect = eyeDesc.resolution.x / eyeDesc.resolution.y;
-		cam.targetTexture = OVRManager.display.GetEyeTexture(eye);
+		cam.targetTexture = OVRManager.display.GetEyeTexture (eye);
 		cam.hdr = OVRManager.instance.hdr;
 
 		#if UNITY_ANDROID && !UNITY_EDITOR
@@ -355,12 +352,11 @@ public class OVRCameraRig : MonoBehaviour
 		((cam.gameObject.GetComponent<Skybox>() != null) || (RenderSettings.skybox != null)));
 		cam.clearFlags = (hasSkybox) ? CameraClearFlags.Skybox : CameraClearFlags.SolidColor;
 		#else
-		cam.rect = new Rect(0f, 0f, OVRManager.instance.virtualTextureScale, OVRManager.instance.virtualTextureScale);
+		cam.rect = new Rect (0f, 0f, OVRManager.instance.virtualTextureScale, OVRManager.instance.virtualTextureScale);
 		#endif
 
 		// When rendering monoscopic, we will use the left camera render for both eyes.
-		if (eye == OVREye.Right)
-		{
+		if (eye == OVREye.Right) {
 			cam.enabled = !OVRManager.instance.monoscopic;
 		}
 
