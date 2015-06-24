@@ -48,6 +48,7 @@ public class SequenceListener : MonoBehaviour
 	public Animator _backPanelCoverAnim;
 
 	public GameObject _emergencySparks;
+    public GameObject _puzzleSparks;
 	public Material _skyboxMaterial;
 	public AudioSource _steamAudio, _hyperdrivePrimedAudio, _hyperdriveErrorAudio;
 	public float _diagnosticHoldTime = 2;
@@ -198,6 +199,7 @@ public class SequenceListener : MonoBehaviour
 
 		_strandedSpaceRotation.enabled = true;
 		_emergencySparks.SetActive (false);
+        //The sparks should stay.
 
 		CancelInvoke ("automaticPowerBack");
 	}
@@ -248,6 +250,7 @@ public class SequenceListener : MonoBehaviour
 				Invoke ("automaticPowerBack", 70);
 				_strandedSpaceRotation.enabled = false;
 				_emergencySparks.SetActive (true);
+                _puzzleSparks.SetActive(true);
 			} else if (_hyperDrive3Primed && _powerBypass && _safetyOverride) {
 				hideConsole ();
 				//Invoke ("bringConsoleBack", 13.5f);

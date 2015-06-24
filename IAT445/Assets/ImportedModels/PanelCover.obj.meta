@@ -7,11 +7,16 @@ ModelImporter:
   fileIDToRecycleName:
     100000: //RootNode
     100002: polySurface8_CockpitCentral_polySurface2_newCockpit1:polySurface8_newCockpit1:newCockpit1:polySurface1
+    100004: PanelCover:CockpitCentral_PanelCover:polySurface2_PanelCover:polySurface8_PanelCover:polySurface9_PanelCover:polySurface10_PanelCover:polySurface1
     400000: //RootNode
     400002: polySurface8_CockpitCentral_polySurface2_newCockpit1:polySurface8_newCockpit1:newCockpit1:polySurface1
+    400004: PanelCover:CockpitCentral_PanelCover:polySurface2_PanelCover:polySurface8_PanelCover:polySurface9_PanelCover:polySurface10_PanelCover:polySurface1
     2300000: polySurface8_CockpitCentral_polySurface2_newCockpit1:polySurface8_newCockpit1:newCockpit1:polySurface1
+    2300002: PanelCover:CockpitCentral_PanelCover:polySurface2_PanelCover:polySurface8_PanelCover:polySurface9_PanelCover:polySurface10_PanelCover:polySurface1
     3300000: polySurface8_CockpitCentral_polySurface2_newCockpit1:polySurface8_newCockpit1:newCockpit1:polySurface1
+    3300002: PanelCover:CockpitCentral_PanelCover:polySurface2_PanelCover:polySurface8_PanelCover:polySurface9_PanelCover:polySurface10_PanelCover:polySurface1
     4300000: polySurface8_CockpitCentral_polySurface2_newCockpit1:polySurface8_newCockpit1:newCockpit1:polySurface1
+    4300002: PanelCover:CockpitCentral_PanelCover:polySurface2_PanelCover:polySurface8_PanelCover:polySurface9_PanelCover:polySurface10_PanelCover:polySurface1
   materials:
     importMaterials: 1
     materialName: 0
