@@ -8,6 +8,9 @@ public class lightIntensityMapper : MonoBehaviour
 
 	private Material _mat;
 
+    public MeshRenderer[] _turnedOnObj;
+    public MeshRenderer[] _turnedOffObj;
+
 	void Start ()
 	{
 		_mat = GetComponent<Renderer> ().material;
@@ -17,5 +20,27 @@ public class lightIntensityMapper : MonoBehaviour
 	void Update ()
 	{
 		_mat.SetColor ("_EmissionColor", _sourceLight.color * _sourceLight.intensity * 0.1f);
+        if (_sourceLight.intensity > 0.2f)
+        {
+            for (int i = 0; i < _turnedOnObj.Length; i++)
+            {
+                _turnedOnObj[i].enabled = false;
+            }
+            for (int i = 0; i < _turnedOffObj.Length; i++)
+            {
+                _turnedOffObj[i].enabled = true;
+            }
+        }
+        else
+        {
+            for (int i = 0; i < _turnedOnObj.Length; i++)
+            {
+                _turnedOnObj[i].enabled = true;
+            }
+            for (int i = 0; i < _turnedOffObj.Length; i++)
+            {
+                _turnedOffObj[i].enabled = false;
+            }
+        }
 	}
 }
