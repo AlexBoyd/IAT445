@@ -297,7 +297,7 @@ public class SequenceListener : MonoBehaviour
 				//_windShieldPrompt.ARText.text = "Diagnostic Mode Activated";
 				_minieventPrompt.text = "Diagnostic Mode Activated";
 				bringConsoleBack ();
-				Debug.Log ("Pressed for 4 seconds the initialize drill!");
+				Debug.Log ("Pressed for 2 seconds the initialize drill!");
 			} else {
 				//_windShieldPrompt.ARText.text = "Diagnostic Mode Disabled";
 				hideConsole ();
