@@ -48,7 +48,7 @@ public class SequenceListener : MonoBehaviour
 	public Animator _backPanelCoverAnim;
 
 	public Material _skyboxMaterial;
-	public AudioSource _steamAudio, _hyperdrivePrimedAudio,_hyperdriveErrorAudio;
+	public AudioSource _steamAudio, _hyperdrivePrimedAudio, _hyperdriveErrorAudio;
 	public float _diagnosticHoldTime = 2;
 
 	Vector3 _openConsolePos;
@@ -128,23 +128,19 @@ public class SequenceListener : MonoBehaviour
 		}
 
 		if (eventName.StartsWith ("keypad")) {
-			if (eventName.Contains("8717") && !_hyperDrive1Done) 
-			{
+			if (eventName.Contains ("8717") && !_hyperDrive1Done) {
 				ConsoleTxt.text = "HyperDrive Primed";
 				_hyperDrive1Primed = true;
 				_hyperdrivePrimedAudio.Play ();
 
-			} else if (eventName.Contains("7178")) 
-			{
+			} else if (eventName.Contains ("7178")) {
 				ConsoleTxt.text = "HyperDrive Primed";
 				if (_hyperDrive2Done)
 					_hyperDrive3Primed = true;
 				else
 					_hyperDrive2Primed = true;
 				_hyperdrivePrimedAudio.Play ();
-			}
-			else
-			{
+			} else {
 				ConsoleTxt.text = "Wrong Launch Code";
 				_hyperdriveErrorAudio.Play ();
 			}
@@ -187,7 +183,7 @@ public class SequenceListener : MonoBehaviour
 		}
 	}
 
-	void automaticPowerBack()
+	void automaticPowerBack ()
 	{
 		
 		_EffectsAnimations.Play ("EmergencyPower");
@@ -197,7 +193,7 @@ public class SequenceListener : MonoBehaviour
 
 		disableStaticAudio ();
 
-		_emergencyPowerSwitch.transform.GetComponent<Interactable> ().disableInteractable();
+		_emergencyPowerSwitch.transform.GetComponent<Interactable> ().disableInteractable ();
 
 		_strandedSpaceRotation.enabled = true;
 
@@ -273,14 +269,13 @@ public class SequenceListener : MonoBehaviour
 		} 
 	}
 
-	IEnumerator gameOver()
+	IEnumerator gameOver ()
 	{
 		yield return new WaitForSeconds (12.5f);
 
 		disableAllInteractables ();
 
-		while (true) 
-		{
+		while (true) {
 			ConsoleTxt.text = "Welcome Back";
 			yield return new WaitForSeconds (1.25f);
 			ConsoleTxt.text = "Thanks for playing";
@@ -309,47 +304,50 @@ public class SequenceListener : MonoBehaviour
 	}
 
 
-	public IEnumerator switchSpaceVisual() {
+	public IEnumerator switchSpaceVisual ()
+	{
 		yield return new WaitForSeconds (1.4f);
 		_spaceScenes [0].SetActive (false);
 		_spaceScenes [1].SetActive (false);
-        _spaceScenes[2].SetActive(true);
+		_spaceScenes [2].SetActive (true);
 		yield return new WaitForSeconds (9.5f);
 
 		if (_emergencyPowerOn) {
 			//I have already passed through the problems and fixed it, ready to get back home
 			_spaceScenes [0].SetActive (true);
-            _spaceScenes[2].SetActive(false);
+			_spaceScenes [2].SetActive (false);
 		} else {
 			if (_powerOutage) {
 				//Things just went really bad D: so don't show anything, just stars all the way
 				//Oh, show the power outage thingy on the miniconsole
-                _spaceScenes[2].SetActive(true);
-				_powerOutageMsg.SetActive(true);
+				_spaceScenes [2].SetActive (true);
+				_powerOutageMsg.SetActive (true);
 				//And pop the back panel
-				_backPanelCoverAnim.Play("BackPanelCoverAnimation",0);
+				_backPanelCoverAnim.Play ("BackPanelCoverAnimation", 0);
 			} else {
 				//This is the start of my journey, take me to the nebulas!
 				_spaceScenes [1].SetActive (true);
-                _spaceScenes[2].SetActive(false);
+				_spaceScenes [2].SetActive (false);
 			}
 		}
 	}
 
 
 
-	public void hideConsole() {
+	public void hideConsole ()
+	{
 		_minieventPrompt.text = "";
 		_consoleParent.DOKill ();
 		Vector3 desiredPos = _openConsolePos;
 		desiredPos.y -= 2;
-		_consoleParent.DOMove(desiredPos, 1.4f);
+		_consoleParent.DOMove (desiredPos, 1.4f);
 
 		_cockpitActivated = false;
 		_steamAudio.Play ();
 	}
 
-	public void bringConsoleBack() {
+	public void bringConsoleBack ()
+	{
 		_consoleParent.DOKill ();
 		_consoleParent.DOMove (_openConsolePos, 1.4f);
 		_steamAudio.Play ();
@@ -406,7 +404,15 @@ public class SequenceListener : MonoBehaviour
 
 	void Update ()
 	{
-		
+		if (Input.GetKeyUp (KeyCode.H)) {
+			_EffectsAnimations.Play ("HyperDriveSuccess");
+
+		}
+
+		if (Input.GetKeyUp (KeyCode.J)) {
+			_EffectsAnimations.Play ("HyperDriveFailure");
+			
+		}
 //		_currentSkyboxRotation = Mathf.Lerp (_currentSkyboxRotation, _desiredSkyboxRotation, Time.deltaTime);
 //		_skyboxMaterial.SetFloat ("_Rotation", _currentSkyboxRotation);
 
@@ -416,13 +422,13 @@ public class SequenceListener : MonoBehaviour
 //			disableAllInteractables ();
 	}
 
-	void ChangeSkyBoxRotation()
+	void ChangeSkyBoxRotation ()
 	{
 		float currentRotation = _skyboxMaterial.GetFloat ("_Rotation");
 		float newRotation = Random.Range (0, 5);
-		float time = Mathf.Abs (newRotation - currentRotation) *10f;
-		_skyboxMaterial.DOFloat (newRotation,"_Rotation", time);
-		Invoke ("ChangeSkyBoxRotation",time+0.1f);
+		float time = Mathf.Abs (newRotation - currentRotation) * 10f;
+		_skyboxMaterial.DOFloat (newRotation, "_Rotation", time);
+		Invoke ("ChangeSkyBoxRotation", time + 0.1f);
 	}
 
 	void promptRandomInteractable ()

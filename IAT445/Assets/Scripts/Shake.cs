@@ -8,6 +8,7 @@ public class Shake : MonoBehaviour
 	private Vector3 originalPos;
 
 	public float _AlwaysShakeIntensity;
+	public AudioSource Rumble;
 
 	bool init = false;
 
@@ -35,6 +36,7 @@ public class Shake : MonoBehaviour
 	{
 		if (_AlwaysShake) {
 			targetTransform.localPosition = originalPos + Random.insideUnitSphere * _AlwaysShakeIntensity;
+			Rumble.volume = _AlwaysShakeIntensity;
 		}
 	}
 
