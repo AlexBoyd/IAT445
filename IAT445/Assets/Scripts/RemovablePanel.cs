@@ -59,7 +59,7 @@ public class RemovablePanel : Interactable
 
 
 		// Just for now
-		//gameObject.SetActive (false);
+		gameObject.SetActive (false);
 	}
 
 }

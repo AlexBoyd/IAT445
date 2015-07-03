@@ -13,7 +13,7 @@ PluginImporter:
         CPU_jar: AnyCPU
         CPU_so: ARMv7
     Any:
-      enabled: 0
+      enabled: 1
       settings: {}
     Editor:
       enabled: 1
@@ -22,29 +22,33 @@ PluginImporter:
         DefaultValueInitialized: true
         OS: Windows
     Linux:
-      enabled: 0
+      enabled: 1
       settings:
-        CPU: x86_64
+        CPU: None
     Linux64:
-      enabled: 0
+      enabled: 1
       settings:
         CPU: x86_64
     LinuxUniversal:
-      enabled: 0
+      enabled: 1
       settings:
         CPU: x86_64
     OSXIntel:
-      enabled: 0
+      enabled: 1
       settings:
-        CPU: x86_64
+        CPU: None
     OSXIntel64:
-      enabled: 0
+      enabled: 1
       settings:
-        CPU: x86_64
+        CPU: AnyCPU
     OSXUniversal:
-      enabled: 0
+      enabled: 1
       settings:
         CPU: x86_64
+    SamsungTV:
+      enabled: 0
+      settings:
+        STV_MODEL: STANDARD_13
     WP8:
       enabled: 0
       settings:
@@ -54,11 +58,11 @@ PluginImporter:
     Win:
       enabled: 1
       settings:
-        CPU: x86_64
+        CPU: AnyCPU
     Win64:
-      enabled: 0
+      enabled: 1
       settings:
-        CPU: x86_64
+        CPU: AnyCPU
     WindowsStoreApps:
       enabled: 0
       settings:
@@ -73,3 +77,4 @@ PluginImporter:
         FrameworkDependencies: 
   userData: 
   assetBundleName: 
+  assetBundleVariant: 

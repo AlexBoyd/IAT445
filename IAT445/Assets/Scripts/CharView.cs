@@ -120,6 +120,10 @@ public class CharView : MonoBehaviour
 		updateFacingObject ();
 		checkButtonPress ();
 
+        if (player.GetButton("Reset1") && player.GetButton("Reset2") && player.GetButton("Reset3"))
+        {
+            Application.LoadLevel(Application.loadedLevel);
+        }
 	}
 
 	IEnumerator buttonPressed (Interactable interactable)

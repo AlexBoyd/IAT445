@@ -35,6 +35,8 @@ public class SequenceListener : MonoBehaviour
 	public bool _powerBypass;
 	public bool _safetyOverride;
 
+    public GameObject _hyperSuccessAudio, _hyperFailureAudio, _hyperSuccessAudio2;
+
 
 	public Interactable _removablePanel;
 	public CharView _charview;
@@ -224,7 +226,11 @@ public class SequenceListener : MonoBehaviour
 
 				_hyperDrive1Primed = false;
 				_hyperDrive1Done = true;
-			} else if (_hyperDrive2Primed) {
+
+                //_hyperSuccessAudio.GetComponent<AudioSource>().Play() ;
+                _hyperSuccessAudio.GetComponent<OSPAudioSource>().Play();
+                Debug.Log("Playing h audio");
+            } else if (_hyperDrive2Primed) {
 				
 				hideConsole ();
 
@@ -251,6 +257,11 @@ public class SequenceListener : MonoBehaviour
 				_strandedSpaceRotation.enabled = false;
 				_emergencySparks.SetActive (true);
                 _puzzleSparks.SetActive(true);
+
+                //_hyperFailureAudio.GetComponent<AudioSource>().Play();
+                _hyperFailureAudio.GetComponent<OSPAudioSource>().Play();
+
+
 			} else if (_hyperDrive3Primed && _powerBypass && _safetyOverride) {
 				hideConsole ();
 				//Invoke ("bringConsoleBack", 13.5f);
@@ -261,6 +272,9 @@ public class SequenceListener : MonoBehaviour
 
 				_hyperDrive1Primed = false;	
 				StartCoroutine (gameOver ());
+
+                //_hyperSuccessAudio.GetComponent<>().Play();         
+                _hyperSuccessAudio2.GetComponent<OSPAudioSource>().Play();
 			} else {
 				if (_hyperDrive3Primed && _powerBypass && !_safetyOverride) {
 					ConsoleTxt.text = "SAFETY LOCK ACTIVATED";
