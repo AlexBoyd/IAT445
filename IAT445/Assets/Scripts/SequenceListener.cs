@@ -1,11 +1,18 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins;
 
-
+[System.Serializable]
+public class SequenceCues
+{
+	public string name;
+	public List<GameObject> cuePrefabs;
+}
 
 public class SequenceListener : MonoBehaviour
 {
@@ -92,6 +99,10 @@ public class SequenceListener : MonoBehaviour
 
 	// Used to prevent diagnostic mode from toggling on/off repeatedly if players keep on pressing the diagnostic button past the required time
 	bool _enableModeChange = true;
+
+	public List<SequenceCues> _sequenceCues;
+
+	public AudioSource _currentCue;
 
 	void disableAllInteractables ()
 	{
@@ -534,14 +545,80 @@ public class SequenceListener : MonoBehaviour
 		_eventPrompt.color = c;
 	}
 
+	void consumeCurrentInput()
+	{
+		_currentInput = SequenceTrigger.NONE;
+	}
+
+	GameObject getRandomCueForSequence(string sequenceName)
+	{
+		List<GameObject> cuePrefabs = _sequenceCues.Find (item => item.name == sequenceName).cuePrefabs;
+
+
+		return cuePrefabs [UnityEngine.Random.Range (0, cuePrefabs.Count)];
+	}
+
+	void playCue(string sequenceName)
+	{
+		if(_currentCue == null || !_currentCue.isPlaying)
+			_currentCue = SoundManager._instance.playSound(getRandomCueForSequence(sequenceName));
+	}
+
+	IEnumerator playCueQueued (string sequenceName)
+	{
+		while (_currentCue.isPlaying) {
+			yield return null;
+		}
+		_currentCue = SoundManager._instance.playSound(getRandomCueForSequence(sequenceName));
+	}
+
 	IEnumerator WaitDiagnosticMode(bool enabled)
 	{
 		bool goNextStep = false;
 		while (!goNextStep) 
 		{
+			playCue ("WaitDiagnostic");
 			Debug.Log ("Wait DIAGNOSTIC "+ enabled);
 			goNextStep = enabled ? _currentInput == SequenceTrigger.DIAGNOSTIC_ON : _currentInput == SequenceTrigger.DIAGNOSTIC_OFF;
+			if (goNextStep)
+				consumeCurrentInput ();
+			
+			yield return null;
+		}
+	}
 
+	IEnumerator WaitCheckAllModulesNoOrder()
+	{
+		bool goNextStep = false;
+		bool artificialPressed, enginesPressed, powersPressed, lifeSupportPressed;
+		artificialPressed= enginesPressed= powersPressed= lifeSupportPressed = false;
+
+		StartCoroutine(playCueQueued ("LookAtShipsModules"));
+
+		while (!goNextStep) 
+		{
+
+			if (_currentInput == SequenceTrigger.ARTIFICIALGRAVITY_BUTTON) {
+				artificialPressed = true;
+				consumeCurrentInput ();
+			}
+			if (_currentInput == SequenceTrigger.ENGINES_BUTTON) {
+				enginesPressed = true;
+				consumeCurrentInput ();
+			}
+			if (_currentInput == SequenceTrigger.LIFESUPPORT_BUTTON) {
+				powersPressed = true;
+				consumeCurrentInput ();
+			}
+			if (_currentInput == SequenceTrigger.POWERS_BUTTON) {
+				lifeSupportPressed = true;
+				consumeCurrentInput ();
+			}
+
+			if (artificialPressed && enginesPressed && powersPressed && lifeSupportPressed)
+				goNextStep = true;
+
+			Debug.Log ("Wait all 4 module buttons no order");
 			yield return null;
 		}
 	}
@@ -551,23 +628,14 @@ public class SequenceListener : MonoBehaviour
 		bool goNextStep = false;
 		bool artificialPressed, enginesPressed, powersPressed, lifeSupportPressed;
 		artificialPressed= enginesPressed= powersPressed= lifeSupportPressed = false;
-		while (!goNextStep) 
-		{
-			if (_currentInput == SequenceTrigger.ARTIFICIALGRAVITY_BUTTON)
-				artificialPressed = true;
-			if (_currentInput == SequenceTrigger.ENGINES_BUTTON)
-				enginesPressed = true;
-			if (_currentInput == SequenceTrigger.LIFESUPPORT_BUTTON)
-				powersPressed = true;
-			if (_currentInput == SequenceTrigger.POWERS_BUTTON)
-				lifeSupportPressed = true;
 
-			if (artificialPressed && enginesPressed && powersPressed && lifeSupportPressed)
-				goNextStep = true;
+		StartCoroutine(playCueQueued ("LookAtShipsModules"));
 
-			Debug.Log ("Wait all 4 module buttons");
-			yield return null;
-		}
+		yield return StartCoroutine(WaitCheckModule (SequenceTrigger.ARTIFICIALGRAVITY_BUTTON));
+		yield return StartCoroutine(WaitCheckModule (SequenceTrigger.ENGINES_BUTTON));
+		yield return StartCoroutine(WaitCheckModule (SequenceTrigger.POWERS_BUTTON));
+		yield return StartCoroutine(WaitCheckModule (SequenceTrigger.LIFESUPPORT_BUTTON));
+
 	}
 
 	IEnumerator WaitCheckModule(SequenceTrigger trigger)
@@ -576,8 +644,25 @@ public class SequenceListener : MonoBehaviour
 
 		while (!goNextStep) 
 		{
-			if (_currentInput == trigger)
+			switch (trigger) {
+			case SequenceTrigger.ARTIFICIALGRAVITY_BUTTON:
+				playCue ("PressArtificialButton");
+				break;
+			case SequenceTrigger.ENGINES_BUTTON:
+				playCue ("PressEnginesButton");
+				break;
+			case SequenceTrigger.POWERS_BUTTON:
+				playCue ("PressPowersButton");
+				break;
+			case SequenceTrigger.LIFESUPPORT_BUTTON:
+				playCue ("PressLifeSupportButton");
+				break;
+			}
+
+			if (_currentInput == trigger) {
 				goNextStep = true;
+				consumeCurrentInput ();
+			}
 			
 			Debug.Log ("Wait trigger: "+trigger);
 			yield return null;
@@ -589,8 +674,10 @@ public class SequenceListener : MonoBehaviour
 		bool goNextStep = false;
 		while (!goNextStep) 
 		{
-			if (_currentInput == SequenceTrigger.HYPERDRIVE_PRIMED)
+			if (_currentInput == SequenceTrigger.HYPERDRIVE_PRIMED) {
 				goNextStep = true;
+				consumeCurrentInput ();
+			}
 
 			Debug.Log ("Wait HYPERDRIVE_PRIMED");
 			yield return null;
@@ -615,8 +702,10 @@ public class SequenceListener : MonoBehaviour
 		goNextStep = false;
 		while (!goNextStep) 
 		{
-			if (_currentInput == SequenceTrigger.HYPERSPACE_JUMP1_BEGIN)
+			if (_currentInput == SequenceTrigger.HYPERSPACE_JUMP1_BEGIN) {
 				goNextStep = true;
+				consumeCurrentInput ();
+			}
 
 			Debug.Log ("Wait HYPERSPACE_JUMP1_BEGIN");
 			yield return null;
@@ -638,8 +727,10 @@ public class SequenceListener : MonoBehaviour
 		bool goNextStep = false;
 		while (!goNextStep) 
 		{
-			if (_currentInput == SequenceTrigger.HYPERSPACE_JUMP2_BEGIN)
+			if (_currentInput == SequenceTrigger.HYPERSPACE_JUMP2_BEGIN) {
 				goNextStep = true;
+				consumeCurrentInput ();
+			}
 
 			Debug.Log ("Wait HYPERSPACE_JUMP2_BEGIN");
 			yield return null;
@@ -655,8 +746,10 @@ public class SequenceListener : MonoBehaviour
 		bool goNextStep = false;
 		while (!goNextStep) 
 		{
-			if (_currentInput == SequenceTrigger.EMERGENCY_POWER_SWITCH)
+			if (_currentInput == SequenceTrigger.EMERGENCY_POWER_SWITCH) {
 				goNextStep = true;
+				consumeCurrentInput ();
+			}
 
 			Debug.Log ("Wait EMERGENCY_POWER_SWITCH");
 			yield return null;
@@ -669,8 +762,10 @@ public class SequenceListener : MonoBehaviour
 		goNextStep = false;
 		while (!goNextStep) 
 		{
-			if (_currentInput == SequenceTrigger.PANEL_REMOVED)
+			if (_currentInput == SequenceTrigger.PANEL_REMOVED) {
 				goNextStep = true;
+				consumeCurrentInput ();
+			}
 
 			Debug.Log ("Wait PANEL_REMOVED");
 			yield return null;
@@ -680,8 +775,10 @@ public class SequenceListener : MonoBehaviour
 		goNextStep = false;
 		while (!goNextStep) 
 		{
-			if (_currentInput == SequenceTrigger.WIRES_BYPASSED)
+			if (_currentInput == SequenceTrigger.WIRES_BYPASSED) {
 				goNextStep = true;
+				consumeCurrentInput ();
+			}
 
 			Debug.Log ("Wait WIRES_BYPASSED");
 			yield return null;
@@ -690,8 +787,10 @@ public class SequenceListener : MonoBehaviour
 		goNextStep = false;
 		while (!goNextStep) 
 		{
-			if (_currentInput == SequenceTrigger.WIRES_BYPASSED)
+			if (_currentInput == SequenceTrigger.WIRES_BYPASSED) {
 				goNextStep = true;
+				consumeCurrentInput ();
+			}
 
 			Debug.Log ("Wait WIRES_BYPASSED");
 			yield return null;
@@ -700,8 +799,10 @@ public class SequenceListener : MonoBehaviour
 		goNextStep = false;
 		while (!goNextStep) 
 		{
-			if (_currentInput == SequenceTrigger.SAFETY_BYPASSEED)
+			if (_currentInput == SequenceTrigger.SAFETY_BYPASSEED) {
 				goNextStep = true;
+				consumeCurrentInput ();
+			}
 
 			Debug.Log ("Wait SAFETY_BYPASSEED");
 			yield return null;
@@ -712,8 +813,10 @@ public class SequenceListener : MonoBehaviour
 		goNextStep = false;
 		while (!goNextStep) 
 		{
-			if (_currentInput == SequenceTrigger.HYPERSPACE_JUMP3_BEGIN)
+			if (_currentInput == SequenceTrigger.HYPERSPACE_JUMP3_BEGIN) {
 				goNextStep = true;
+				consumeCurrentInput ();
+			}
 
 			Debug.Log ("Wait HYPERSPACE_JUMP3_BEGIN");
 			yield return null;
