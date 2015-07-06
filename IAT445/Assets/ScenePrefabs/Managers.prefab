@@ -156,16 +156,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98401667b701148a8b87847266573a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _nStartingGameObjects:
-  - {fileID: 186080, guid: 18afa681e4678463ea5129c2aa9c81f4, type: 2}
-  - {fileID: 107950, guid: 53abc577bf638482d8971af2f75d4790, type: 2}
-  - {fileID: 135278, guid: 2a9540f4f74814c22868d067aaf0c42d, type: 2}
-  - {fileID: 161660, guid: 9b471e22061884cd89cde3afc588a7a1, type: 2}
-  - {fileID: 120110, guid: c10d84c491f6d4869981f26eb7ec88db, type: 2}
-  - {fileID: 195336, guid: 05ed9455107dd4c2797d8a1cdafa4136, type: 2}
-  - {fileID: 197758, guid: 708faa021b71a41db8cb1704f96edd2f, type: 2}
-  - {fileID: 182632, guid: 3ff5b55d8bd51439fa55ecaf553a8178, type: 2}
-  _nStartingPool: 0100000001000000010000000100000001000000010000000100000001000000
+  _startingGameObjects: []
+  _startingPoolCount: 
 --- !u!114 &11459006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -812,24 +804,24 @@ MonoBehaviour:
   _sequenceCues:
   - name: WaitDiagnostic
     cuePrefabs:
-    - {fileID: 182632, guid: 3ff5b55d8bd51439fa55ecaf553a8178, type: 2}
-    - {fileID: 197758, guid: 708faa021b71a41db8cb1704f96edd2f, type: 2}
-    - {fileID: 195336, guid: 05ed9455107dd4c2797d8a1cdafa4136, type: 2}
+    - {fileID: 179850, guid: 3ff5b55d8bd51439fa55ecaf553a8178, type: 2}
+    - {fileID: 111892, guid: 708faa021b71a41db8cb1704f96edd2f, type: 2}
+    - {fileID: 124732, guid: 05ed9455107dd4c2797d8a1cdafa4136, type: 2}
   - name: LookAtShipsModules
     cuePrefabs:
-    - {fileID: 120110, guid: c10d84c491f6d4869981f26eb7ec88db, type: 2}
+    - {fileID: 106126, guid: c10d84c491f6d4869981f26eb7ec88db, type: 2}
   - name: PressArtificialButton
     cuePrefabs:
-    - {fileID: 186080, guid: 18afa681e4678463ea5129c2aa9c81f4, type: 2}
+    - {fileID: 166422, guid: 18afa681e4678463ea5129c2aa9c81f4, type: 2}
   - name: PressEnginesButton
     cuePrefabs:
-    - {fileID: 107950, guid: 53abc577bf638482d8971af2f75d4790, type: 2}
+    - {fileID: 141904, guid: 53abc577bf638482d8971af2f75d4790, type: 2}
   - name: PressPowersButton
     cuePrefabs:
-    - {fileID: 161660, guid: 9b471e22061884cd89cde3afc588a7a1, type: 2}
+    - {fileID: 184126, guid: 9b471e22061884cd89cde3afc588a7a1, type: 2}
   - name: PressLifeSupportButton
     cuePrefabs:
-    - {fileID: 135278, guid: 2a9540f4f74814c22868d067aaf0c42d, type: 2}
+    - {fileID: 188732, guid: 2a9540f4f74814c22868d067aaf0c42d, type: 2}
   _currentCue: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
