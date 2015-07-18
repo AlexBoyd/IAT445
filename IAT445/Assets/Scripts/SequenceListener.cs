@@ -1,19 +1,53 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins;
 
-
+[System.Serializable]
+public class SequenceCues
+{
+	public string name;
+	public List<GameObject> cuePrefabs;
+}
 
 public class SequenceListener : MonoBehaviour
 {
+
+	public enum SequenceTrigger {
+		NONE, //NOOP
+		DIAGNOSTIC_ON,// Diagnostic mode turned on
+		DIAGNOSTIC_OFF, // Diagnostic mode turned off
+		KEYPAD_UP, // Keypad brought up
+		KEYPAD_DOWN, // Keypad brought down
+		ENGINES_BUTTON, // Engines button clicked
+		POWERS_BUTTON, // Powers button clicked
+		LIFESUPPORT_BUTTON, // Life support clicked
+		ARTIFICIALGRAVITY_BUTTON, // Artificial Gravity clicked
+		PANEL_REMOVED, // Wires panel removed
+		WIRES_BYPASSED, // Wires mini game solved
+		SAFETY_BYPASSEED, // Safety switched bypassed
+		HYPERSPACE_JUMP1_BEGIN, // Hyperspace jump 1 began
+		HYPERSPACE_JUMP1_OVER,// Hyperspace jump 1 ended
+		HYPERSPACE_JUMP2_BEGIN, // Hyperspace jump 2 began
+		HYPERSPACE_JUMP2_OVER,// Hyperspace jump 2 ended
+		HYPERSPACE_JUMP3_BEGIN, // Hyperspace jump 3 began
+		HYPERSPACE_JUMP3_OVER,// Hyperspace jump 3 ended
+		HYPERDRIVE_PRIMED,// Hyperspace was primed
+		WRONG_LAUNCH_CODE, // Wrong launch code was typed in the keypad
+		EMERGENCY_POWER_SWITCH // Emergency power switch used
+
+	}
 
 	Interactable[] _interectables;
 	Switch[] _switches;
 	public SwitchPanel _switchPanel;
 	public SwitchPanel _emergencyPowerSwitch;
+	public RemovablePanel _wiresPanel;
+	public WireMiniGame _wireMiniGame;
 	public Text _eventPrompt;
 	public Text _minieventPrompt;
 
@@ -60,6 +94,16 @@ public class SequenceListener : MonoBehaviour
 
 	public Text	ConsoleTxt;
 
+	// Used to move the story forward based on what the player is doing
+	public SequenceTrigger _currentInput;
+
+	// Used to prevent diagnostic mode from toggling on/off repeatedly if players keep on pressing the diagnostic button past the required time
+	bool _enableModeChange = true;
+
+	public List<SequenceCues> _sequenceCues;
+
+	public AudioSource _currentCue;
+
 	void disableAllInteractables ()
 	{
 		_charview.removeCurrentFocus ();
@@ -104,6 +148,8 @@ public class SequenceListener : MonoBehaviour
 		_switchPanel.TriggerEvent += eventTriggered;
 		_emergencyPowerSwitch.TriggerEvent += eventTriggered;
 		_keypad.TriggerEvent += eventTriggered;
+		_wiresPanel.PressedEvent += pressedEvent;
+		_wireMiniGame.TriggerEvent += eventTriggered;
 
 
 	}
@@ -119,6 +165,8 @@ public class SequenceListener : MonoBehaviour
 		_switchPanel.TriggerEvent -= eventTriggered;
 		_emergencyPowerSwitch.TriggerEvent -= eventTriggered;
 		_keypad.TriggerEvent -= eventTriggered;
+		_wiresPanel.PressedEvent -= pressedEvent;
+		_wireMiniGame.TriggerEvent -= eventTriggered;
 	}
 
 
@@ -135,18 +183,32 @@ public class SequenceListener : MonoBehaviour
 			if (eventName.Contains ("8717") && !_hyperDrive1Done) {
 				ConsoleTxt.text = "HyperDrive Primed";
 				_hyperDrive1Primed = true;
+				_currentInput = SequenceTrigger.HYPERDRIVE_PRIMED;
 				_hyperdrivePrimedAudio.Play ();
 
 			} else if (eventName.Contains ("7178")) {
 				ConsoleTxt.text = "HyperDrive Primed";
+				_currentInput = SequenceTrigger.HYPERDRIVE_PRIMED;
 				if (_hyperDrive2Done)
 					_hyperDrive3Primed = true;
 				else
 					_hyperDrive2Primed = true;
 				_hyperdrivePrimedAudio.Play ();
 			} else {
-				ConsoleTxt.text = "Wrong Launch Code";
-				_hyperdriveErrorAudio.Play ();
+				if(eventName == ("keypad_up"))
+				{
+					_currentInput = SequenceTrigger.KEYPAD_UP;
+				}
+				else if (eventName == ("keypad_down"))
+				{
+					_currentInput = SequenceTrigger.KEYPAD_DOWN;	
+				}
+				else
+				{
+					_currentInput = SequenceTrigger.WRONG_LAUNCH_CODE;
+					ConsoleTxt.text = "Wrong Launch Code";
+					_hyperdriveErrorAudio.Play ();
+				}
 			}
 		}
 
@@ -156,6 +218,13 @@ public class SequenceListener : MonoBehaviour
 		}
 		if (eventName == "safetyOverride" && _emergencyPowerOn) {
 			_safetyOverride = true;
+			_currentInput = SequenceTrigger.SAFETY_BYPASSEED;
+		}
+
+		if (!_powerBypass && eventName == "power_bypassed") {
+			_currentInput = SequenceTrigger.WIRES_BYPASSED;
+			_powerBypass = true;
+			_windShieldPrompt.showPowerRepaired ();
 		}
 
 	}
@@ -166,12 +235,15 @@ public class SequenceListener : MonoBehaviour
 			return;
 		
 		if (interactable._eventName.Equals ("gravity_button")) {
+			_currentInput = SequenceTrigger.ARTIFICIALGRAVITY_BUTTON;
 			_windShieldPrompt.showGravity ();
 		}
 		if (interactable._eventName.Equals ("engines_button")) {
+			_currentInput = SequenceTrigger.ENGINES_BUTTON;
 			_windShieldPrompt.showEngines ();
 		}
 		if (interactable._eventName.Equals ("powers_button")) {
+			_currentInput = SequenceTrigger.POWERS_BUTTON;
 			if (_emergencyPowerOn) {
 				if (_powerBypass) {
 					_windShieldPrompt.showPowerRepaired ();
@@ -183,13 +255,130 @@ public class SequenceListener : MonoBehaviour
 			}
 		}
 		if (interactable._eventName.Equals ("life_button")) {
+			_currentInput = SequenceTrigger.LIFESUPPORT_BUTTON;
 			_windShieldPrompt.showLife ();
 		}
+	
+		if (interactable._eventName.Equals ("panel_removed")) {
+			_currentInput = SequenceTrigger.PANEL_REMOVED;
+		}
+
+
+
+
 	}
+
+	void releasedEvent (Interactable interactable)
+	{
+
+		if (interactable._eventName.Equals ("initializeDrill")) {
+			_enableModeChange = true;
+		}
+
+
+		if (interactable._eventName.Equals ("initializeDrill") && interactable._pressDuration <= _diagnosticHoldTime) {
+			if (_hyperDrive1Primed) {// || (_powerBypass && _hyperDrive2Primed)) {
+				_currentInput = SequenceTrigger.HYPERSPACE_JUMP1_BEGIN;
+				hideConsole ();
+				_keypad.bringDown ();
+				//Invoke ("bringConsoleBack", 13.5f);
+				StartCoroutine (switchSpaceVisual ());
+
+				_EffectsAnimations.Play ("HyperDriveSuccess");
+				_windShieldPrompt.ARText.text = string.Empty;
+
+				_hyperDrive1Primed = false;
+				_hyperDrive1Done = true;
+
+				//_hyperSuccessAudio.GetComponent<AudioSource>().Play() ;
+				_hyperSuccessAudio.GetComponent<OSPAudioSource>().Play();
+				Debug.Log("Playing h audio");
+			} else if (_hyperDrive2Primed) {
+				_currentInput = SequenceTrigger.HYPERSPACE_JUMP2_BEGIN;
+				hideConsole ();
+				_keypad.bringDown ();
+				_EffectsAnimations.Play ("HyperDriveFailure");
+				_powerOutage = true;
+				_hyperDrive2Primed = false;
+				_emergencyPowerOn = false;
+				_windShieldPrompt.ARText.text = string.Empty;
+
+
+				StartCoroutine (switchSpaceVisual ());
+
+				Debug.LogWarning ("disableAllInteractables");
+
+				// Disable all
+				disableAllInteractables ();
+				// Enable the emergency switch
+				_emergencyPowerSwitch.GetComponentInChildren<Interactable> ().enableInteractable (true);
+				//
+				//				enableStaticAudio ();
+				_hyperDrive2Primed = false;
+				_hyperDrive2Done = true;
+				Invoke ("automaticPowerBack", 70);
+				_strandedSpaceRotation.enabled = false;
+				_emergencySparks.SetActive (true);
+				_puzzleSparks.SetActive(true);
+
+				//_hyperFailureAudio.GetComponent<AudioSource>().Play();
+				_hyperFailureAudio.GetComponent<OSPAudioSource>().Play();
+
+
+			} else if (_hyperDrive3Primed && _powerBypass && _safetyOverride) {
+				_currentInput = SequenceTrigger.HYPERSPACE_JUMP3_BEGIN;
+				hideConsole ();
+				_keypad.bringDown ();
+				//Invoke ("bringConsoleBack", 13.5f);
+				StartCoroutine (switchSpaceVisual ());
+
+				_EffectsAnimations.Play ("HyperDriveSuccess");
+				_windShieldPrompt.ARText.text = string.Empty;
+
+				_hyperDrive1Primed = false;	
+				StartCoroutine (gameOver ());
+
+				//_hyperSuccessAudio.GetComponent<>().Play();         
+				_hyperSuccessAudio2.GetComponent<OSPAudioSource>().Play();
+			} else {
+				if (_hyperDrive3Primed && _powerBypass && !_safetyOverride) {
+					ConsoleTxt.text = "SAFETY LOCK ACTIVATED";
+					_hyperdriveErrorAudio.Play ();
+				} else if (_hyperDrive3Primed && !_powerBypass) {
+					ConsoleTxt.text = "ERROR IN POWER SYSTEM";
+					_hyperdriveErrorAudio.Play ();
+				}
+
+
+			}
+		} 
+	}
+
+	void holdEvent (Interactable interactable)
+	{
+		if (interactable._eventName.Equals ("initializeDrill") && interactable._pressDuration > _diagnosticHoldTime && _enableModeChange) {
+			_cockpitActivated = !_cockpitActivated;
+			_enableModeChange = false;
+
+			if (_cockpitActivated) {
+				_minieventPrompt.text = "Diagnostic Mode Activated";
+				bringConsoleBack ();
+				Debug.Log ("Pressed for 2 seconds the initialize drill!");
+				_currentInput = SequenceTrigger.DIAGNOSTIC_ON;
+			} else {	
+				hideConsole ();
+				_minieventPrompt.text = "Diagnostic Mode Disabled";
+				_currentInput = SequenceTrigger.DIAGNOSTIC_OFF;
+			}
+		} 
+	}
+
+
 
 	void automaticPowerBack ()
 	{
-		
+		_currentInput = SequenceTrigger.EMERGENCY_POWER_SWITCH;
+
 		_EffectsAnimations.Play ("EmergencyPower");
 		_emergencyPowerOn = true;
 		_powerOutageMsg.SetActive (false);
@@ -206,89 +395,6 @@ public class SequenceListener : MonoBehaviour
 		CancelInvoke ("automaticPowerBack");
 	}
 
-	void releasedEvent (Interactable interactable)
-	{
-
-		if (interactable._eventName.Equals ("initializeDrill")) {
-			_enableModeChange = true;
-		}
-
-
-		if (interactable._eventName.Equals ("initializeDrill") && interactable._pressDuration <= _diagnosticHoldTime) {
-			if (_hyperDrive1Primed) {// || (_powerBypass && _hyperDrive2Primed)) {
-
-				hideConsole ();
-				//Invoke ("bringConsoleBack", 13.5f);
-				StartCoroutine (switchSpaceVisual ());
-
-				_EffectsAnimations.Play ("HyperDriveSuccess");
-				_windShieldPrompt.ARText.text = string.Empty;
-
-				_hyperDrive1Primed = false;
-				_hyperDrive1Done = true;
-
-                //_hyperSuccessAudio.GetComponent<AudioSource>().Play() ;
-                _hyperSuccessAudio.GetComponent<OSPAudioSource>().Play();
-                Debug.Log("Playing h audio");
-            } else if (_hyperDrive2Primed) {
-				
-				hideConsole ();
-
-				_EffectsAnimations.Play ("HyperDriveFailure");
-				_powerOutage = true;
-				_hyperDrive2Primed = false;
-				_emergencyPowerOn = false;
-				_windShieldPrompt.ARText.text = string.Empty;
-
-
-				StartCoroutine (switchSpaceVisual ());
-
-				Debug.LogWarning ("disableAllInteractables");
-
-				// Disable all
-				disableAllInteractables ();
-				// Enable the emergency switch
-				_emergencyPowerSwitch.GetComponentInChildren<Interactable> ().enableInteractable (true);
-//
-//				enableStaticAudio ();
-				_hyperDrive2Primed = false;
-				_hyperDrive2Done = true;
-				Invoke ("automaticPowerBack", 70);
-				_strandedSpaceRotation.enabled = false;
-				_emergencySparks.SetActive (true);
-                _puzzleSparks.SetActive(true);
-
-                //_hyperFailureAudio.GetComponent<AudioSource>().Play();
-                _hyperFailureAudio.GetComponent<OSPAudioSource>().Play();
-
-
-			} else if (_hyperDrive3Primed && _powerBypass && _safetyOverride) {
-				hideConsole ();
-				//Invoke ("bringConsoleBack", 13.5f);
-				StartCoroutine (switchSpaceVisual ());
-
-				_EffectsAnimations.Play ("HyperDriveSuccess");
-				_windShieldPrompt.ARText.text = string.Empty;
-
-				_hyperDrive1Primed = false;	
-				StartCoroutine (gameOver ());
-
-                //_hyperSuccessAudio.GetComponent<>().Play();         
-                _hyperSuccessAudio2.GetComponent<OSPAudioSource>().Play();
-			} else {
-				if (_hyperDrive3Primed && _powerBypass && !_safetyOverride) {
-					ConsoleTxt.text = "SAFETY LOCK ACTIVATED";
-					_hyperdriveErrorAudio.Play ();
-				} else if (_hyperDrive3Primed && !_powerBypass) {
-					ConsoleTxt.text = "ERROR IN POWER SYSTEM";
-					_hyperdriveErrorAudio.Play ();
-				}
-			
-		
-			}
-		} 
-	}
-
 	IEnumerator gameOver ()
 	{
 		yield return new WaitForSeconds (16f);
@@ -303,25 +409,6 @@ public class SequenceListener : MonoBehaviour
 		}
 	}
 
-	bool _enableModeChange = true;
-
-	void holdEvent (Interactable interactable)
-	{
-		if (interactable._eventName.Equals ("initializeDrill") && interactable._pressDuration > _diagnosticHoldTime && _enableModeChange) {
-			_cockpitActivated = !_cockpitActivated;
-			_enableModeChange = false;
-			if (_cockpitActivated) {
-				//_windShieldPrompt.ARText.text = "Diagnostic Mode Activated";
-				_minieventPrompt.text = "Diagnostic Mode Activated";
-				bringConsoleBack ();
-				Debug.Log ("Pressed for 2 seconds the initialize drill!");
-			} else {
-				//_windShieldPrompt.ARText.text = "Diagnostic Mode Disabled";
-				hideConsole ();
-				_minieventPrompt.text = "Diagnostic Mode Disabled";
-			}
-		} 
-	}
 
 
 	public IEnumerator switchSpaceVisual ()
@@ -414,13 +501,9 @@ public class SequenceListener : MonoBehaviour
 	void Start ()
 	{
 		ChangeSkyBoxRotation ();
-		
-//		_skyboxMaterial.DOFloat (360.0f,"_Rotation", 10f);
 
-//		promptRandomInteractable ();
+		StartCoroutine (StartGameNarration ());
 	}
-
-//	float _currentSkyboxRotation, _desiredSkyboxRotation, _duration;
 
 	void Update ()
 	{
@@ -433,13 +516,6 @@ public class SequenceListener : MonoBehaviour
 			_EffectsAnimations.Play ("HyperDriveFailure");
 			
 		}
-//		_currentSkyboxRotation = Mathf.Lerp (_currentSkyboxRotation, _desiredSkyboxRotation, Time.deltaTime);
-//		_skyboxMaterial.SetFloat ("_Rotation", _currentSkyboxRotation);
-
-//		if (Input.GetKeyDown (KeyCode.Alpha1))
-//			enableAllInteractables ();
-//		if (Input.GetKeyDown (KeyCode.Alpha2))
-//			disableAllInteractables ();
 	}
 
 	void ChangeSkyBoxRotation ()
@@ -451,17 +527,6 @@ public class SequenceListener : MonoBehaviour
 		Invoke ("ChangeSkyBoxRotation", time + 0.1f);
 	}
 
-	void promptRandomInteractable ()
-	{
-		int randomIndex = Random.Range (0, _interectables.Length);
-
-		_eventPrompt.text = "Press the " + _interectables [randomIndex]._eventNamePretty;
-		_requiredEvent = _interectables [randomIndex]._eventName;
-
-
-		setTextInvisible ();
-
-	}
 	void setTextInvisible ()
 	{
 		setTextAlpha (0);
@@ -478,5 +543,292 @@ public class SequenceListener : MonoBehaviour
 		Color c = _eventPrompt.color;
 		c.a = f;
 		_eventPrompt.color = c;
+	}
+
+	void consumeCurrentInput()
+	{
+		_currentInput = SequenceTrigger.NONE;
+	}
+
+	GameObject getRandomCueForSequence(string sequenceName)
+	{
+		List<GameObject> cuePrefabs = _sequenceCues.Find (item => item.name == sequenceName).cuePrefabs;
+
+
+		return cuePrefabs [UnityEngine.Random.Range (0, cuePrefabs.Count)];
+	}
+
+	void playCue(string sequenceName)
+	{
+		if(_currentCue == null || !_currentCue.isPlaying)
+			_currentCue = SoundManager._instance.playSound(getRandomCueForSequence(sequenceName));
+	}
+
+	IEnumerator playCueQueued (string sequenceName)
+	{
+		while (_currentCue.isPlaying) {
+			yield return null;
+		}
+		_currentCue = SoundManager._instance.playSound(getRandomCueForSequence(sequenceName));
+	}
+
+	IEnumerator WaitDiagnosticMode(bool enabled)
+	{
+		bool goNextStep = false;
+		while (!goNextStep) 
+		{
+			playCue ("WaitDiagnostic");
+			Debug.Log ("Wait DIAGNOSTIC "+ enabled);
+			goNextStep = enabled ? _currentInput == SequenceTrigger.DIAGNOSTIC_ON : _currentInput == SequenceTrigger.DIAGNOSTIC_OFF;
+			if (goNextStep)
+				consumeCurrentInput ();
+			
+			yield return null;
+		}
+	}
+
+	IEnumerator WaitCheckAllModulesNoOrder()
+	{
+		bool goNextStep = false;
+		bool artificialPressed, enginesPressed, powersPressed, lifeSupportPressed;
+		artificialPressed= enginesPressed= powersPressed= lifeSupportPressed = false;
+
+		StartCoroutine(playCueQueued ("LookAtShipsModules"));
+
+		while (!goNextStep) 
+		{
+
+			if (_currentInput == SequenceTrigger.ARTIFICIALGRAVITY_BUTTON) {
+				artificialPressed = true;
+				consumeCurrentInput ();
+			}
+			if (_currentInput == SequenceTrigger.ENGINES_BUTTON) {
+				enginesPressed = true;
+				consumeCurrentInput ();
+			}
+			if (_currentInput == SequenceTrigger.LIFESUPPORT_BUTTON) {
+				powersPressed = true;
+				consumeCurrentInput ();
+			}
+			if (_currentInput == SequenceTrigger.POWERS_BUTTON) {
+				lifeSupportPressed = true;
+				consumeCurrentInput ();
+			}
+
+			if (artificialPressed && enginesPressed && powersPressed && lifeSupportPressed)
+				goNextStep = true;
+
+			Debug.Log ("Wait all 4 module buttons no order");
+			yield return null;
+		}
+	}
+
+	IEnumerator WaitCheckAllModules()
+	{
+		bool goNextStep = false;
+		bool artificialPressed, enginesPressed, powersPressed, lifeSupportPressed;
+		artificialPressed= enginesPressed= powersPressed= lifeSupportPressed = false;
+
+		StartCoroutine(playCueQueued ("LookAtShipsModules"));
+
+		yield return StartCoroutine(WaitCheckModule (SequenceTrigger.ARTIFICIALGRAVITY_BUTTON));
+		yield return StartCoroutine(WaitCheckModule (SequenceTrigger.ENGINES_BUTTON));
+		yield return StartCoroutine(WaitCheckModule (SequenceTrigger.POWERS_BUTTON));
+		yield return StartCoroutine(WaitCheckModule (SequenceTrigger.LIFESUPPORT_BUTTON));
+
+	}
+
+	IEnumerator WaitCheckModule(SequenceTrigger trigger)
+	{
+		bool goNextStep = false;
+
+		while (!goNextStep) 
+		{
+			switch (trigger) {
+			case SequenceTrigger.ARTIFICIALGRAVITY_BUTTON:
+				playCue ("PressArtificialButton");
+				break;
+			case SequenceTrigger.ENGINES_BUTTON:
+				playCue ("PressEnginesButton");
+				break;
+			case SequenceTrigger.POWERS_BUTTON:
+				playCue ("PressPowersButton");
+				break;
+			case SequenceTrigger.LIFESUPPORT_BUTTON:
+				playCue ("PressLifeSupportButton");
+				break;
+			}
+
+			if (_currentInput == trigger) {
+				goNextStep = true;
+				consumeCurrentInput ();
+			}
+			
+			Debug.Log ("Wait trigger: "+trigger);
+			yield return null;
+		}
+	}
+
+	IEnumerator WaitHyperDrivePrimed()
+	{
+		bool goNextStep = false;
+		while (!goNextStep) 
+		{
+			if (_currentInput == SequenceTrigger.HYPERDRIVE_PRIMED) {
+				goNextStep = true;
+				consumeCurrentInput ();
+			}
+
+			Debug.Log ("Wait HYPERDRIVE_PRIMED");
+			yield return null;
+		}
+	}
+
+	IEnumerator StartGameNarration()
+	{
+		yield return StartCoroutine (WaitDiagnosticMode (true));
+
+		StartCoroutine (FirstDiagnosis ());
+	}
+
+	IEnumerator FirstDiagnosis()
+	{
+		bool goNextStep = false;
+
+		yield return StartCoroutine (WaitCheckAllModules ());
+
+		yield return StartCoroutine (WaitHyperDrivePrimed ());
+
+		goNextStep = false;
+		while (!goNextStep) 
+		{
+			if (_currentInput == SequenceTrigger.HYPERSPACE_JUMP1_BEGIN) {
+				goNextStep = true;
+				consumeCurrentInput ();
+			}
+
+			Debug.Log ("Wait HYPERSPACE_JUMP1_BEGIN");
+			yield return null;
+		}
+
+		StartCoroutine (SecondJumpBegin ());
+	}
+
+	IEnumerator SecondJumpBegin()
+	{
+		yield return new WaitForSeconds (15);
+
+		yield return StartCoroutine (WaitDiagnosticMode (true));
+
+		yield return StartCoroutine (WaitCheckAllModules ());
+
+		yield return StartCoroutine (WaitHyperDrivePrimed ());
+
+		bool goNextStep = false;
+		while (!goNextStep) 
+		{
+			if (_currentInput == SequenceTrigger.HYPERSPACE_JUMP2_BEGIN) {
+				goNextStep = true;
+				consumeCurrentInput ();
+			}
+
+			Debug.Log ("Wait HYPERSPACE_JUMP2_BEGIN");
+			yield return null;
+		}
+
+		StartCoroutine (MalfunctionBegin ());
+	}
+
+	IEnumerator MalfunctionBegin()
+	{
+		yield return new WaitForSeconds (15);
+
+		bool goNextStep = false;
+		while (!goNextStep) 
+		{
+			if (_currentInput == SequenceTrigger.EMERGENCY_POWER_SWITCH) {
+				goNextStep = true;
+				consumeCurrentInput ();
+			}
+
+			Debug.Log ("Wait EMERGENCY_POWER_SWITCH");
+			yield return null;
+		}
+
+		yield return StartCoroutine (WaitDiagnosticMode (true));
+
+		yield return StartCoroutine (WaitCheckModule(SequenceTrigger.POWERS_BUTTON));
+
+		goNextStep = false;
+		while (!goNextStep) 
+		{
+			if (_currentInput == SequenceTrigger.PANEL_REMOVED) {
+				goNextStep = true;
+				consumeCurrentInput ();
+			}
+
+			Debug.Log ("Wait PANEL_REMOVED");
+			yield return null;
+		}
+
+
+		goNextStep = false;
+		while (!goNextStep) 
+		{
+			if (_currentInput == SequenceTrigger.WIRES_BYPASSED) {
+				goNextStep = true;
+				consumeCurrentInput ();
+			}
+
+			Debug.Log ("Wait WIRES_BYPASSED");
+			yield return null;
+		}
+
+		goNextStep = false;
+		while (!goNextStep) 
+		{
+			if (_currentInput == SequenceTrigger.WIRES_BYPASSED) {
+				goNextStep = true;
+				consumeCurrentInput ();
+			}
+
+			Debug.Log ("Wait WIRES_BYPASSED");
+			yield return null;
+		}
+
+		goNextStep = false;
+		while (!goNextStep) 
+		{
+			if (_currentInput == SequenceTrigger.SAFETY_BYPASSEED) {
+				goNextStep = true;
+				consumeCurrentInput ();
+			}
+
+			Debug.Log ("Wait SAFETY_BYPASSEED");
+			yield return null;
+		}
+
+		yield return StartCoroutine (WaitHyperDrivePrimed ());
+
+		goNextStep = false;
+		while (!goNextStep) 
+		{
+			if (_currentInput == SequenceTrigger.HYPERSPACE_JUMP3_BEGIN) {
+				goNextStep = true;
+				consumeCurrentInput ();
+			}
+
+			Debug.Log ("Wait HYPERSPACE_JUMP3_BEGIN");
+			yield return null;
+		}
+
+		StartCoroutine (GameOver ());
+	}
+
+	IEnumerator GameOver()
+	{
+		yield return new WaitForSeconds (15);
+
+		Debug.Log ("Game Over");
 	}
 }

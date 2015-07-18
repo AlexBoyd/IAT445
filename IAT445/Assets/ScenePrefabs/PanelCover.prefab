@@ -11,7 +11,7 @@ GameObject:
   m_Layer: 0
   m_Name: PanelCover
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -2663371497217273435, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -26,8 +26,8 @@ GameObject:
   - 33: {fileID: 3335306}
   - 23: {fileID: 2377942}
   - 54: {fileID: 5408100}
-  - 64: {fileID: 6463968}
   - 114: {fileID: 11402792}
+  - 65: {fileID: 6500228}
   m_Layer: 10
   m_Name: polySurface8_CockpitCentral_polySurface2_newCockpit1:polySurface8_newCockpit1:newCockpit1:polySurface1
   m_TagString: Untagged
@@ -42,7 +42,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 178956}
   m_LocalRotation: {x: 3.99964293e-08, y: .99193579, z: -.126741841, w: -1.57935091e-07}
-  m_LocalPosition: {x: 0, y: -.202999949, z: .208999991}
+  m_LocalPosition: {x: 0, y: -.125, z: -.279000014}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 431192}
@@ -53,8 +53,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 161426}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.22899997, z: .305999994}
+  m_LocalRotation: {x: .00130899681, y: 0, z: 0, w: .999999166}
+  m_LocalPosition: {x: 0, y: 1.14559996, z: .79400003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 401266}
@@ -90,7 +90,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 178956}
-  m_Mesh: {fileID: 4300000, guid: 8581d1edfd80a44e78b52405e8d4a693, type: 3}
+  m_Mesh: {fileID: 4300002, guid: 8581d1edfd80a44e78b52405e8d4a693, type: 3}
 --- !u!54 &5408100
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -106,8 +106,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &6463968
-MeshCollider:
+--- !u!65 &6500228
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -116,8 +116,8 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 1
-  m_Mesh: {fileID: 4300000, guid: 8581d1edfd80a44e78b52405e8d4a693, type: 3}
+  m_Size: {x: .67820859, y: -.00999999978, z: .589999974}
+  m_Center: {x: -9.23872449e-07, y: .0399999991, z: .00999999978}
 --- !u!114 &11402792
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -133,7 +133,7 @@ MonoBehaviour:
   _materialIndex: 0
   _boxColor: {r: 0, g: 0, b: 0, a: 0}
   _originalMaterial: {fileID: 0}
-  _eventName: 
+  _eventName: panel_removed
   _eventNamePretty: 
   _pressDuration: 0
   Audio: {fileID: 0}

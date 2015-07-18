@@ -53,9 +53,10 @@ public class RemovablePanel : Interactable
 		if (!_interactable)
 			return;
 
-		pressed ();
+		//pressed ();
 
 		base.triggerPressedEvent ();
+
 
 
 		// Just for now

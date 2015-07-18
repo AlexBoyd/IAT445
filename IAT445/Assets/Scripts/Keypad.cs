@@ -5,6 +5,10 @@ using System.Collections;
 public class Keypad : MonoBehaviour
 {
 
+	public bool _isUp;
+
+	Animator _animator;
+
 	public KeypadButton[] _keypadButtons;
 
 //	public string _eventName;
@@ -14,7 +18,7 @@ public class Keypad : MonoBehaviour
 	public Text _keypadInput;
 	public event StringDelegate TriggerEvent;
 
-	public SequenceListener _SequenceListener;
+	KeypadHandle _keypadHandle;
 
 	public Text	ConsoleTxt;
 
@@ -28,6 +32,8 @@ public class Keypad : MonoBehaviour
 
 	void Awake ()
 	{
+		_animator = GetComponent<Animator> ();
+		_keypadHandle = GetComponent<KeypadHandle> ();
 		if (_keypadButtons == null) {
 			_keypadButtons = GetComponentsInChildren<KeypadButton> () as KeypadButton[];
 		}
@@ -47,21 +53,32 @@ public class Keypad : MonoBehaviour
 		}
 	}
 
+	public void toggleUpDown() 
+	{
+		_animator.SetBool ("Up", !_isUp);
+		_isUp = !_isUp;
+
+		string eventName = _isUp ? "up" : "down";
+		OnTriggerEvent (eventName);
+	}
+
+	public void bringUp()
+	{
+		_isUp = true;
+		_animator.SetBool ("Up", _isUp);
+	}
+	public void bringDown()
+	{
+		_isUp = false;
+		_animator.SetBool ("Up", _isUp);
+	}
+
 	void keypadButtonPressed (string keyValue)
 	{	
 		_KeypadAudio.Play ();
 		if (keyValue == "#") {
 			OnTriggerEvent (_currentInput);
 			_currentInput = string.Empty;
-//			if (_currentInput == "8717") {
-//				ConsoleTxt.text = "HyperDrive Primed";
-//				_currentInput = string.Empty;
-//				_SequenceListener._hyperDrive1Primed = true;
-//			} else if (_currentInput == "7178") {
-//				ConsoleTxt.text = "HyperDrive Primed";
-//				_currentInput = string.Empty;
-//				_SequenceListener._hyperDrive2Primed = true;
-//			}
 		} else if (keyValue == "*") {
 			_currentInput = string.Empty;
 

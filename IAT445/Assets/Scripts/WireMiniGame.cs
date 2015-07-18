@@ -6,8 +6,16 @@ public class WireMiniGame : MonoBehaviour
 {
 
 	public WirePiece[] _pieces;
-	public SequenceListener _SequenceListener;
 
+	public event StringDelegate TriggerEvent;
+
+	public string _eventName = "power_bypassed";
+
+	void OnTriggerEvent ()
+	{
+		if (TriggerEvent != null)
+			TriggerEvent (_eventName);
+	}
 
 	// Use this for initialization
 	void Start ()
@@ -32,9 +40,10 @@ public class WireMiniGame : MonoBehaviour
 				break;
 			}
 		}
-		if (_pieces.Where ((p) => p.Locked).Count () == 5 && !_SequenceListener._powerBypass) {
-			_SequenceListener._powerBypass = true;
-			_SequenceListener._windShieldPrompt.showPowerRepaired ();
+		if (_pieces.Where ((p) => p.Locked).Count () == 5 ) {
+
+			OnTriggerEvent ();
+
 		}
 	}
 }
