@@ -81,7 +81,7 @@ public class SequenceListener : MonoBehaviour
 
 	public GameObject _powerOutageMsg;
 
-	public Animator _backPanelCoverAnim;
+	public GameObject _backPanelCover;
 
 	public GameObject _emergencySparks;
     public GameObject _puzzleSparks;
@@ -148,7 +148,7 @@ public class SequenceListener : MonoBehaviour
 		_switchPanel.TriggerEvent += eventTriggered;
 		_emergencyPowerSwitch.TriggerEvent += eventTriggered;
 		_keypad.TriggerEvent += eventTriggered;
-		_wiresPanel.PressedEvent += pressedEvent;
+		//_wiresPanel.PressedEvent += pressedEvent;
 		_wireMiniGame.TriggerEvent += eventTriggered;
 
 
@@ -165,7 +165,7 @@ public class SequenceListener : MonoBehaviour
 		_switchPanel.TriggerEvent -= eventTriggered;
 		_emergencyPowerSwitch.TriggerEvent -= eventTriggered;
 		_keypad.TriggerEvent -= eventTriggered;
-		_wiresPanel.PressedEvent -= pressedEvent;
+		//_wiresPanel.PressedEvent -= pressedEvent;
 		_wireMiniGame.TriggerEvent -= eventTriggered;
 	}
 
@@ -430,7 +430,7 @@ public class SequenceListener : MonoBehaviour
 				_spaceScenes [2].SetActive (true);
 				_powerOutageMsg.SetActive (true);
 				//And pop the back panel
-				_backPanelCoverAnim.Play ("BackPanelCoverAnimation", 0);
+				_backPanelCover.gameObject.SetActive(false);
 			} else {
 				//This is the start of my journey, take me to the nebulas!
 				_spaceScenes [1].SetActive (true);
