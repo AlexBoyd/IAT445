@@ -587,12 +587,17 @@ public class SequenceListener : MonoBehaviour
 		}
 	}
 
-	void playCueReplace(string sequenceName)
+	void stopCurrentCue ()
 	{
 		if (_currentCue != null) {
 			_currentCue.gameObject.SetActive (false);
 			_currentCue = null;
 		}
+	}
+
+	void playCueReplace(string sequenceName)
+	{
+		stopCurrentCue ();
 
 		playCue (sequenceName);
 	}
@@ -767,9 +772,13 @@ public class SequenceListener : MonoBehaviour
 				consumeCurrentInput ();
 			}
 
+			playCueLoop ("goodLuck_dialogue");
+			
 			Debug.Log ("Wait HYPERSPACE_JUMP2_BEGIN");
 			yield return null;
 		}
+
+		stopCurrentCue ();
 
 		StartCoroutine (MalfunctionBegin ());
 	}
@@ -845,9 +854,13 @@ public class SequenceListener : MonoBehaviour
 				consumeCurrentInput ();
 			}
 
+			playCueLoop ("goodLuck_dialogue");
+			
 			Debug.Log ("Wait HYPERSPACE_JUMP3_BEGIN");
 			yield return null;
 		}
+		
+		stopCurrentCue ();
 
 		StartCoroutine (GameOver ());
 	}
