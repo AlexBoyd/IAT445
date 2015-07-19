@@ -69,11 +69,13 @@ public class SequenceListener : MonoBehaviour
 	public bool _powerBypass;
 	public bool _safetyOverride;
 
+	public bool _useNarration = false;
+
     public GameObject _hyperSuccessAudio, _hyperFailureAudio, _hyperSuccessAudio2;
 
 
 	public Interactable _removablePanel;
-	public CharView _charview;
+	//public CharView _charview;
 	public AudioSource _staticAudio;
 
 	public GameObject[] _spaceScenes;
@@ -106,7 +108,7 @@ public class SequenceListener : MonoBehaviour
 
 	void disableAllInteractables ()
 	{
-		_charview.removeCurrentFocus ();
+		//_charview.removeCurrentFocus ();
 
 		foreach (Interactable interactable in _interectables) {
 			interactable.disableInteractable ();
@@ -115,7 +117,7 @@ public class SequenceListener : MonoBehaviour
 
 	void enableAllInteractables (bool overridePrevious = false)
 	{
-		_charview.removeCurrentFocus ();
+		//_charview.removeCurrentFocus ();
 
 		foreach (Interactable interactable in _interectables) {
 			interactable.enableInteractable (overridePrevious);
@@ -502,7 +504,10 @@ public class SequenceListener : MonoBehaviour
 	{
 		ChangeSkyBoxRotation ();
 
-		StartCoroutine (StartGameNarration ());
+
+		if (_useNarration) {
+			StartCoroutine (StartGameNarration ());
+		}
 	}
 
 	void Update ()
