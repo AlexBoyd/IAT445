@@ -183,7 +183,7 @@ public class SequenceListener : MonoBehaviour
 		}
 
 		if (eventName.StartsWith ("keypad")) {
-			if (eventName.Contains ("8717") && !_hyperDrive1Done) {
+			if (eventName.Contains ("8717")) {
 				ConsoleTxt.text = "HyperDrive Primed";
 				_hyperDrive1Primed = true;
 				_currentInput = SequenceTrigger.HYPERDRIVE_PRIMED;
