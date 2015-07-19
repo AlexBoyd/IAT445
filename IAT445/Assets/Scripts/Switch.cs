@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof( VRInteractable ))]
 public class Switch : Interactable {
 
 	public bool _isOn;
@@ -35,8 +36,5 @@ public class Switch : Interactable {
 
 		base.triggerPressedEvent ();
 	}
-
-
-
-
+	
 }

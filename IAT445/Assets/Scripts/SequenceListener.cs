@@ -578,7 +578,7 @@ public class SequenceListener : MonoBehaviour
 		while (!goNextStep) 
 		{
 			playCue ("WaitDiagnostic");
-			Debug.Log ("Wait DIAGNOSTIC "+ enabled);
+			//Debug.Log ("Wait DIAGNOSTIC "+ enabled);
 			goNextStep = enabled ? _currentInput == SequenceTrigger.DIAGNOSTIC_ON : _currentInput == SequenceTrigger.DIAGNOSTIC_OFF;
 			if (goNextStep)
 				consumeCurrentInput ();

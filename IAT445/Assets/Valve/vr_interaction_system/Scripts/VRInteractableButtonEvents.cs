@@ -27,7 +27,7 @@ public class VRInteractableButtonEvents : MonoBehaviour
 		{
 			SteamVR_Controller.Device controller = hand.controller;
 
-			if ( controller.GetPressDown( Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger ) )
+			if ( controller.GetPressDown( Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger ))
 			{
 				onTriggerDown.Invoke();
 			}
@@ -66,6 +66,11 @@ public class VRInteractableButtonEvents : MonoBehaviour
 			{
 				onTouchpadRelease.Invoke();
 			}
+		}
+
+		if (hand.controller == null && hand.GetStandardInteractionButtonDown ()) 
+		{
+			onGripDown.Invoke();
 		}
 	}
 }
