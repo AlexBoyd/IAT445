@@ -724,9 +724,9 @@ public class SequenceListener : MonoBehaviour
 
 	IEnumerator StartGameNarration()
 	{
-		yield return StartCoroutine (WaitDiagnosticMode (true));
-
+		
 		StartCoroutine (FirstDiagnosis ());
+		yield return null;
 	}
 
 	IEnumerator FirstDiagnosis()
