@@ -803,20 +803,7 @@ public class SequenceListener : MonoBehaviour
 
 		playCueReplace("power_restored_dialogue");
 
-		goNextStep = false;
-		while (!goNextStep) 
-		{
-			if (_currentInput == SequenceTrigger.PANEL_REMOVED) {
-				goNextStep = true;
-				consumeCurrentInput ();
-			}
 
-			playCueLoop ("puzzle_dialogue");
-
-
-			Debug.Log ("Wait PANEL_REMOVED");
-			yield return null;
-		}
 
 		goNextStep = false;
 		while (!goNextStep) 
@@ -826,7 +813,7 @@ public class SequenceListener : MonoBehaviour
 				consumeCurrentInput ();
 			}
 
-			playCueLoop ("safety_dialogue");
+            playCueLoop("puzzle_dialogue");
 
 			Debug.Log ("Wait WIRES_BYPASSED");
 			yield return null;
@@ -839,7 +826,7 @@ public class SequenceListener : MonoBehaviour
 				goNextStep = true;
 				consumeCurrentInput ();
 			}
-
+            playCueLoop("safety_dialogue");
 			Debug.Log ("Wait SAFETY_BYPASSEED");
 			yield return null;
 		}
