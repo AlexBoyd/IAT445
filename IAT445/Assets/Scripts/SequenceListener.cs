@@ -585,6 +585,16 @@ public class SequenceListener : MonoBehaviour
 		}
 	}
 
+	void playCueReplace(string sequenceName)
+	{
+		if (_currentCue != null) {
+			_currentCue.gameObject.SetActive (false);
+			_currentCue = null;
+		}
+
+		playCue (sequenceName);
+	}
+
 	IEnumerator playCueQueued (string sequenceName)
 	{
 		while (_currentCue.isPlaying) {
@@ -690,7 +700,7 @@ public class SequenceListener : MonoBehaviour
 		}
 	}
 
-	IEnumerator WaitHyperDrivePrimed()
+	IEnumerator WaitHyperDrivePrimed(string soundCue)
 	{
 		bool goNextStep = false;
 		while (!goNextStep) 
@@ -699,6 +709,8 @@ public class SequenceListener : MonoBehaviour
 				goNextStep = true;
 				consumeCurrentInput ();
 			}
+
+			playCueLoop (soundCue);
 
 			Debug.Log ("Wait HYPERDRIVE_PRIMED");
 			yield return null;
@@ -717,7 +729,7 @@ public class SequenceListener : MonoBehaviour
 
 			playCueLoop ("keypad_prime_dialogue");
 
-			Debug.Log ("Wait HYPERDRIVE_PRIMED");
+			Debug.Log ("Wait KEYPAD_UP");
 			yield return null;
 		}
 	}
@@ -725,18 +737,13 @@ public class SequenceListener : MonoBehaviour
 	IEnumerator StartGameNarration()
 	{
 		
-		StartCoroutine (FirstDiagnosis ());
+		StartCoroutine (BeforeJump ());
 		yield return null;
 	}
 
-	IEnumerator FirstDiagnosis()
+	IEnumerator BeforeJump()
 	{
 		bool goNextStep = false;
-
-//		yield return StartCoroutine (WaitCheckAllModules ());
-
-//		yield return StartCoroutine (WaitHyperDrivePrimed ());
-
 
 		playCue ("hello_dialogue");
 
@@ -746,45 +753,11 @@ public class SequenceListener : MonoBehaviour
 
 		yield return new WaitForSeconds (_currentCue.clip.length * 1.2f);
 
-//		playCue ("brief_dialogue");
-//
-//		yield return new WaitForSeconds (_currentCue.clip.length * 1.2f);
-//
-
-
-//		StartCoroutine (playCueQueued ("brief_dialogue"));
-
-
 		yield return StartCoroutine (WaitKeypadUP ());
-//		yield return StartCoroutine (WaitHyperDrivePrimed ());
 
+		yield return StartCoroutine (WaitHyperDrivePrimed ("coordinates_dialogue"));
 
 		goNextStep = false;
-		while (!goNextStep) 
-		{
-			if (_currentInput == SequenceTrigger.HYPERSPACE_JUMP1_BEGIN) {
-				goNextStep = true;
-				consumeCurrentInput ();
-			}
-
-			Debug.Log ("Wait HYPERSPACE_JUMP1_BEGIN");
-			yield return null;
-		}
-
-//		StartCoroutine (SecondJumpBegin ());
-	}
-
-	IEnumerator SecondJumpBegin()
-	{
-		yield return new WaitForSeconds (15);
-
-		yield return StartCoroutine (WaitDiagnosticMode (true));
-
-		yield return StartCoroutine (WaitCheckAllModules ());
-
-		yield return StartCoroutine (WaitHyperDrivePrimed ());
-
-		bool goNextStep = false;
 		while (!goNextStep) 
 		{
 			if (_currentInput == SequenceTrigger.HYPERSPACE_JUMP2_BEGIN) {
@@ -811,13 +784,13 @@ public class SequenceListener : MonoBehaviour
 				consumeCurrentInput ();
 			}
 
+			playCueLoop ("error_dialogue");
+
 			Debug.Log ("Wait EMERGENCY_POWER_SWITCH");
 			yield return null;
 		}
 
-		yield return StartCoroutine (WaitDiagnosticMode (true));
-
-		yield return StartCoroutine (WaitCheckModule(SequenceTrigger.POWERS_BUTTON));
+		playCueReplace("power_restored_dialogue");
 
 		goNextStep = false;
 		while (!goNextStep) 
@@ -827,11 +800,13 @@ public class SequenceListener : MonoBehaviour
 				consumeCurrentInput ();
 			}
 
+			playCueLoop ("puzzle_dialogue");
+
+
 			Debug.Log ("Wait PANEL_REMOVED");
 			yield return null;
 		}
 
-
 		goNextStep = false;
 		while (!goNextStep) 
 		{
@@ -840,17 +815,7 @@ public class SequenceListener : MonoBehaviour
 				consumeCurrentInput ();
 			}
 
-			Debug.Log ("Wait WIRES_BYPASSED");
-			yield return null;
-		}
-
-		goNextStep = false;
-		while (!goNextStep) 
-		{
-			if (_currentInput == SequenceTrigger.WIRES_BYPASSED) {
-				goNextStep = true;
-				consumeCurrentInput ();
-			}
+			playCueLoop ("safety_dialogue");
 
 			Debug.Log ("Wait WIRES_BYPASSED");
 			yield return null;
@@ -868,7 +833,7 @@ public class SequenceListener : MonoBehaviour
 			yield return null;
 		}
 
-		yield return StartCoroutine (WaitHyperDrivePrimed ());
+		yield return StartCoroutine (WaitHyperDrivePrimed ("coordinates_2_dialogue"));
 
 		goNextStep = false;
 		while (!goNextStep) 
