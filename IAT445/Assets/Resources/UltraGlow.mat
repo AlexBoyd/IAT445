@@ -93,20 +93,8 @@ Material:
         second: .5
       data:
         first:
-          name: _Emission
-        second: 1.29499996
-      data:
-        first:
           name: _Parallax
         second: .0199999996
-      data:
-        first:
-          name: _GlowPower
-        second: 5.53000021
-      data:
-        first:
-          name: _Albedo
-        second: 0
       data:
         first:
           name: _ZWrite
@@ -138,6 +126,18 @@ Material:
       data:
         first:
           name: _Metallic
+        second: 0
+      data:
+        first:
+          name: _Emission
+        second: 1.29499996
+      data:
+        first:
+          name: _GlowPower
+        second: 5.53000021
+      data:
+        first:
+          name: _Albedo
         second: 0
     m_Colors:
       data:
