@@ -87,6 +87,7 @@ public class SequenceListener : MonoBehaviour
 
 	public GameObject _emergencySparks;
     public GameObject _puzzleSparks;
+    public GameObject _puzzlelight;
 	public Material _skyboxMaterial;
 	public AudioSource _steamAudio, _hyperdrivePrimedAudio, _hyperdriveErrorAudio;
 	public float _diagnosticHoldTime = 2;
@@ -433,6 +434,7 @@ public class SequenceListener : MonoBehaviour
 				_powerOutageMsg.SetActive (true);
 				//And pop the back panel
 				_backPanelCover.gameObject.SetActive(false);
+                _puzzlelight.gameObject.SetActive(true);
 			} else {
 				//This is the start of my journey, take me to the nebulas!
 				_spaceScenes [1].SetActive (true);
