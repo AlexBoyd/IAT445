@@ -45,32 +45,5 @@ public class KeypadHandle : Interactable {
 		base.triggerPressedEvent ();
 	}
 
-	void OnHandHoverBegin()
-	{
-		this.litUp ();
-	}
-	
-	void OnHandHoverEnd()
-	{
-		this.unlit ();
-	}
-	
-	void HandHoverUpdate ( VRHand hand )
-	{
-		if(hand.GetStandardInteractionButtonDown() || 
-		   (hand.controller != null && hand.controller.GetPressDown( Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger )))
-		{
-			triggerPressedEvent();
-		}
-		
-		if(hand.GetStandardInteractionButtonUp() || 
-		   (hand.controller != null && hand.controller.GetPressUp( Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger )))
-		{
-			triggerReleasedEvent();
-		}
-	}
-
-
-
 
 }
