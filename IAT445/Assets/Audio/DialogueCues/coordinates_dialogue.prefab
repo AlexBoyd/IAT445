@@ -1,43 +1,44 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &102668
+--- !u!1 &174434
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 482574}
-  - 82: {fileID: 8278042}
+  - 4: {fileID: 451490}
+  - 82: {fileID: 8273858}
   m_Layer: 0
-  m_Name: AudioTemplate
+  m_Name: coordinates_dialogue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &482574
+--- !u!4 &451490
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 102668}
+  m_GameObject: {fileID: 174434}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!82 &8278042
+--- !u!82 &8273858
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 102668}
+  m_GameObject: {fileID: 174434}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9d56e019f31684c4d9744c7a535c45ca, type: 3}
+  OutputAudioMixerGroup: {fileID: 24362202, guid: af2728b36671b47eebaf406e5992d762,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: e25877f1e4df24ffea992983f580b8a0, type: 3}
   m_PlayOnAwake: 1
   m_Volume: .150000006
   m_Pitch: 1
@@ -110,5 +111,5 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 102668}
+  m_RootGameObject: {fileID: 174434}
   m_IsPrefabParent: 1

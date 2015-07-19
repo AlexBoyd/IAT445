@@ -563,10 +563,26 @@ public class SequenceListener : MonoBehaviour
 		return cuePrefabs [UnityEngine.Random.Range (0, cuePrefabs.Count)];
 	}
 
+
+
 	void playCue(string sequenceName)
 	{
 		if(_currentCue == null || !_currentCue.isPlaying)
+		{
 			_currentCue = SoundManager._instance.playSound(getRandomCueForSequence(sequenceName));
+		}
+	}
+
+	private float cueWaitTime = 0.0f;
+	private float pauseTimeMin = 0.8f;
+	private float pauseTimeMax = 1.3f;
+	void playCueLoop(string sequenceName)
+	{
+		if(_currentCue == null || (!_currentCue.isPlaying && Time.time > cueWaitTime))
+		{
+			_currentCue = SoundManager._instance.playSound(getRandomCueForSequence(sequenceName));
+			cueWaitTime = Time.time + _currentCue.clip.length * (1 + Random.Range(pauseTimeMin,pauseTimeMax));
+		}
 	}
 
 	IEnumerator playCueQueued (string sequenceName)
@@ -689,6 +705,23 @@ public class SequenceListener : MonoBehaviour
 		}
 	}
 
+	IEnumerator WaitKeypadUP()
+	{
+		bool goNextStep = false;
+		while (!goNextStep) 
+		{
+			if (_currentInput == SequenceTrigger.KEYPAD_UP) {
+				goNextStep = true;
+				consumeCurrentInput ();
+			}
+
+			playCueLoop ("keypad_prime_dialogue");
+
+			Debug.Log ("Wait HYPERDRIVE_PRIMED");
+			yield return null;
+		}
+	}
+
 	IEnumerator StartGameNarration()
 	{
 		yield return StartCoroutine (WaitDiagnosticMode (true));
@@ -700,9 +733,31 @@ public class SequenceListener : MonoBehaviour
 	{
 		bool goNextStep = false;
 
-		yield return StartCoroutine (WaitCheckAllModules ());
+//		yield return StartCoroutine (WaitCheckAllModules ());
 
-		yield return StartCoroutine (WaitHyperDrivePrimed ());
+//		yield return StartCoroutine (WaitHyperDrivePrimed ());
+
+
+		playCue ("hello_dialogue");
+
+		yield return new WaitForSeconds (_currentCue.clip.length * 1.2f);
+
+		playCue ("hello_dialogue2");
+
+		yield return new WaitForSeconds (_currentCue.clip.length * 1.2f);
+
+//		playCue ("brief_dialogue");
+//
+//		yield return new WaitForSeconds (_currentCue.clip.length * 1.2f);
+//
+
+
+//		StartCoroutine (playCueQueued ("brief_dialogue"));
+
+
+		yield return StartCoroutine (WaitKeypadUP ());
+//		yield return StartCoroutine (WaitHyperDrivePrimed ());
+
 
 		goNextStep = false;
 		while (!goNextStep) 
@@ -716,7 +771,7 @@ public class SequenceListener : MonoBehaviour
 			yield return null;
 		}
 
-		StartCoroutine (SecondJumpBegin ());
+//		StartCoroutine (SecondJumpBegin ());
 	}
 
 	IEnumerator SecondJumpBegin()

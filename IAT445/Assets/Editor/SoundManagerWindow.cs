@@ -1,14 +1,23 @@
 ﻿using UnityEngine;
+using UnityEngine.Audio;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using System.IO;
+using System.Text.RegularExpressions;
 
 
-
+[System.Serializable]
+public class MixerRegex
+{
+	public string _regex;
+	public AudioMixerGroup _mixer;
+}
 
 public class SoundManagerWindow : EditorWindow
 {
+
+	public List<MixerRegex> _mixerRegex = new List<MixerRegex> ();
 
 	enum PrefabCreationAction {add,replace,nothing};
 
@@ -36,6 +45,13 @@ public class SoundManagerWindow : EditorWindow
 
 	void OnGUI ()
 	{
+		ScriptableObject target = this;
+		SerializedObject so = new SerializedObject(target);
+		SerializedProperty stringsProperty = so.FindProperty("_mixerRegex");
+
+		EditorGUILayout.PropertyField(stringsProperty, true); // True means show children
+		so.ApplyModifiedProperties(); // Remember to apply modified properties
+
 		// The actual window code goes here
 		_soundManager = (SoundManager)EditorGUILayout.ObjectField ("Sound Manager Object", _soundManager, typeof(SoundManager), true);
 
@@ -135,6 +151,12 @@ public class SoundManagerWindow : EditorWindow
 			AudioSource source= gameObject.GetComponent<AudioSource> ();
 			source.clip = clip;
 		
+			foreach (MixerRegex mixerRegex in _mixerRegex) {
+				Regex reg = new Regex (mixerRegex._regex);
+				if (reg.IsMatch (clip.name))
+					source.outputAudioMixerGroup = mixerRegex._mixer;
+			}
+
 			if (replacing) {
 				EditorUtility.SetDirty (gameObject);
 

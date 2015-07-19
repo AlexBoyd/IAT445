@@ -1,0 +1,12 @@
+hello_dialogue:Hello Astronaut. As you are aware, today we are testing the first ship prototype that is able to make hyperjumps. 
+hello_dialogue_2:I will give you some coordinates and we will attempt a jump. If everything goes right you should be back in no time.
+keypad_prime_dialogue:Get familiar with the ship and when you are ready to jump bring up the keypad in the center of the room
+keypad_prime_dialogue_b:There's a keypad in the ship. Bring it up when you're ready to proceed with the jump.
+keypad_prime_dialogue_c:The keypad will allow you to input the jump coordinates. Bring the keypad up when you're ready to go.
+coordinates_dialogue:Now input the key code, 8, 7, 1, 7 to prime the hyperjump
+goodLuck_dialogue:Press the red button when you’re ready.
+error_dialogue:ERROR, POWER OUTAGE
+power_restored_dialogue:Power restored.
+puzzle_dialogue:Error number 318 in power relays detected. Bypass the power through different sockets in the power frame in the back of the ship
+safety_dialogue:Safety bypass required. Flick the switches to the following arrangement: Up, Down, Up, Up.
+coordinates_2_dialogue:Safety lock bypassed. Input the key code 7, 1, 7, 8 in the keypad.	
