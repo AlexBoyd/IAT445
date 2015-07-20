@@ -9,6 +9,7 @@ public class SwitchPanel : MonoBehaviour {
 
 
 	public bool[] _rightCombination;
+	public bool[] _lastCombination;
 
 	public string _eventName;
 
@@ -19,6 +20,31 @@ public class SwitchPanel : MonoBehaviour {
 	{
 		if (TriggerEvent != null)
 			TriggerEvent (_eventName);
+	}
+
+	bool combinationChanged()
+	{
+		for (int i = 0; i < _switches.Length; i++) 
+		{
+			if (_switches [i]._isOn != _lastCombination[i]) 
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	void Start()
+	{
+		_lastCombination = new bool[_switches.Length];
+	}
+
+	void updateLastCombination()
+	{
+		for (int i = 0; i < _switches.Length; i++) 
+		{
+			_lastCombination[i] = _switches [i]._isOn; 
+		}
 	}
 
 	// Update is called once per frame
@@ -38,10 +64,12 @@ public class SwitchPanel : MonoBehaviour {
 			}
 		}
 
-		if (count == _switches.Length) 
+		if (count == _switches.Length && combinationChanged()) 
 		{
 			OnTriggerEvent ();
 		}
+
+		updateLastCombination ();
 	}
 
 }

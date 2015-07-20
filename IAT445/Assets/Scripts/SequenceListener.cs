@@ -523,6 +523,8 @@ public class SequenceListener : MonoBehaviour
 			_EffectsAnimations.Play ("HyperDriveFailure");
 			
 		}
+
+		Debug.LogWarning ("_currentInput" + _currentInput);
 	}
 
 	void ChangeSkyBoxRotation ()
