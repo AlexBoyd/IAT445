@@ -177,7 +177,6 @@ public class SequenceListener : MonoBehaviour
 	{
 		if (_cockpitActivated) {
 			if (eventName.Equals ("switchPanel")) {
-				Debug.Log ("SwitchPanel");
 				//_windShieldPrompt.showLifeOK ();
 			}
 		}
@@ -295,7 +294,6 @@ public class SequenceListener : MonoBehaviour
 
 				//_hyperSuccessAudio.GetComponent<AudioSource>().Play() ;
 				_hyperSuccessAudio.GetComponent<OSPAudioSource>().Play();
-				Debug.Log("Playing h audio");
 			} else if (_hyperDrive2Primed) {
 				_currentInput = SequenceTrigger.HYPERSPACE_JUMP2_BEGIN;
 				hideConsole ();
@@ -309,7 +307,6 @@ public class SequenceListener : MonoBehaviour
 
 				StartCoroutine (switchSpaceVisual ());
 
-				Debug.LogWarning ("disableAllInteractables");
 
 				// Disable all
 				disableAllInteractables ();
@@ -366,7 +363,6 @@ public class SequenceListener : MonoBehaviour
 			if (_cockpitActivated) {
 				_minieventPrompt.text = "Diagnostic Mode Activated";
 				bringConsoleBack ();
-				Debug.Log ("Pressed for 2 seconds the initialize drill!");
 				_currentInput = SequenceTrigger.DIAGNOSTIC_ON;
 			} else {	
 				hideConsole ();
@@ -466,7 +462,6 @@ public class SequenceListener : MonoBehaviour
 
 	public void disableStaticAudio ()
 	{
-		Debug.LogWarning ("Disable static!");
 
 
 		StartCoroutine (setStaticVolume (0.0f, 0.25f));
@@ -474,7 +469,6 @@ public class SequenceListener : MonoBehaviour
 
 	public void enableStaticAudio ()
 	{
-		Debug.LogWarning ("Enable static!");
 
 		StartCoroutine (setStaticVolume (0.02f, 0.25f));
 	}
@@ -524,7 +518,6 @@ public class SequenceListener : MonoBehaviour
 			
 		}
 
-		Debug.LogWarning ("_currentInput" + _currentInput);
 	}
 
 	void ChangeSkyBoxRotation ()
@@ -634,7 +627,6 @@ public class SequenceListener : MonoBehaviour
 		while (!goNextStep) 
 		{
 			playCue ("WaitDiagnostic");
-			//Debug.Log ("Wait DIAGNOSTIC "+ enabled);
 			goNextStep = enabled ? _currentInput == SequenceTrigger.DIAGNOSTIC_ON : _currentInput == SequenceTrigger.DIAGNOSTIC_OFF;
 			if (goNextStep)
 				consumeCurrentInput ();
@@ -674,7 +666,7 @@ public class SequenceListener : MonoBehaviour
 			if (artificialPressed && enginesPressed && powersPressed && lifeSupportPressed)
 				goNextStep = true;
 
-			Debug.Log ("Wait all 4 module buttons no order");
+
 			yield return null;
 		}
 	}
@@ -720,7 +712,6 @@ public class SequenceListener : MonoBehaviour
 				consumeCurrentInput ();
 			}
 			
-			Debug.Log ("Wait trigger: "+trigger);
 			yield return null;
 		}
 	}
@@ -737,7 +728,6 @@ public class SequenceListener : MonoBehaviour
 
 			playCueLoop (soundCue);
 
-			Debug.Log ("Wait HYPERDRIVE_PRIMED");
 			yield return null;
 		}
 	}
@@ -754,7 +744,6 @@ public class SequenceListener : MonoBehaviour
 
 			playCueLoop ("keypad_prime_dialogue");
 
-			Debug.Log ("Wait KEYPAD_UP");
 			yield return null;
 		}
 	}
@@ -800,7 +789,6 @@ public class SequenceListener : MonoBehaviour
 
 			playCueLoop ("goodLuck_dialogue");
 			
-			Debug.Log ("Wait HYPERSPACE_JUMP2_BEGIN");
 			yield return null;
 		}
 
@@ -823,7 +811,6 @@ public class SequenceListener : MonoBehaviour
 
 			playCueLoop ("error_dialogue");
 
-			Debug.Log ("Wait EMERGENCY_POWER_SWITCH");
 			yield return null;
 		}
 
@@ -841,7 +828,6 @@ public class SequenceListener : MonoBehaviour
 
             playCueLoop("puzzle_dialogue");
 
-			Debug.Log ("Wait WIRES_BYPASSED");
 			yield return null;
 		}
 
@@ -853,7 +839,6 @@ public class SequenceListener : MonoBehaviour
 				consumeCurrentInput ();
 			}
             playCueLoop("safety_dialogue");
-			Debug.Log ("Wait SAFETY_BYPASSEED");
 			yield return null;
 		}
 
@@ -869,7 +854,6 @@ public class SequenceListener : MonoBehaviour
 
 			playCueLoop ("goodLuck_dialogue");
 			
-			Debug.Log ("Wait HYPERSPACE_JUMP3_BEGIN");
 			yield return null;
 		}
 		
@@ -882,6 +866,5 @@ public class SequenceListener : MonoBehaviour
 	{
 		yield return new WaitForSeconds (15);
 
-		Debug.Log ("Game Over");
 	}
 }
