@@ -53,7 +53,7 @@ public class SequenceListener : MonoBehaviour
 
 	string _requiredEvent;
 
-	public ARWindShield _windShieldPrompt;
+	public ARWindShield[] _windShieldPrompt;
 	public Transform _consoleParent;
 
 	public Animation _EffectsAnimations;
@@ -227,7 +227,10 @@ public class SequenceListener : MonoBehaviour
 		if (!_powerBypass && eventName == "power_bypassed") {
 			_currentInput = SequenceTrigger.WIRES_BYPASSED;
 			_powerBypass = true;
-			_windShieldPrompt.showPowerRepaired ();
+            for (int i = 0; i < _windShieldPrompt.Length; i++)
+            {        
+	    		_windShieldPrompt[i].showPowerRepaired ();
+            }
 		}
 
 	}
@@ -239,27 +242,45 @@ public class SequenceListener : MonoBehaviour
 		
 		if (interactable._eventName.Equals ("gravity_button")) {
 			_currentInput = SequenceTrigger.ARTIFICIALGRAVITY_BUTTON;
-			_windShieldPrompt.showGravity ();
+            for (int i = 0; i < _windShieldPrompt.Length; i++)
+            {
+                _windShieldPrompt[i].showGravity();
+            }
 		}
 		if (interactable._eventName.Equals ("engines_button")) {
 			_currentInput = SequenceTrigger.ENGINES_BUTTON;
-			_windShieldPrompt.showEngines ();
+            for (int i = 0; i < _windShieldPrompt.Length; i++)
+            {
+                _windShieldPrompt[i].showEngines();
+            }
 		}
 		if (interactable._eventName.Equals ("powers_button")) {
 			_currentInput = SequenceTrigger.POWERS_BUTTON;
 			if (_emergencyPowerOn) {
 				if (_powerBypass) {
-					_windShieldPrompt.showPowerRepaired ();
+                    for (int i = 0; i < _windShieldPrompt.Length; i++)
+                    {
+                        _windShieldPrompt[i].showPowerRepaired();
+                    }
 				} else {
-					_windShieldPrompt.showPowerError ();
+                    for (int i = 0; i < _windShieldPrompt.Length; i++)
+                    {
+                        _windShieldPrompt[i].showPowerError();
+                    }
 				}
 			} else {
-				_windShieldPrompt.showPowers ();
+                for (int i = 0; i < _windShieldPrompt.Length; i++)
+                {
+                    _windShieldPrompt[i].showPowers();
+                }
 			}
 		}
 		if (interactable._eventName.Equals ("life_button")) {
 			_currentInput = SequenceTrigger.LIFESUPPORT_BUTTON;
-			_windShieldPrompt.showLife ();
+            for (int i = 0; i < _windShieldPrompt.Length; i++)
+            {
+                _windShieldPrompt[i].showLife();
+            }
 		}
 	
 		if (interactable._eventName.Equals ("panel_removed")) {
@@ -288,7 +309,10 @@ public class SequenceListener : MonoBehaviour
 				StartCoroutine (switchSpaceVisual ());
 
 				_EffectsAnimations.Play ("HyperDriveSuccess");
-				_windShieldPrompt.ARText.text = string.Empty;
+                for (int i = 0; i < _windShieldPrompt.Length; i++)
+                {
+                    _windShieldPrompt[i].ARText.text = string.Empty;
+                }
 
 				_hyperDrive1Primed = false;
 				_hyperDrive1Done = true;
@@ -304,8 +328,10 @@ public class SequenceListener : MonoBehaviour
 				_powerOutage = true;
 				_hyperDrive2Primed = false;
 				_emergencyPowerOn = false;
-				_windShieldPrompt.ARText.text = string.Empty;
-
+                for (int i = 0; i < _windShieldPrompt.Length; i++)
+                {
+                    _windShieldPrompt[i].ARText.text = string.Empty;
+                }
 
 				StartCoroutine (switchSpaceVisual ());
 
@@ -336,8 +362,10 @@ public class SequenceListener : MonoBehaviour
 				StartCoroutine (switchSpaceVisual ());
 
 				_EffectsAnimations.Play ("HyperDriveSuccess");
-				_windShieldPrompt.ARText.text = string.Empty;
-
+                for (int i = 0; i < _windShieldPrompt.Length; i++)
+                {
+                    _windShieldPrompt[i].ARText.text = string.Empty;
+                }
 				_hyperDrive1Primed = false;	
 				StartCoroutine (gameOver ());
 
