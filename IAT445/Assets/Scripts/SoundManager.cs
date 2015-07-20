@@ -55,7 +55,7 @@ public class SoundManager : MonoBehaviour {
 
 	public void pool(GameObject prefab, int n)
 	{
-		
+
 		int hash = prefab.GetHashCode ();
 
 		for(int i = 0; i < n; i++)
