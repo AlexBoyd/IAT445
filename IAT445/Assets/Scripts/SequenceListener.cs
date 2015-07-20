@@ -802,7 +802,7 @@ public class SequenceListener : MonoBehaviour
 
 		yield return StartCoroutine (WaitKeypadUP ());
 
-		yield return StartCoroutine (WaitHyperDrivePrimed ("coordinates_dialogue"));
+		yield return StartCoroutine (WaitHyperDrivePrimed ("coordinates_dialogue_a"));
 
 		goNextStep = false;
 		while (!goNextStep) 
