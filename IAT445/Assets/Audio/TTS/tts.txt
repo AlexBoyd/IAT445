@@ -1,10 +1,14 @@
-hello_dialogue:Hello Astronaut. As you are aware, today we are testing the first ship prototype that is able to make hyperjumps. 
-hello_dialogue_2:I will give you some coordinates and we will attempt a jump. If everything goes right you should be back in no time.
-keypad_prime_dialogue:Get familiar with the ship and when you are ready to jump bring up the keypad in the center of the room
-keypad_prime_dialogue_b:There's a keypad in the ship. Bring it up when you're ready to proceed with the jump.
-keypad_prime_dialogue_c:The keypad will allow you to input the jump coordinates. Bring the keypad up when you're ready to go.
-coordinates_dialogue:Now input the key code, 7, 1, 7, 8 to prime the hyperjump
-goodLuck_dialogue:Press the red button when you’re ready.
+hello_dialogue:Hello Astronaut. I will be your artificial intelligent assistant for today's mission. 
+hello_dialogue_2:Today you will be embarking on a new frontier for humanity.
+hello_dialogue_3:In testing this ship's new hyperdrive engine, you will be the first human to venture beyond the solar system. 
+hello_dialogue_4:First get your bearings in the cockpit. In a moment I will begin instructing you on the operation of the hyperdrive. 
+keypad_prime_dialogue_a: There is a keypad on the front console. When you are ready to jump, use the red handle and pull out the keypad. 
+keypad_prime_dialogue_b: There is a red handle near the front of the ship, under the main screen. Pull it up to bring up the keypad. 
+keypad_prime_dialogue_c: The keypad will allow you to input the jump coordinates. Bring the keypad up when you are ready to go.
+coordinates_dialogue_a: Use the keypad to input the jump coordinates seven, one, seven, eight, and then the pound symbol. This will prime the hyperjump.
+coordinates_dialogue_b: You can clear the keypad by pressing the star symbol, in the bottom left of the keypad.
+coordinates_dialogue_c: Press the pound symbol that is in the bottom right hand corner of the keypad once you have entered the coordinates seven, one, seven, eight.
+goodLuck_dialogue:Now press the large red button that is on the console, underneath the keypad to activate the hyperdrive.
 error_dialogue:ERROR, POWER OUTAGE
 power_restored_dialogue:Power restored.
 puzzle_dialogue:Error number 318 in power relays detected. Bypass the power through different sockets in the power frame in the back of the ship

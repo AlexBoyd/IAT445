@@ -6426,15 +6426,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 11479868, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
       propertyPath: _sequenceCues.Array.size
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 11425078, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
       propertyPath: _startingPoolCount.Array.size
-      value: 13
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 11425078, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
       propertyPath: _startingGameObjects.Array.size
-      value: 13
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 11479868, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
       propertyPath: _sequenceCues.Array.data[6].cuePrefabs.Array.size
@@ -6458,6 +6458,18 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11479868, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
       propertyPath: _sequenceCues.Array.data[10].cuePrefabs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11479868, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
+      propertyPath: _sequenceCues.Array.data[11].cuePrefabs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11479868, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
+      propertyPath: _sequenceCues.Array.data[12].cuePrefabs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11479868, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
+      propertyPath: _sequenceCues.Array.data[13].cuePrefabs.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 447862, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
@@ -6615,7 +6627,7 @@ Prefab:
     - target: {fileID: 11479868, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
       propertyPath: _sequenceCues.Array.data[6].cuePrefabs.Array.data[0]
       value: 
-      objectReference: {fileID: 122186, guid: 9f4fe0701aa494b628db319b3ed0d4a8, type: 2}
+      objectReference: {fileID: 195454, guid: 9898f6db22c25b2438a450ea7fa5c804, type: 2}
     - target: {fileID: 11479868, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
       propertyPath: _sequenceCues.Array.data[7].name
       value: safety_dialogue
@@ -6723,35 +6735,35 @@ Prefab:
     - target: {fileID: 11425078, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
       propertyPath: _startingGameObjects.Array.data[3]
       value: 
-      objectReference: {fileID: 157662, guid: 9bd735c359f5a47a8b9a7f27a0761eeb, type: 2}
+      objectReference: {fileID: 102818, guid: 267b689341813574587646d674d1ec6d, type: 2}
     - target: {fileID: 11425078, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
       propertyPath: _startingGameObjects.Array.data[4]
       value: 
-      objectReference: {fileID: 121814, guid: 7070e889617b44ac99d5c87e36a26e43, type: 2}
+      objectReference: {fileID: 130482, guid: b0ccfcce380456340b76506f67a7e874, type: 2}
     - target: {fileID: 11425078, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
       propertyPath: _startingGameObjects.Array.data[5]
       value: 
-      objectReference: {fileID: 106996, guid: 8f9c408f8566f4689a57eda0cb302481, type: 2}
+      objectReference: {fileID: 168216, guid: e4e520b682d38c44699ed0942113958a, type: 2}
     - target: {fileID: 11425078, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
       propertyPath: _startingGameObjects.Array.data[6]
       value: 
-      objectReference: {fileID: 147446, guid: fb56efb393cb7482c830a239369a8411, type: 2}
+      objectReference: {fileID: 157662, guid: 9bd735c359f5a47a8b9a7f27a0761eeb, type: 2}
     - target: {fileID: 11425078, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
       propertyPath: _startingGameObjects.Array.data[7]
       value: 
-      objectReference: {fileID: 122186, guid: 9f4fe0701aa494b628db319b3ed0d4a8, type: 2}
+      objectReference: {fileID: 121814, guid: 7070e889617b44ac99d5c87e36a26e43, type: 2}
     - target: {fileID: 11425078, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
       propertyPath: _startingGameObjects.Array.data[8]
       value: 
-      objectReference: {fileID: 182400, guid: 9e49d97f9245747a1809939a36dcd4a3, type: 2}
+      objectReference: {fileID: 106996, guid: 8f9c408f8566f4689a57eda0cb302481, type: 2}
     - target: {fileID: 11425078, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
       propertyPath: _startingGameObjects.Array.data[9]
       value: 
-      objectReference: {fileID: 154404, guid: 6b6825a175522497ca4a3ab622757374, type: 2}
+      objectReference: {fileID: 147446, guid: fb56efb393cb7482c830a239369a8411, type: 2}
     - target: {fileID: 11425078, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
       propertyPath: _startingGameObjects.Array.data[10]
       value: 
-      objectReference: {fileID: 130746, guid: 5fa86c8c3fed44ff7828990d9beccba5, type: 2}
+      objectReference: {fileID: 127238, guid: 9c23d17806ecf504eab31a3315d68ae5, type: 2}
     - target: {fileID: 11425078, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
       propertyPath: _startingPoolCount.Array.data[0]
       value: 1
@@ -6799,11 +6811,11 @@ Prefab:
     - target: {fileID: 11425078, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
       propertyPath: _startingGameObjects.Array.data[11]
       value: 
-      objectReference: {fileID: 109880, guid: f23de51032a494826a1b2275314ac2d4, type: 2}
+      objectReference: {fileID: 178208, guid: 7409b7c1852f6cf40a5c0bbda01afb2f, type: 2}
     - target: {fileID: 11425078, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
       propertyPath: _startingGameObjects.Array.data[12]
       value: 
-      objectReference: {fileID: 141086, guid: ae7418e6c385d483f864ce2165834e30, type: 2}
+      objectReference: {fileID: 195454, guid: 9898f6db22c25b2438a450ea7fa5c804, type: 2}
     - target: {fileID: 11425078, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
       propertyPath: _startingPoolCount.Array.data[11]
       value: 1
@@ -6824,6 +6836,74 @@ Prefab:
       propertyPath: _puzzlelight
       value: 
       objectReference: {fileID: 2073653258}
+    - target: {fileID: 11425078, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
+      propertyPath: _startingGameObjects.Array.data[13]
+      value: 
+      objectReference: {fileID: 182400, guid: 9e49d97f9245747a1809939a36dcd4a3, type: 2}
+    - target: {fileID: 11425078, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
+      propertyPath: _startingGameObjects.Array.data[14]
+      value: 
+      objectReference: {fileID: 154404, guid: 6b6825a175522497ca4a3ab622757374, type: 2}
+    - target: {fileID: 11425078, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
+      propertyPath: _startingGameObjects.Array.data[15]
+      value: 
+      objectReference: {fileID: 130746, guid: 5fa86c8c3fed44ff7828990d9beccba5, type: 2}
+    - target: {fileID: 11425078, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
+      propertyPath: _startingGameObjects.Array.data[16]
+      value: 
+      objectReference: {fileID: 109880, guid: f23de51032a494826a1b2275314ac2d4, type: 2}
+    - target: {fileID: 11425078, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
+      propertyPath: _startingGameObjects.Array.data[17]
+      value: 
+      objectReference: {fileID: 141086, guid: ae7418e6c385d483f864ce2165834e30, type: 2}
+    - target: {fileID: 11425078, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
+      propertyPath: _startingPoolCount.Array.data[13]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11425078, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
+      propertyPath: _startingPoolCount.Array.data[14]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11425078, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
+      propertyPath: _startingPoolCount.Array.data[15]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11425078, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
+      propertyPath: _startingPoolCount.Array.data[16]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11425078, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
+      propertyPath: _startingPoolCount.Array.data[17]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11479868, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
+      propertyPath: _sequenceCues.Array.data[11].name
+      value: hello_dialogue3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11479868, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
+      propertyPath: _sequenceCues.Array.data[11].cuePrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 127238, guid: 9c23d17806ecf504eab31a3315d68ae5, type: 2}
+    - target: {fileID: 11479868, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
+      propertyPath: _sequenceCues.Array.data[12].name
+      value: hello_dialogue4
+      objectReference: {fileID: 0}
+    - target: {fileID: 11479868, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
+      propertyPath: _sequenceCues.Array.data[12].cuePrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 178208, guid: 7409b7c1852f6cf40a5c0bbda01afb2f, type: 2}
+    - target: {fileID: 11479868, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
+      propertyPath: _sequenceCues.Array.data[13].name
+      value: hello_dialogue2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11479868, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
+      propertyPath: _sequenceCues.Array.data[13].cuePrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 147446, guid: fb56efb393cb7482c830a239369a8411, type: 2}
+    - target: {fileID: 11479868, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
+      propertyPath: _sequenceCues.Array.data[11].cuePrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 127238, guid: 9c23d17806ecf504eab31a3315d68ae5, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 53df1df8ef48c43b5b66f9cb866b1040, type: 2}
   m_IsPrefabParent: 0

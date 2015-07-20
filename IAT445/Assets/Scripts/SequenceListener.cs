@@ -565,13 +565,29 @@ public class SequenceListener : MonoBehaviour
 		return cuePrefabs [UnityEngine.Random.Range (0, cuePrefabs.Count)];
 	}
 
+	private int lastCueIndex = 0;
+	private string lastSequenceName = "";
+	GameObject getSequentialCueForSequence(string sequenceName)
+	{
+		List<GameObject> cuePrefabs = _sequenceCues.Find (item => item.name == sequenceName).cuePrefabs;
+
+		lastCueIndex++;
+		lastCueIndex%=cuePrefabs.Count();
+
+		if (lastSequenceName != sequenceName)
+			lastCueIndex = 0;
+		lastSequenceName = sequenceName;
+
+		return cuePrefabs [lastCueIndex];
+	}
+
 
 
 	void playCue(string sequenceName)
 	{
 		if(_currentCue == null || !_currentCue.isPlaying)
 		{
-			_currentCue = SoundManager._instance.playSound(getRandomCueForSequence(sequenceName));
+			_currentCue = SoundManager._instance.playSound(getSequentialCueForSequence(sequenceName));
 		}
 	}
 
@@ -582,7 +598,7 @@ public class SequenceListener : MonoBehaviour
 	{
 		if(_currentCue == null || (!_currentCue.isPlaying && Time.time > cueWaitTime))
 		{
-			_currentCue = SoundManager._instance.playSound(getRandomCueForSequence(sequenceName));
+			_currentCue = SoundManager._instance.playSound(getSequentialCueForSequence(sequenceName));
 			cueWaitTime = Time.time + _currentCue.clip.length * (1 + Random.Range(pauseTimeMin,pauseTimeMax));
 		}
 	}
@@ -607,7 +623,7 @@ public class SequenceListener : MonoBehaviour
 		while (_currentCue.isPlaying) {
 			yield return null;
 		}
-		_currentCue = SoundManager._instance.playSound(getRandomCueForSequence(sequenceName));
+		_currentCue = SoundManager._instance.playSound(getSequentialCueForSequence(sequenceName));
 	}
 
 	IEnumerator WaitDiagnosticMode(bool enabled)
@@ -758,6 +774,14 @@ public class SequenceListener : MonoBehaviour
 
 		playCue ("hello_dialogue2");
 
+		yield return new WaitForSeconds (_currentCue.clip.length * 1.2f);
+
+		playCue ("hello_dialogue3");
+		
+		yield return new WaitForSeconds (_currentCue.clip.length * 1.2f);
+		
+		playCue ("hello_dialogue4");
+		
 		yield return new WaitForSeconds (_currentCue.clip.length * 1.2f);
 
 		yield return StartCoroutine (WaitKeypadUP ());
