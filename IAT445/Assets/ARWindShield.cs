@@ -27,6 +27,20 @@ public class ARWindShield : MonoBehaviour
 	public string
 		PowerRepaired;
 
+    public SequenceListener sList;
+
+    public bool AutoUpdate = false;
+    public bool Life = false;
+    public bool Power = false;
+    public bool Engines = false;
+
+    public void Start()
+    {
+        if (AutoUpdate && sList)
+        {
+            StartCoroutine(autoUpdateTxts());
+        }
+    }
 	public void Update ()
 	{
 //		if (Input.GetKeyDown (KeyCode.Alpha1)) {
@@ -44,8 +58,80 @@ public class ARWindShield : MonoBehaviour
 //		if (Input.GetKeyDown (KeyCode.Alpha5)) {
 //			ARText.text = LifeSupportError;
 //		}
+
 	}
 
+    IEnumerator autoUpdateTxts()
+    {
+        while (true)
+        {
+            if (Power)
+            {
+                if (sList._emergencyPowerOn)
+                {
+                    if (sList._powerBypass)
+                    {
+                        showPowerRepaired();
+                    }
+                    else
+                    {
+                        showPowerError();
+                    }
+                }
+                else
+                {
+                    if (sList._powerOutage)
+                    {
+                        ARText.text = string.Empty;
+                    }
+                    else
+                    {
+                        showPowers();
+                    }
+                }
+            }
+
+            if (Engines)
+            {
+                if (sList._powerOutage)
+                {
+                    if (sList._emergencyPowerOn)
+                    {
+                        showEngines();
+                    }
+                    else
+                    {
+                        ARText.text = string.Empty;
+                    }
+                }
+                else
+                {
+                    showEngines();
+                }
+            }
+
+            if (Life)
+            {
+                if (sList._powerOutage)
+                {
+                    if (sList._emergencyPowerOn)
+                    {
+                        showLife();
+                    }
+                    else
+                    {
+                        ARText.text = string.Empty;
+                    }
+                }
+                else
+                {
+                    showLife();
+                }
+            }
+
+            yield return new WaitForSeconds(0.4f);
+        }
+    }
 
 	public void showGravity ()
 	{
@@ -70,7 +156,7 @@ public class ARWindShield : MonoBehaviour
 	}
 	public void showPowerError ()
 	{
-		ARText.color = new Color (255f, 100f, 0);
+		ARText.color = Color.red;
 		ARText.text = PowerError;
 	}
 	public void showPowerRepaired ()
