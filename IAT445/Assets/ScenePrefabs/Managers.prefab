@@ -40,6 +40,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 493332}
   - 114: {fileID: 11479868}
+  - 114: {fileID: 11433980}
   m_Layer: 0
   m_Name: SequenceListener
   m_TagString: Untagged
@@ -156,8 +157,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98401667b701148a8b87847266573a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startingGameObjects: []
-  _startingPoolCount: 
+  _startingGameObjects:
+  - {fileID: 164730, guid: c1d93631e269c47d7b539fa755b3057d, type: 2}
+  - {fileID: 165674, guid: 494b4f423385e40debf73c678511f6b7, type: 2}
+  - {fileID: 102818, guid: 267b689341813574587646d674d1ec6d, type: 2}
+  - {fileID: 130482, guid: b0ccfcce380456340b76506f67a7e874, type: 2}
+  - {fileID: 168216, guid: e4e520b682d38c44699ed0942113958a, type: 2}
+  - {fileID: 157662, guid: 9bd735c359f5a47a8b9a7f27a0761eeb, type: 2}
+  - {fileID: 121814, guid: 7070e889617b44ac99d5c87e36a26e43, type: 2}
+  - {fileID: 106996, guid: 8f9c408f8566f4689a57eda0cb302481, type: 2}
+  - {fileID: 147446, guid: fb56efb393cb7482c830a239369a8411, type: 2}
+  - {fileID: 127238, guid: 9c23d17806ecf504eab31a3315d68ae5, type: 2}
+  - {fileID: 178208, guid: 7409b7c1852f6cf40a5c0bbda01afb2f, type: 2}
+  - {fileID: 195454, guid: 9898f6db22c25b2438a450ea7fa5c804, type: 2}
+  - {fileID: 182400, guid: 9e49d97f9245747a1809939a36dcd4a3, type: 2}
+  - {fileID: 154404, guid: 6b6825a175522497ca4a3ab622757374, type: 2}
+  - {fileID: 130746, guid: 5fa86c8c3fed44ff7828990d9beccba5, type: 2}
+  - {fileID: 109880, guid: f23de51032a494826a1b2275314ac2d4, type: 2}
+  - {fileID: 141086, guid: ae7418e6c385d483f864ce2165834e30, type: 2}
+  _startingPoolCount: 010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+--- !u!114 &11433980
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 127454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b93b6a877adcbf94c89a9d6e0c0e844d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11459006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -778,11 +807,11 @@ MonoBehaviour:
   _powerOutage: 0
   _powerBypass: 0
   _safetyOverride: 0
+  _useNarration: 1
   _hyperSuccessAudio: {fileID: 0}
   _hyperFailureAudio: {fileID: 0}
   _hyperSuccessAudio2: {fileID: 0}
   _removablePanel: {fileID: 0}
-  _charview: {fileID: 0}
   _staticAudio: {fileID: 0}
   _spaceScenes:
   - {fileID: 0}
@@ -790,9 +819,10 @@ MonoBehaviour:
   - {fileID: 0}
   _strandedSpaceRotation: {fileID: 0}
   _powerOutageMsg: {fileID: 0}
-  _backPanelCoverAnim: {fileID: 0}
+  _backPanelCover: {fileID: 0}
   _emergencySparks: {fileID: 0}
   _puzzleSparks: {fileID: 0}
+  _puzzlelight: {fileID: 0}
   _skyboxMaterial: {fileID: 2100000, guid: 1b5d6dd22ac4aca47817c7ef59058665, type: 2}
   _steamAudio: {fileID: 0}
   _hyperdrivePrimedAudio: {fileID: 0}
@@ -802,26 +832,49 @@ MonoBehaviour:
   ConsoleTxt: {fileID: 0}
   _currentInput: 0
   _sequenceCues:
-  - name: WaitDiagnostic
+  - name: brief_dialogue
     cuePrefabs:
-    - {fileID: 179850, guid: 3ff5b55d8bd51439fa55ecaf553a8178, type: 2}
-    - {fileID: 111892, guid: 708faa021b71a41db8cb1704f96edd2f, type: 2}
-    - {fileID: 124732, guid: 05ed9455107dd4c2797d8a1cdafa4136, type: 2}
-  - name: LookAtShipsModules
+    - {fileID: 164730, guid: c1d93631e269c47d7b539fa755b3057d, type: 2}
+  - name: coordinates_2_dialogue
     cuePrefabs:
-    - {fileID: 106126, guid: c10d84c491f6d4869981f26eb7ec88db, type: 2}
-  - name: PressArtificialButton
+    - {fileID: 165674, guid: 494b4f423385e40debf73c678511f6b7, type: 2}
+  - name: coordinates_dialogue
     cuePrefabs:
-    - {fileID: 166422, guid: 18afa681e4678463ea5129c2aa9c81f4, type: 2}
-  - name: PressEnginesButton
+    - {fileID: 102818, guid: 267b689341813574587646d674d1ec6d, type: 2}
+    - {fileID: 130482, guid: b0ccfcce380456340b76506f67a7e874, type: 2}
+    - {fileID: 168216, guid: e4e520b682d38c44699ed0942113958a, type: 2}
+  - name: error_dialogue
     cuePrefabs:
-    - {fileID: 141904, guid: 53abc577bf638482d8971af2f75d4790, type: 2}
-  - name: PressPowersButton
+    - {fileID: 157662, guid: 9bd735c359f5a47a8b9a7f27a0761eeb, type: 2}
+  - name: goodLuck_dialogue
     cuePrefabs:
-    - {fileID: 184126, guid: 9b471e22061884cd89cde3afc588a7a1, type: 2}
-  - name: PressLifeSupportButton
+    - {fileID: 121814, guid: 7070e889617b44ac99d5c87e36a26e43, type: 2}
+  - name: hello_dialogue
     cuePrefabs:
-    - {fileID: 188732, guid: 2a9540f4f74814c22868d067aaf0c42d, type: 2}
+    - {fileID: 106996, guid: 8f9c408f8566f4689a57eda0cb302481, type: 2}
+  - name: keypad_prime_dialogue
+    cuePrefabs:
+    - {fileID: 195454, guid: 9898f6db22c25b2438a450ea7fa5c804, type: 2}
+    - {fileID: 182400, guid: 9e49d97f9245747a1809939a36dcd4a3, type: 2}
+    - {fileID: 154404, guid: 6b6825a175522497ca4a3ab622757374, type: 2}
+  - name: safety_dialogue
+    cuePrefabs:
+    - {fileID: 141086, guid: ae7418e6c385d483f864ce2165834e30, type: 2}
+  - name: power_restored_dialogue
+    cuePrefabs:
+    - {fileID: 130746, guid: 5fa86c8c3fed44ff7828990d9beccba5, type: 2}
+  - name: puzzle_dialogue
+    cuePrefabs:
+    - {fileID: 109880, guid: f23de51032a494826a1b2275314ac2d4, type: 2}
+  - name: hello_dialogue2
+    cuePrefabs:
+    - {fileID: 147446, guid: fb56efb393cb7482c830a239369a8411, type: 2}
+  - name: hello_dialogue3
+    cuePrefabs:
+    - {fileID: 127238, guid: 9c23d17806ecf504eab31a3315d68ae5, type: 2}
+  - name: hello_dialogue4
+    cuePrefabs:
+    - {fileID: 178208, guid: 7409b7c1852f6cf40a5c0bbda01afb2f, type: 2}
   _currentCue: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:

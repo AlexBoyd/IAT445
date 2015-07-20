@@ -316,8 +316,8 @@ public class SequenceListener : MonoBehaviour
 				_hyperDrive1Primed = false;
 				_hyperDrive1Done = true;
 
-				//_hyperSuccessAudio.GetComponent<AudioSource>().Play() ;
-				_hyperSuccessAudio.GetComponent<OSPAudioSource>().Play();
+				_hyperSuccessAudio.GetComponent<AudioSource>().Play() ;
+				//_hyperSuccessAudio.GetComponent<OSPAudioSource>().Play();
 			} else if (_hyperDrive2Primed) {
 				_currentInput = SequenceTrigger.HYPERSPACE_JUMP2_BEGIN;
 				hideConsole ();
@@ -347,8 +347,8 @@ public class SequenceListener : MonoBehaviour
 				_emergencySparks.SetActive (true);
 				_puzzleSparks.SetActive(true);
 
-				//_hyperFailureAudio.GetComponent<AudioSource>().Play();
-				_hyperFailureAudio.GetComponent<OSPAudioSource>().Play();
+				_hyperFailureAudio.GetComponent<AudioSource>().Play();
+				//_hyperFailureAudio.GetComponent<OSPAudioSource>().Play();
 
 
 			} else if (_hyperDrive3Primed && _powerBypass && _safetyOverride) {
@@ -366,8 +366,8 @@ public class SequenceListener : MonoBehaviour
 				_hyperDrive1Primed = false;	
 				StartCoroutine (gameOver ());
 
-				//_hyperSuccessAudio.GetComponent<>().Play();         
-				_hyperSuccessAudio2.GetComponent<OSPAudioSource>().Play();
+				_hyperSuccessAudio.GetComponent<AudioSource>().Play();         
+				//	_hyperSuccessAudio2.GetComponent<OSPAudioSource>().Play();
 			} else {
 				if (_hyperDrive3Primed && _powerBypass && !_safetyOverride) {
 					ConsoleTxt.text = "SAFETY LOCK ACTIVATED";
@@ -456,9 +456,6 @@ public class SequenceListener : MonoBehaviour
 				//Oh, show the power outage thingy on the miniconsole
 				_spaceScenes [2].SetActive (true);
 				_powerOutageMsg.SetActive (true);
-				//And pop the back panel
-				_backPanelCover.gameObject.SetActive(false);
-                _puzzlelight.gameObject.SetActive(true);
 			} else {
 				//This is the start of my journey, take me to the nebulas!
 				_spaceScenes [1].SetActive (true);
@@ -829,6 +826,10 @@ public class SequenceListener : MonoBehaviour
 	{
 		yield return new WaitForSeconds (15);
 
+		//And pop the back panel
+		_backPanelCover.gameObject.SetActive(false);
+		_puzzlelight.gameObject.SetActive(true);
+		
 		bool goNextStep = false;
 		while (!goNextStep) 
 		{
